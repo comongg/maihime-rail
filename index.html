@@ -182,7 +182,8 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 @-webkit-keyframes cinp{from{-webkit-transform:rotate(-12deg) scale(.3);opacity:0}to{opacity:1}}
 @keyframes cinp{from{transform:rotate(-12deg) scale(.3);opacity:0}to{opacity:1}}
 #card.book .h{font-size:clamp(22px,3.6vw,36px)}
-#card.hj{top:13%;left:3%;max-width:min(400px,44vw);padding:10px 14px 12px;-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}#card.hj.on{-webkit-animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both;animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both}#card.hj .h{font-size:clamp(17px,2.6vw,28px)}#card.hj .s{font-size:clamp(11px,1.4vw,14px)}
+#card.hj{top:13%;left:3%;max-width:min(400px,44vw);padding:10px 14px 12px;-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}#card.hj.on{-webkit-animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both;animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both}#card.hjR{left:auto;right:3%}
+#card.hj .h{font-size:clamp(17px,2.6vw,28px)}#card.hj .s{font-size:clamp(11px,1.4vw,14px)}
 #card.low{top:auto;bottom:4%;bottom:calc(4% + env(safe-area-inset-bottom));-webkit-transform:translate(-50%,0) rotate(-1deg);transform:translate(-50%,0) rotate(-1deg)}
 #card.low.on{-webkit-animation:none;animation:none}
 #card .k{font-size:12px;font-weight:900;letter-spacing:.2em;color:#c4374f}
@@ -1643,41 +1644,98 @@ function buildNPC(){
   if (!n.isElise) n.root.rotation.y = Math.PI;
   return n;
 }
-// 乗っ取りの小道具：第2幕は時計の鎖、第4幕は巨大な手、第6幕は動く歩道の矢印
+// 乗っ取りの仕掛け：幕ごとに、豊太郎を原作の道へ連れ戻す大きな物を出す
+function heartGeo(size){
+  var sh = new THREE.Shape(), x = 0, y = 0, k = size;
+  sh.moveTo(x, y - 0.35 * k);
+  sh.bezierCurveTo(x - 1.0 * k, y + 0.35 * k, x - 0.45 * k, y + 1.0 * k, x, y + 0.45 * k);
+  sh.bezierCurveTo(x + 0.45 * k, y + 1.0 * k, x + 1.0 * k, y + 0.35 * k, x, y - 0.35 * k);
+  var gm = new THREE.ExtrudeGeometry(sh, { depth: 0.5 * k, bevelEnabled: true, bevelSize: 0.08 * k, bevelThickness: 0.08 * k, bevelSegments: 2, curveSegments: 16 });
+  gm.translate(0, 0, -0.25 * k); return gm;
+}
+function giantHead(face, hat, beard){
+  var g = new THREE.Group(), skin = smat(0xf2cdb0);
+  M(new THREE.SphereGeometry(3.2, 28, 20), skin, 0, 0, 0, g, 1.03);
+  if (beard){ var bd = M(new THREE.SphereGeometry(2.0, 20, 16), smat(0xf4f4f4), 0, -2.2, 1.6, g, 1.04); bd.scale.set(1, 1.1, 0.6); }
+  if (hat === 'top'){ M(new THREE.CylinderGeometry(3.9, 3.9, 0.3, 28), smat(0x16141c), 0, 2.7, 0, g, 1.03); M(new THREE.CylinderGeometry(2.3, 2.4, 3.6, 28), smat(0x16141c), 0, 4.5, 0, g, 1.03); M(new THREE.CylinderGeometry(2.42, 2.42, 0.5, 28), smat(0x8a2a3a), 0, 3.1, 0, g); }
+  var fm = new THREE.Mesh(new THREE.PlaneGeometry(5.0, 5.0), new THREE.MeshBasicMaterial({ map: FACES[face], transparent: true, depthWrite: false })); fm.position.set(0, -0.3, 3.25); g.add(fm);
+  return g;
+}
 function buildProp(){
   var stl = ST.wrong.hijack.style, g = new THREE.Group();
-  if (stl === 'chain'){
-    var link = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1, 6), smat(0xd9a441, { shininess: 90 })); link.name = 'chain'; g.add(link);
-    var w = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.12, 20), smat(0xf3cf7f, { shininess: 90 })); w.rotation.x = Math.PI / 2; w.name = 'watch'; g.add(w);
-    var dial = new THREE.Mesh(new THREE.CircleGeometry(0.36, 20), new THREE.MeshBasicMaterial({ color: 0xfffaf0 })); dial.position.y = 0.07; dial.rotation.x = -Math.PI / 2; w.add(dial);
+  if (stl === 'hop'){
+    var hm = new THREE.MeshPhongMaterial({ color: 0xff4d7e, emissive: 0xff2d6f, emissiveIntensity: 0.45, shininess: 60 });
+    var h = new THREE.Mesh(heartGeo(2.2), hm); h.name = 'agent'; ol(h, 1.04); g.add(h);
+    var glow = glowSprite(0, 0, 0, 9, 0xff9ec0); scene.remove(glow); glow.name = 'glow'; g.add(glow);
+  } else if (stl === 'chain'){
+    var link = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 1, 8), smat(0xd9a441, { shininess: 90 })); link.name = 'chain'; g.add(link);
+    var w = new THREE.Group(); w.name = 'agent'; g.add(w);
+    M(new THREE.CylinderGeometry(1.5, 1.5, 0.35, 32), smat(0xf3cf7f, { shininess: 90, emissive: 0x6a4a10, emissiveIntensity: 0.3 }), 0, 0, 0, w, 1.04).rotation.x = Math.PI / 2;
+    var dial = new THREE.Mesh(new THREE.CircleGeometry(1.25, 32), new THREE.MeshBasicMaterial({ color: 0xfffaf0 })); dial.position.z = 0.19; w.add(dial);
+    var hand1 = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.0, 0.04), new THREE.MeshBasicMaterial({ color: 0x2b2a3a })); hand1.position.set(0, 0.45, 0.22); hand1.name = 'hand1'; w.add(hand1);
+    M(new THREE.TorusGeometry(0.35, 0.09, 8, 16), smat(0xd9a441, { shininess: 90 }), 0, 1.8, 0, w);
+    var gl2 = glowSprite(0, 0, 0, 7, 0xffd166); scene.remove(gl2); g.add(gl2); gl2.name = 'glow';
+  } else if (stl === 'warp'){
+    var rm = new THREE.MeshBasicMaterial({ color: 0x5fd0ff, transparent: true, opacity: 0.9, fog: false });
+    var r1 = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.16, 10, 36), rm); r1.name = 'ringA'; g.add(r1);
+    var r2 = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.16, 10, 36), rm); r2.name = 'ringB'; g.add(r2);
+    var gA = glowSprite(0, 0, 0, 6, 0x5fd0ff); scene.remove(gA); gA.name = 'gA'; g.add(gA);
+    var gB = glowSprite(0, 0, 0, 6, 0x5fd0ff); scene.remove(gB); gB.name = 'gB'; g.add(gB);
   } else if (stl === 'hand'){
     var sk = smat(0xf2cdb0), hand = new THREE.Group(); hand.name = 'hand'; g.add(hand);
     M(new THREE.BoxGeometry(0.7, 2.4, 2.0), sk, 0, 0, 0, hand, 1.04);
     for (var f = 0; f < 4; f++) M(new THREE.CapsuleGeometry(0.22, 1.0, 4, 8), sk, 0, 1.6, -0.75 + f * 0.5, hand, 1.06);
     var th = M(new THREE.CapsuleGeometry(0.24, 0.8, 4, 8), sk, 0, 0.2, 1.25, hand, 1.06); th.rotation.x = -0.9;
     M(new THREE.CylinderGeometry(0.9, 0.9, 1.6, 12), smat(0x4a5a48), 0, -1.9, 0, hand);
+  } else if (stl === 'march'){
+    var mh = giantHead('minister', 'top', true); mh.name = 'agent'; g.add(mh);
+    var halo = glowSprite(0, 0, 0, 16, 0xffe08a); scene.remove(halo); halo.name = 'glow'; g.add(halo);
   } else if (stl === 'conveyor'){
-    for (var a = 0; a < 6; a++){ var ar = new THREE.Mesh(new THREE.ConeGeometry(0.45, 0.9, 3), new THREE.MeshBasicMaterial({ color: 0xffd166, transparent: true, opacity: 0.85, fog: false })); ar.rotation.x = -Math.PI / 2; g.add(ar); }
+    var coin = new THREE.Group(); coin.name = 'coin'; g.add(coin);
+    M(new THREE.CylinderGeometry(1.3, 1.3, 0.22, 32), smat(0xf3cf7f, { shininess: 100, emissive: 0x8a6a10, emissiveIntensity: 0.4 }), 0, 0, 0, coin, 1.04);
+    var mk = textBoard('M', '', '#d9a441', '#7a4a10', 1.2, 1.2); mk.rotation.x = -Math.PI / 2; mk.position.y = 0.13; coin.add(mk);
+    var board = textBoard('出世', 'こちら → 本国・名誉', '#d9a441', '#fff8d0', 6, 2.6); board.name = 'agent'; g.add(board);
+    var gl3 = glowSprite(0, 0, 0, 10, 0xffd166); scene.remove(gl3); gl3.name = 'glow'; g.add(gl3);
+    for (var a = 0; a < 8; a++){ var ar = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.0, 3), new THREE.MeshBasicMaterial({ color: 0xffd166, transparent: true, opacity: 0.85, fog: false })); ar.rotation.x = -Math.PI / 2; ar.name = 'arrow'; g.add(ar); }
+  } else if (stl === 'wander'){
+    return null;
   } else return null;
   g.visible = false; scene.add(g); return g;
 }
 var tmpA = null, tmpB = null;
 function updateProp(dt){
   var g = W3.prop; if (!g || !g.visible) return;
-  var stl = ST.wrong.hijack.style, px = G.x, pz = -G.s;
+  var stl = ST.wrong.hijack.style, px = G.x, pz = -G.s, tx = laneTarget(C, G.s), u = G.hop ? clamp(G.hop.t / G.hop.dur, 0, 1) : 1;
   if (!tmpA){ tmpA = new THREE.Vector3(); tmpB = new THREE.Vector3(); }
-  if (stl === 'chain'){
-    var ax = laneTarget(C, G.s + 7), az = -(G.s + 7), ay = 1.3 + Math.sin(G.clock * 6) * 0.2;
-    var w = g.getObjectByName('watch'), l = g.getObjectByName('chain');
-    w.position.set(ax, ay, az); w.rotation.y = G.clock * 4;
-    tmpA.set(px, 1.25, pz); tmpB.set(ax, ay, az);
-    l.position.copy(tmpA).add(tmpB).multiplyScalar(0.5); l.scale.set(1, tmpA.distanceTo(tmpB), 1);
-    l.lookAt(tmpB); l.rotateX(Math.PI / 2);
+  var ag = g.getObjectByName('agent'), gl = g.getObjectByName('glow');
+  if (stl === 'hop'){
+    var hx = mix(G.x, laneTarget(C, G.s + 12), 0.6), pulse = 1 + Math.sin(G.clock * 10) * 0.08;
+    ag.position.set(hx, 4.6 + Math.sin(G.clock * 3) * 0.3, -(G.s + 12)); ag.rotation.y = Math.sin(G.clock * 2) * 0.4; ag.scale.setScalar(pulse);
+    gl.position.copy(ag.position);
+  } else if (stl === 'chain'){
+    var ax = laneTarget(C, G.s + 8), az = -(G.s + 8), ay = 2.4 + Math.sin(G.clock * 6) * 0.3;
+    ag.position.set(ax, ay, az); ag.rotation.z = Math.sin(G.clock * 5) * 0.3; ag.getObjectByName('hand1').rotation.z = -G.clock * 12;
+    gl.position.set(ax, ay, az + 0.3);
+    var l = g.getObjectByName('chain'); tmpA.set(px, 1.1, pz); tmpB.set(ax, ay - 1.6, az);
+    l.position.copy(tmpA).add(tmpB).multiplyScalar(0.5); l.scale.set(1, tmpA.distanceTo(tmpB), 1); l.lookAt(tmpB); l.rotateX(Math.PI / 2);
+    if (Math.random() < dt * 20){ var sp = toScreen(W3.toyo.root, 0.05); burst('star', 1, sp.x, sp.y, 150); }
+  } else if (stl === 'warp'){
+    var rA = g.getObjectByName('ringA'), rB = g.getObjectByName('ringB'), x0 = G.hop ? G.hop.x0 : px;
+    rA.position.set(x0, 1.3, pz); rB.position.set(tx, 1.3, pz); rA.rotation.z = G.clock * 6; rB.rotation.z = -G.clock * 6;
+    var sA = u < 0.55 ? Math.min(1, u * 5) : Math.max(0, 1 - (u - 0.55) * 5), sB = u < 0.4 ? 0 : Math.min(1, (u - 0.4) * 4) * (u > 0.9 ? (1 - u) * 10 : 1);
+    rA.scale.setScalar(Math.max(0.01, sA)); rB.scale.setScalar(Math.max(0.01, sB));
+    g.getObjectByName('gA').position.copy(rA.position); g.getObjectByName('gB').position.copy(rB.position);
+    g.getObjectByName('gA').scale.setScalar(6 * sA + 0.01); g.getObjectByName('gB').scale.setScalar(6 * sB + 0.01);
   } else if (stl === 'hand'){
-    var hd = g.getObjectByName('hand');
-    hd.position.set(px - C * 1.6, 1.3, pz); hd.rotation.z = C * 0.15;
+    var hd = g.getObjectByName('hand'); hd.position.set(px - C * 1.6, 1.3, pz); hd.rotation.z = C * 0.15;
+  } else if (stl === 'march'){
+    var my = mix(-6, 5.5, smooth(Math.min(1, u * 2.5)));
+    ag.position.set(laneTarget(C, G.s + 16), my, -(G.s + 16)); ag.rotation.y = Math.atan2(camera.position.x - ag.position.x, camera.position.z - ag.position.z) + Math.sin(G.clock * 4) * 0.08;
+    gl.position.set(ag.position.x, my, ag.position.z - 1);
   } else if (stl === 'conveyor'){
-    for (var i = 0; i < g.children.length; i++){ var k = ((G.clock * 1.5 + i / 6) % 1); g.children[i].position.set(mix(px, laneTarget(C, G.s), k), 0.12, pz - 1 - k * 8); }
+    var coin = g.getObjectByName('coin'); coin.position.set(px, 0.13, pz); coin.rotation.y += dt * 6;
+    ag.position.set(laneTarget(C, G.s + 14), 4.4, -(G.s + 14)); gl.position.set(ag.position.x, 4.4, ag.position.z + 0.5);
+    var i = 0; g.children.forEach(function(ar){ if (ar.name !== 'arrow') return; var k = ((G.clock * 1.6 + i / 8) % 1); ar.position.set(mix(px, laneTarget(C, G.s + 10), k), 0.15, pz - 1 - k * 10); i++; });
   }
 }
 function buildBigHead(){
@@ -1721,6 +1779,10 @@ function fxDraw(dt){
       var r0 = Math.max(FX.w, FX.h) * (0.25 + ph * 0.6), r1 = r0 + 40 + ph * 120;
       g.beginPath(); g.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0 * 0.7); g.lineTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1 * 0.7); g.stroke();
     }
+  }
+  if (G.mode === 'hijack' && G.hstyle === 'wander'){
+    g.strokeStyle = 'rgba(235,240,255,.55)'; g.lineWidth = 2;
+    for (i = 0; i < 40; i++){ var wy = rnd(i * 3.3) * FX.h, ph2 = (G.clock * 1.4 + rnd(i)) % 1, wx = (C > 0 ? ph2 : 1 - ph2) * (FX.w + 200) - 100; g.beginPath(); g.moveTo(wx, wy); g.lineTo(wx + C * 90, wy + 18); g.stroke(); }
   }
   if (FX.lines > 0){
     FX.lineSeed += dt;
@@ -1807,7 +1869,7 @@ function loadStage(i){
   W3.npc = buildNPC();
   W3.shadow = new THREE.Mesh(new THREE.CircleGeometry(0.75, 16), new THREE.MeshBasicMaterial({ color: 0x1b1028, transparent: true, opacity: 0.35, depthWrite: false }));
   W3.shadow.rotation.x = -Math.PI / 2; scene.add(W3.shadow);
-  W3.set = buildSet(); G.inSet = false; W3.prop = buildProp();
+  W3.set = buildSet(); G.inSet = false; W3.prop = buildProp(); W3.toyo.root.scale.setScalar(1);
   el.stageNo.textContent = 'STAGE ' + ST.no + ' / 7'; el.stageTtl.textContent = ST.title;
   hintL.textContent = '◀ ' + ST.left.label; hintR.textContent = ST.right.label + ' ▶';
   hintL.className = 'hint good ' + (C === -1 ? 'ok' : 'ng'); hintR.className = 'hint bad ' + (C === 1 ? 'ok' : 'ng');
@@ -1888,9 +1950,9 @@ function startFreeze(){
   beats.push([t, function(){
     clearErrWins(); gagHTML(''); el.stage.className = ''; on(el.scan, false); darken(''); flash(); el.gl.className = ''; el.portrait.className = '';
     FX.lines = 0;
-    showCard('err hj', hj.k, hj.h, hj.s);
+    showCard('err hj' + (C === -1 ? ' hjR' : ''), hj.k, hj.h, hj.s);
     var stl = hj.style || 'hop';
-    el.bigWheel.querySelector('.tag').textContent = hj.op; on(el.bigWheel, stl === 'hop' || stl === 'march');
+    el.bigWheel.querySelector('.tag').textContent = hj.op; on(el.bigWheel, false);
     if (stl === 'wander'){ bgm(true, false); noise(1.5, 0.12, 400, 200, 0.6); }
     else { if (stl !== 'warp') SFX.squeal(); bgm(true, true); }
     if (stl !== 'wander' && stl !== 'warp') restartAnim(el.stage, 'swerve');
@@ -1900,7 +1962,7 @@ function startFreeze(){
     if (stl === 'conveyor'){ SFX.fanfare(); rain('coin', 40); }
     ambLevel(STAGE_AMB[ST.no][1]);
     G.worldScale = 1; G.mode = 'hijack'; G.hstyle = stl; G.camMode = 'follow'; W3.toyo.head.rotation.y = 0; setFace(hj.face);
-    G.hop = { t: 0, dur: ({ hop: 1.7, chain: 2.0, warp: 0.5, hand: 1.9, march: 1.8, conveyor: 2.0, wander: 3.2 })[stl], x0: G.x }; G.glow = stl !== 'wander';
+    G.hop = { t: 0, dur: ({ hop: 2.0, chain: 2.2, warp: 1.8, hand: 1.9, march: 2.2, conveyor: 2.2, wander: 3.2 })[stl], x0: G.x }; G.glow = stl !== 'wander';
     if (G.bigHeadT >= 0) G.bigHeadT = stl === 'hand' ? -3 : -2;
     if (W3.prop) W3.prop.visible = true;
   }]);
@@ -2232,13 +2294,15 @@ function update(dt, rawDt){
     var h = G.hop;
     if (h){
       h.t += dt; var u = clamp(h.t / h.dur, 0, 1), ue = smooth(u), tx = laneTarget(C, G.s);
-      if (hs === 'hop'){ G.x = mix(h.x0, tx, ue); G.y = Math.sin(Math.PI * u) * 2.2; G.spin = ue * Math.PI * 4; }
+      if (hs === 'hop'){ G.x = mix(h.x0, tx, ue); G.y = Math.sin(Math.PI * u) * 3.2; G.spin = ue * Math.PI * 6; }
       else if (hs === 'wander'){ G.x = mix(h.x0, tx, ue) + Math.sin(u * Math.PI * 3) * 1.6 * (1 - u); G.y = 0; G.spin = Math.sin(u * Math.PI * 3) * 0.7; }
-      else if (hs === 'warp'){ G.x = u < 0.5 ? h.x0 + (Math.random() - 0.5) * 2 : tx; G.y = 0; G.spin = 0; }
+      else if (hs === 'warp'){ G.x = u < 0.5 ? h.x0 : tx; G.y = 0.3; G.spin = u * Math.PI * 6; t.root.scale.setScalar(u < 0.5 ? Math.max(0.02, 1 - u * 2.2) : Math.min(1, (u - 0.5) * 2.5)); if (u >= 0.5 && !h.flashed){ h.flashed = true; flash(); SFX.chime(); } }
+      else if (hs === 'conveyor'){ G.x = mix(h.x0, tx, ue); G.y = 0.25; G.spin = Math.sin(G.clock * 3) * 0.3; }
+      else if (hs === 'wander'){ G.x = mix(h.x0, tx, ue) + Math.sin(u * Math.PI * 3) * 1.6 * (1 - u); G.y = Math.abs(Math.sin(u * Math.PI * 4)) * 0.4; G.spin = u * Math.PI * 4; }
       else if (hs === 'chain'){ G.x = mix(h.x0, tx, ue); G.y = 0; G.spin = -C * 0.6; }
       else if (hs === 'hand'){ var ue2 = smooth(clamp((u - 0.25) / 0.75, 0, 1)); G.x = mix(h.x0, tx, ue2); G.y = Math.sin(Math.PI * ue2) * 0.6; G.spin = C * ue2 * 0.8; }
       else { G.x = mix(h.x0, tx, ue); G.y = 0; G.spin = 0; }
-      if (u >= 1){ G.hop = null; G.y = 0; G.spin = 0; if (W3.prop) W3.prop.visible = false; if (G.bigHeadT === -3) G.bigHeadT = -2; }
+      if (u >= 1){ G.hop = null; G.y = 0; G.spin = 0; t.root.scale.setScalar(1); if (W3.prop) W3.prop.visible = false; if (G.bigHeadT === -3) G.bigHeadT = -2; }
     } else G.x = damp(G.x, laneTarget(C, G.s), 6, dt);
     if (hs === 'march' && Math.random() < dt * 2.5) say('T', Math.random() < 0.5 ? 'はい！' : 'お供します！', 0.6);
     if (hs === 'conveyor' && Math.random() < dt * 8){ var pc = toScreen(t.body, 0.5); burst('star', 2, pc.x, pc.y, 200); }
@@ -2336,6 +2400,7 @@ function updateCamera(dt){
     var back = portrait ? 10.5 : 7.6, up = portrait ? 5.2 : 4.0;
     if (G.slow){ back -= 1.2; up -= 0.6; }
     if (G.bigHeadT >= 0){ back += 3; up += 1.5; }
+    if (G.mode === 'hijack'){ back += 3.2; up += 1.8; }
     tp = [px * 0.85, up + G.y * 0.4, pz + back]; tl = [px * 0.9, G.bigHeadT >= 0 ? 2.5 : 1.1, pz - 9]; k = 6;
   }
   camPos.set(damp(camPos.x, tp[0], k, dt), damp(camPos.y, tp[1], k, dt), damp(camPos.z, tp[2], k, dt));
