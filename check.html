@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>舞姫ゲーム 動作確認</title>
+<style>
+body{margin:0;padding:20px;font-family:-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;background:#fffaf0;color:#2b2a3a}
+h1{font-size:20px;margin:0 0 12px}
+.row{margin:8px 0;padding:10px 12px;border-radius:10px;background:#fff;border:2px solid #ddd;font-size:15px;font-weight:bold}
+.ok{border-color:#2e8b57;color:#1e6b46}.ng{border-color:#c4374f;color:#a32a22}
+#ua{font-size:11px;font-weight:normal;word-break:break-all;color:#555}
+canvas{display:block;width:200px;height:120px;margin-top:10px;border-radius:8px;background:#222}
+</style>
+</head>
+<body>
+<h1>舞姫ゲーム 動作確認（0301）</h1>
+<div class="row ng" id="js">JavaScript：動いていません（この文が変わらない場合）</div>
+<div class="row" id="gl">3D（WebGL）：未確認</div>
+<div class="row" id="anim">動き：未確認</div>
+<div class="row" id="ua"></div>
+<canvas id="c" width="400" height="240"></canvas>
+<p style="font-size:13px">この画面を写真に撮って送ってください。</p>
+<script>
+(function(){
+ var js = document.getElementById('js'); js.textContent = 'JavaScript：動いています'; js.className = 'row ok';
+ document.getElementById('ua').textContent = '端末：' + navigator.userAgent + '　画面：' + screen.width + '×' + screen.height + '　倍率：' + (window.devicePixelRatio || 1);
+ var glr = document.getElementById('gl'), c = document.getElementById('c'), gl = null, kind = '';
+ try { gl = c.getContext('webgl2'); kind = 'WebGL2'; if (!gl){ gl = c.getContext('webgl') || c.getContext('experimental-webgl'); kind = 'WebGL1'; } } catch (e) { glr.textContent = '3D（WebGL）：エラー ' + e.message; glr.className = 'row ng'; }
+ if (!gl){ if (glr.className !== 'row ng'){ glr.textContent = '3D（WebGL）：使えません'; glr.className = 'row ng'; } }
+ else { glr.textContent = '3D（WebGL）：使えます（' + kind + '）'; glr.className = 'row ok'; }
+ var a = document.getElementById('anim'), n = 0, t0 = Date.now();
+ function frame(){
+  n++;
+  if (gl){ var t = (Date.now() - t0) / 1000; gl.clearColor(0.5 + 0.5 * Math.sin(t * 2), 0.4, 0.6, 1); gl.clear(gl.COLOR_BUFFER_BIT); }
+  if (n % 30 === 0){ a.textContent = '動き：動いています（' + Math.round(n / ((Date.now() - t0) / 1000)) + ' コマ/秒）'; a.className = 'row ok'; }
+  (window.requestAnimationFrame || function(f){ setTimeout(f, 16); })(frame);
+ }
+ frame();
+})();
+</script>
+</body>
+</html>
