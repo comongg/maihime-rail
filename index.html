@@ -32,6 +32,13 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 #vignette{pointer-events:none;z-index:3;background:radial-gradient(ellipse 80% 75% at 50% 45%,rgba(0,0,0,0) 45%,rgba(10,8,30,.45) 100%)}
 #scan{pointer-events:none;z-index:24;display:none;background:repeating-linear-gradient(0deg,rgba(255,40,80,.10) 0,rgba(255,40,80,.10) 2px,rgba(0,0,0,0) 2px,rgba(0,0,0,0) 5px)}
 #scan.on{display:block}
+#gl.slowfx{-webkit-filter:saturate(.55) contrast(1.12) brightness(.92);filter:saturate(.55) contrast(1.12) brightness(.92)}
+#slowVig{pointer-events:none;z-index:4;opacity:0;background:radial-gradient(ellipse 70% 65% at 50% 55%,rgba(0,0,0,0) 40%,rgba(20,8,40,.75) 100%);-webkit-transition:opacity .6s;transition:opacity .6s}
+#slowVig.on{opacity:1;-webkit-animation:pulseV .85s ease-in-out infinite;animation:pulseV .85s ease-in-out infinite}
+@-webkit-keyframes pulseV{50%{opacity:.75}}@keyframes pulseV{50%{opacity:.75}}
+.lb{position:absolute;z-index:9;left:0;right:0;height:0;background:#0b0a14;pointer-events:none;-webkit-transition:height .5s;transition:height .5s}
+#lbTop{top:0}#lbBot{bottom:0}
+.lb.on{height:8vh}
 #flash{pointer-events:none;z-index:40;background:#fffbe6;opacity:0}
 #flash.bang{-webkit-animation:flash .45s ease-out;animation:flash .45s ease-out}
 @-webkit-keyframes flash{0%{opacity:.95}100%{opacity:0}}@keyframes flash{0%{opacity:.95}100%{opacity:0}}
@@ -66,8 +73,19 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 .hint{display:inline-block;padding:9px 14px;border-radius:12px;font-size:14px;font-weight:900;box-shadow:0 6px 16px rgba(0,0,0,.25)}
 .hint.good{float:left;background:#e9fff1;color:#1e6b46;border:2px solid #6fcf97}
 .hint.bad{float:right;background:#fff0ee;color:#a33a3a;border:2px solid #f29a8f}
-#caption{position:absolute;z-index:11;left:50%;bottom:120px;bottom:calc(120px + env(safe-area-inset-bottom));-webkit-transform:translateX(-50%);transform:translateX(-50%);max-width:min(560px,86vw);padding:11px 18px;border-radius:14px;background:rgba(255,250,238,.94);color:#2b2a3a;font-size:clamp(13px,1.9vw,17px);font-weight:900;line-height:1.5;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.25);pointer-events:none;opacity:0;-webkit-transition:opacity .2s;transition:opacity .2s;white-space:nowrap}
+/* 走っている時のテロップ（大きな字幕） */
+#caption{position:absolute;z-index:11;left:50%;top:12%;top:calc(12% + env(safe-area-inset-top));width:min(900px,92vw);margin-left:calc(min(900px,92vw) / -2);text-align:center;pointer-events:none;opacity:0;-webkit-transition:opacity .2s;transition:opacity .2s;color:#fff;font-size:clamp(20px,3.5vw,40px);font-weight:900;line-height:1.35;letter-spacing:.02em;
+ text-shadow:3px 0 0 #2b2a3a,-3px 0 0 #2b2a3a,0 3px 0 #2b2a3a,0 -3px 0 #2b2a3a,3px 3px 0 #2b2a3a,-3px -3px 0 #2b2a3a,3px -3px 0 #2b2a3a,-3px 3px 0 #2b2a3a,0 7px 0 #c4374f,0 12px 20px rgba(0,0,0,.45)}
 #caption.on{opacity:1}
+#caption.pop .cl{-webkit-animation:telop .5s cubic-bezier(.2,1.7,.35,1) both;animation:telop .5s cubic-bezier(.2,1.7,.35,1) both}
+#caption .cl{display:inline-block}
+#caption .cl.l2{-webkit-animation-delay:.08s;animation-delay:.08s}
+@-webkit-keyframes telop{from{-webkit-transform:scale(.4) rotate(-6deg) translateY(30px);opacity:0}to{-webkit-transform:none;opacity:1}}
+@keyframes telop{from{transform:scale(.4) rotate(-6deg) translateY(30px);opacity:0}to{transform:none;opacity:1}}
+#caption .who{display:inline-block;margin-bottom:8px;padding:5px 16px;border-radius:999px;background:#c4374f;color:#fff;font-size:clamp(13px,1.8vw,18px);letter-spacing:.12em;text-shadow:none;border:3px solid #fff;box-shadow:0 4px 0 #2b2a3a}
+#caption .quote{font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;color:#fffbe6;font-size:1.05em}
+#caption .tip{display:block;margin-top:10px;font-size:clamp(13px,1.7vw,18px);text-shadow:2px 0 0 #2b2a3a,-2px 0 0 #2b2a3a,0 2px 0 #2b2a3a,0 -2px 0 #2b2a3a,0 4px 8px rgba(0,0,0,.5);color:#ffe9b8}
+#caption .hl{color:#ffd166}
 #controls{position:absolute;z-index:12;left:0;right:0;bottom:0;height:110px;padding:0 16px 16px;padding-bottom:max(16px,env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));pointer-events:none}
 .steer{pointer-events:auto;touch-action:none;position:absolute;bottom:18px;bottom:max(18px,env(safe-area-inset-bottom));width:clamp(96px,16vw,140px);height:76px;border-radius:20px;border:3px solid #fff;background:linear-gradient(180deg,#fffaf0,#efdcb6);color:#2b2a3a;font-size:19px;font-weight:900;box-shadow:0 7px 0 #a9875a,0 14px 24px rgba(0,0,0,.35);-webkit-transition:-webkit-transform .05s;transition:transform .05s}
 .steer .ar{font-size:26px;display:block;line-height:1}
@@ -75,7 +93,7 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 .steer.down{-webkit-transform:translateY(6px);transform:translateY(6px);box-shadow:0 1px 0 #a9875a,0 5px 12px rgba(0,0,0,.3);background:linear-gradient(180deg,#ffe9b0,#f2c97a)}
 #wheel{position:absolute;left:50%;bottom:6px;bottom:max(6px,env(safe-area-inset-bottom));width:120px;height:120px;margin-left:-60px;pointer-events:none;-webkit-transition:-webkit-transform .08s linear;transition:transform .08s linear;-webkit-filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 #ctlTip{position:fixed;left:50%;top:62px;top:calc(62px + env(safe-area-inset-top));-webkit-transform:translateX(-50%);transform:translateX(-50%);font-size:11px;font-weight:800;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7);white-space:nowrap;display:none}
-#warn{position:absolute;z-index:13;left:50%;top:26%;-webkit-transform:translateX(-50%);transform:translateX(-50%);padding:12px 18px;border-radius:14px;background:#fff0ee;border:3px solid #e2574c;color:#a32a22;font-size:clamp(14px,2.2vw,20px);font-weight:900;white-space:nowrap;display:none;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+#warn{position:absolute;z-index:13;left:50%;top:44%;-webkit-transform:translateX(-50%);transform:translateX(-50%);padding:12px 18px;border-radius:14px;background:#fff0ee;border:3px solid #e2574c;color:#a32a22;font-size:clamp(14px,2.2vw,20px);font-weight:900;white-space:nowrap;display:none;box-shadow:0 10px 24px rgba(0,0,0,.3)}
 #warn.on{display:block;-webkit-animation:pulse .5s infinite alternate;animation:pulse .5s infinite alternate}
 @-webkit-keyframes pulse{to{-webkit-transform:translateX(-50%) scale(1.06)}}@keyframes pulse{to{transform:translateX(-50%) scale(1.06)}}
 
@@ -289,8 +307,8 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 #endNotes .note{margin-top:8px}
 #bootDiag{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:#fbe9ec;color:#7a1d2b;font-size:12px;line-height:1.6;text-align:left;word-break:break-all;-webkit-user-select:text;user-select:text}
 #errBox{position:absolute;z-index:99;left:10px;right:10px;bottom:10px;padding:10px 12px;border-radius:10px;background:#5b0d1c;color:#fff;font-size:12px;line-height:1.5;display:none;word-break:break-all}
-@media (max-height:600px){.panel{padding:16px 22px 16px}.logo{font-size:52px}.tag2{margin-top:6px;font-size:12.5px}.primary{margin-top:8px;min-height:48px;padding:10px 28px}.howto{margin-top:8px}.steer{height:62px}#wheel{width:92px;height:92px;margin-left:-46px}#caption{bottom:96px}}
-@media (max-width:600px){#stageCard{min-width:0;padding:7px 10px}#stageCard .no{display:none}#stageCard .ttl{font-size:13px}#stageCard .row{display:none}#progWrap{top:70px;top:calc(70px + env(safe-area-inset-top));width:60vw;margin-left:-30vw}#hints{top:112px}#ctlTip{top:auto;bottom:118px;white-space:normal;width:70vw;text-align:center}#warn{top:30%;white-space:normal;width:84vw;text-align:center}.hint{font-size:12px;padding:7px 9px}#caption{white-space:normal;width:80vw}#card,#card.center,#card.low{left:5vw;right:5vw;top:14%;bottom:auto;max-width:none;padding:14px 16px 16px;-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}#card.on,#card.center.on,#card.low.on{-webkit-animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both;animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both}#card .h{font-size:30px}#card.book .h{font-size:24px}#card.low{top:auto;bottom:3%}#portrait{height:62%}#wheel{display:none}}
+@media (max-height:600px){.panel{padding:16px 22px 16px}.logo{font-size:52px}.tag2{margin-top:6px;font-size:12.5px}.primary{margin-top:8px;min-height:48px;padding:10px 28px}.howto{margin-top:8px}.steer{height:62px}#wheel{width:92px;height:92px;margin-left:-46px}}
+@media (max-width:600px){#stageCard{min-width:0;padding:7px 10px}#stageCard .no{display:none}#stageCard .ttl{font-size:13px}#stageCard .row{display:none}#progWrap{top:70px;top:calc(70px + env(safe-area-inset-top));width:60vw;margin-left:-30vw}#hints{top:112px}#ctlTip{top:auto;bottom:118px;white-space:normal;width:70vw;text-align:center}#warn{top:46%;white-space:normal;width:84vw;text-align:center}.hint{font-size:12px;padding:7px 9px}#card,#card.center,#card.low{left:5vw;right:5vw;top:14%;bottom:auto;max-width:none;padding:14px 16px 16px;-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}#card.on,#card.center.on,#card.low.on{-webkit-animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both;animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both}#card .h{font-size:30px}#card.book .h{font-size:24px}#card.low{top:auto;bottom:3%}#portrait{height:62%}#wheel{display:none}}
 @media (prefers-reduced-motion:reduce){#stage.shake,#stage.swerve,#stage.glitch #gl{-webkit-animation-duration:.01s;animation-duration:.01s}}
 </style>
 <script>
@@ -310,6 +328,7 @@ window.onerror=function(msg,src,line){
   <div id="touch"></div>
   <div id="vignette" class="full"></div>
  </div>
+ <div id="slowVig" class="full"></div><div id="lbTop" class="lb"></div><div id="lbBot" class="lb"></div>
  <div id="scan" class="full"></div>
  <div id="flash" class="full"></div>
 
@@ -664,7 +683,7 @@ var el = {
   app: $('app'), stage: $('stage'), gl: $('gl'), fx: $('fx'), touch: $('touch'), flash: $('flash'), scan: $('scan'),
   hud: $('hud'), prog: $('progFill'), hints: $('hints'), caption: $('caption'), warn: $('warn'),
   btnL: $('btnL'), btnR: $('btnR'), wheel: $('wheel'), ctlTip: $('ctlTip'), sound: $('soundBtn'), rebel: $('rebelCount'),
-  stageNo: $('stageNo'), stageTtl: $('stageTtl'),
+  stageNo: $('stageNo'), stageTtl: $('stageTtl'), lbTop: $('lbTop'), lbBot: $('lbBot'), slowVig: $('slowVig'),
   bubT: $('bubT'), bubE: $('bubE'), darken: $('darken'), portrait: $('portrait'), card: $('card'), stamp: $('stamp'), bigWheel: $('bigWheel'), gag: $('gag'),
   title: $('title'), start: $('startBtn'), boot: $('boot'), stageSel: $('stageSel'),
   result: $('result'), resEyebrow: $('resEyebrow'), resTitle: $('resTitle'), resLabel: $('resLabel'), resText: $('resText'), resRebel: $('resRebel'), resNote: $('resNote'),
@@ -692,7 +711,14 @@ function caption(text){
   if (text === captionText) return;
   captionText = text;
   if (!text){ on(el.caption, false); return; }
-  el.caption.textContent = text; on(el.caption, true);
+  // 「人の名前「台詞」」は名札と台詞に分け、「　← →…」の操作説明は小さく下に出す
+  var main = text, tip = '', m = /^(.*?)　(← →.*)$/.exec(text);
+  if (m){ main = m[1]; tip = m[2]; }
+  var html, q2 = /^([^「」]{1,8})「(.+)」(.*)$/.exec(main);
+  if (q2) html = '<span class="cl"><span class="who">' + esc(q2[1]) + '</span></span><br><span class="cl l2 quote">「' + esc(q2[2]) + '」</span>' + (q2[3] ? '<br><span class="cl l2">' + esc(q2[3]) + '</span>' : '');
+  else html = '<span class="cl">' + esc(main).replace(/(左：|右：)/g, '<span class="hl">$1</span>').replace(/ ／ /, '</span><br><span class="cl l2">') + '</span>';
+  if (tip) html += '<span class="tip">' + esc(tip) + '</span>';
+  el.caption.innerHTML = html; on(el.caption, true); restartAnim(el.caption, 'pop');
 }
 function darken(mode){ el.darken.className = 'full' + (mode ? ' on ' + mode : ''); }
 var bubbles = { T: { el: el.bubT, text: '', until: 0 }, E: { el: el.bubE, text: '', until: 0 } };
@@ -1364,7 +1390,7 @@ function startStage(i, cont){
   if (i !== G.stage || !scene) loadStage(i); else loadStage(i);
   G.round++; G.mode = 'run'; G.s = 0; G.x = 0; G.vx = 0; G.y = 0; G.speed = 0; G.chosen = null; G.worldScale = 1; G.spin = 0; G.hop = null;
   G.camMode = 'follow'; G.glow = 0; G.eLook = 0; G.collapse = 0; G.bigHeadT = -1; G.dither = 0; G.heldL = G.heldR = false; on(el.btnL, false, 'down'); on(el.btnR, false, 'down');
-  resetFx(); on(el.title, false); on(el.result, false); on(el.end, false); hudOn(true);
+  exitSlow(false); resetFx(); on(el.title, false); on(el.result, false); on(el.end, false); hudOn(true);
   el.ctlTip.style.display = ST.no === 1 ? 'block' : 'none';
   captionText = null; caption(ST.captions[0][1]);
   showCard('center', 'STAGE ' + ST.no, ST.title, '');
@@ -1372,11 +1398,12 @@ function startStage(i, cont){
   schedule([[1.6, function(){ showCard(null); }], [3.5, function(){ el.ctlTip.style.display = 'none'; }]]);
 }
 function toTitle(){
-  G.mode = 'title'; G.seq = []; resetFx(); hudOn(false); caption(''); on(el.result, false); on(el.end, false); on(el.title, true);
+  exitSlow(false); G.mode = 'title'; G.seq = []; resetFx(); hudOn(false); caption(''); on(el.result, false); on(el.end, false); on(el.title, true);
   if (G.stage !== 0) loadStage(0);
   G.s = 0; G.x = 0; G.collapse = 0; bgm(false);
 }
 function decide(side){
+  exitSlow(true);
   G.chosen = side; G.mode = side === C ? 'good' : 'wrong';
   on(el.warn, false); on(el.hints, false); hudOn(false); caption('');
   G.heldL = G.heldR = false; on(el.btnL, false, 'down'); on(el.btnR, false, 'down');
@@ -1671,6 +1698,33 @@ var GAGS = {
 
 /* ---------------- [9] LOOP / INPUT ---------------- */
 function laneTarget(side, s){ return laneC(side, s) - side * 0.6; }
+// ---- 迷いのスローモーション ----
+var SLOW_AT = TIP - 24;
+function enterSlow(){
+  G.slow = 1; G.slowT = 0; G.slowBeat = 0; G.slowVoice = 0;
+  el.gl.classList.add('slowfx'); on(el.lbTop, true); on(el.lbBot, true); on(el.slowVig, true);
+  if (A.bgmGain) A.bgmGain.gain.value = 0.06;
+  tone(700, 0.9, 'sine', 0.22, 0, 120); noise(0.8, 0.25, 1800, 200, 1);
+  caption('どうする、豊太郎……');
+  say('E', '');
+}
+function exitSlow(snap){
+  if (!G.slow) return;
+  G.slow = 0; el.gl.classList.remove('slowfx'); on(el.lbTop, false); on(el.lbBot, false); on(el.slowVig, false);
+  if (A.bgmGain) A.bgmGain.gain.value = 0.2;
+  W3.toyo.head.rotation.y = 0;
+  if (snap){ flash(); SFX.whoosh(); }
+}
+function updateSlow(dt){
+  G.slowT += dt; G.slowBeat -= dt; G.slowVoice -= dt;
+  // 首を左右にゆっくり振る
+  W3.toyo.head.rotation.y = Math.sin(G.slowT * 2.4) * 0.75;
+  if (G.slowBeat <= 0){ SFX.heart(); G.slowBeat = 0.85; }
+  if (G.slowVoice <= 0){
+    var which = Math.floor(G.slowT / 1.3) % 2 === 0 ? ST.left : ST.right;
+    say('T', '（' + which.label + '……？）', 1.2); G.slowVoice = 1.3;
+  }
+}
 function update(dt, rawDt){
   G.clock += dt;
   runSeq(rawDt);
@@ -1682,12 +1736,15 @@ function update(dt, rawDt){
     var lim = G.s < ROAD.FORK ? ROAD.MAIN_HALF - 0.6 : laneC(1, G.s) + laneH(G.s) - 0.6;
     G.x = clamp(G.x, -lim, lim);
     if (G.mode === 'run'){
-      G.speed = damp(G.speed, ROAD.SPEED, 2.2, dt); G.s += G.speed * dt;
-      var cap = ST.captions; for (var c = 0; c < cap.length; c++){ if (G.s < cap[c][0]){ caption(cap[c][1]); break; } }
-      on(el.hints, G.s > 62 && G.s < TIP - 14);
+      // 分かれ道の手前はスローモーションで迷う
+      if (!G.slow && G.s >= SLOW_AT) enterSlow();
+      G.speed = damp(G.speed, G.slow ? ROAD.SPEED * 0.3 : ROAD.SPEED, G.slow ? 3.5 : 2.2, dt); G.s += G.speed * dt;
+      if (G.slow) updateSlow(dt);
+      else { var cap = ST.captions; for (var c = 0; c < cap.length; c++){ if (G.s < cap[c][0]){ caption(cap[c][1]); break; } } }
+      on(el.hints, false);
       if (G.s >= DECIDE){
         if (Math.abs(G.x) > 0.9) decide(G.x < 0 ? -1 : 1);
-        else { G.mode = 'dither'; G.s = DECIDE; G.speed = 0; on(el.warn, true); on(el.hints, false); say('E', ''); say('T', 'ど、どっちに行けば……', 2.5); SFX.err(0); caption('立て札の前で立ち止まってしまった！'); }
+        else { exitSlow(false); G.mode = 'dither'; G.s = DECIDE; G.speed = 0; on(el.warn, true); on(el.hints, false); say('E', ''); say('T', 'ど、どっちに行けば……', 2.5); SFX.err(0); caption('立て札の前で立ち止まってしまった！'); }
       }
     } else {
       G.speed = 0; t.head.rotation.y = Math.sin(G.clock * 6) * 0.6;
@@ -1759,7 +1816,7 @@ function update(dt, rawDt){
   } else {
     e.armR.rotation.x = G.mode === 'meet' ? -1.4 : Math.sin(G.clock * 1.5) * 0.1;
   }
-  var calling = (G.mode === 'run' && G.s < DECIDE - 4) || G.mode === 'good' || G.mode === 'arriving';
+  var calling = (G.mode === 'run' && G.s < SLOW_AT - 2) || G.mode === 'good' || G.mode === 'arriving';
   if (ST.npcCall && calling && dE < 170 && sobTimer <= 0 && !G.eLook){ say('E', ST.npcCall, 2.2); sobTimer = 3.2; if (ST.sob && dE < 90) SFX.sob(); }
   updateCamera(dt);
   updateSnow(dt);
@@ -1780,6 +1837,7 @@ function updateCamera(dt){
     tp = [px + C * 3.0, 3.6, pz + 6.2]; tl = [(px + ex) / 2, 1.0, (pz + ez) / 2]; k = 2.5;
   } else {
     var back = portrait ? 10.5 : 7.6, up = portrait ? 5.2 : 4.0;
+    if (G.slow){ back -= 1.2; up -= 0.6; }
     if (G.bigHeadT >= 0){ back += 3; up += 1.5; }
     tp = [px * 0.85, up + G.y * 0.4, pz + back]; tl = [px * 0.9, G.bigHeadT >= 0 ? 2.5 : 1.1, pz - 9]; k = 6;
   }
@@ -1789,7 +1847,7 @@ function updateCamera(dt){
   if (G.mode === 'locked' || G.mode === 'freeze'){ camera.position.x += (Math.random() - 0.5) * 0.06; camera.position.y += (Math.random() - 0.5) * 0.06; }
   camera.lookAt(camLook);
   camera.rotateZ(G.camMode === 'follow' ? -G.vx * 0.006 : 0);
-  var fov = (portrait ? 64 : 50) + (FX.speed * 9);
+  var fov = (portrait ? 64 : 50) + (FX.speed * 9) - (G.slow ? 7 : 0);
   if (Math.abs(camera.fov - fov) > 0.05){ camera.fov = damp(camera.fov, fov, 4, dt); camera.updateProjectionMatrix(); }
 }
 function resize(){
