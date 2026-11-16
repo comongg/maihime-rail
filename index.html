@@ -182,6 +182,7 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 @-webkit-keyframes cinp{from{-webkit-transform:rotate(-12deg) scale(.3);opacity:0}to{opacity:1}}
 @keyframes cinp{from{transform:rotate(-12deg) scale(.3);opacity:0}to{opacity:1}}
 #card.book .h{font-size:clamp(22px,3.6vw,36px)}
+#card.hj{top:13%;left:3%;max-width:min(400px,44vw);padding:10px 14px 12px;-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}#card.hj.on{-webkit-animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both;animation:cinp .4s cubic-bezier(.2,1.7,.35,1) both}#card.hj .h{font-size:clamp(17px,2.6vw,28px)}#card.hj .s{font-size:clamp(11px,1.4vw,14px)}
 #card.low{top:auto;bottom:4%;bottom:calc(4% + env(safe-area-inset-bottom));-webkit-transform:translate(-50%,0) rotate(-1deg);transform:translate(-50%,0) rotate(-1deg)}
 #card.low.on{-webkit-animation:none;animation:none}
 #card .k{font-size:12px;font-weight:900;letter-spacing:.2em;color:#c4374f}
@@ -195,7 +196,7 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 #card.good{background:#effff4;border-color:#1e6b46;box-shadow:10px 10px 0 #1e6b46}#card.good .k{color:#1e6b46}#card.good .h{text-shadow:3px 3px 0 #bdf0cf}
 #card.book{background:#fbf3df;border-color:#6b4a2b;box-shadow:8px 8px 0 #6b4a2b;font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif}
 #card.book .k{color:#8a5a2b}#card.book .h{text-shadow:none;font-size:clamp(18px,2.7vw,28px)}#card.book{max-width:min(560px,80vw);padding:12px 18px 14px}#card.book .s{font-size:clamp(12px,1.6vw,15px)}
-#stamp{position:absolute;z-index:26;left:50%;top:20%;padding:10px 22px;border-radius:12px;font-size:clamp(22px,4.4vw,44px);font-weight:900;white-space:nowrap;display:none;border:5px solid currentColor;background:rgba(255,255,255,.92);pointer-events:none}
+#stamp{position:absolute;z-index:26;left:50%;top:40%;padding:10px 22px;border-radius:12px;font-size:clamp(22px,4.4vw,44px);font-weight:900;white-space:nowrap;display:none;border:5px solid currentColor;background:rgba(255,255,255,.92);pointer-events:none}
 #stamp.on{display:block;-webkit-animation:stamp .45s cubic-bezier(.2,1.6,.4,1) both;animation:stamp .45s cubic-bezier(.2,1.6,.4,1) both}
 @-webkit-keyframes stamp{from{-webkit-transform:translate(-50%,-50%) scale(3) rotate(-14deg);opacity:0}to{-webkit-transform:translate(-50%,-50%) scale(1) rotate(-6deg);opacity:1}}
 @keyframes stamp{from{transform:translate(-50%,-50%) scale(3) rotate(-14deg);opacity:0}to{transform:translate(-50%,-50%) scale(1) rotate(-6deg);opacity:1}}
@@ -593,7 +594,7 @@ var STAGES = [
    captions: [[22, 'ベルリンの夕暮れ。豊太郎は下宿へ帰る途中……'], [58, 'どこかで少女が泣いている。　← → でハンドル操作'], [9999, '分かれ道だ！　左：エリスを助ける ／ 右：無視して帰る']],
    good: { stamp: '原作どおり！', bubble: '（放っておけない……！）', caption: '迷わず左へ！ 豊太郎、珍しく即決！' },
    wrong: { bubble: 'ふぅ……これで下宿に帰れる', caption: 'このまま下宿へ一直線！', gag: 'portrait',
-     hijack: { k: 'AUTO STEERING', h: '本能がハンドルを\n乗っ取りました', s: '「無視して帰る」→「声をかける」に自動修正中……', op: '操縦者：同情心', face: 'love' } },
+     hijack: { k: 'AUTO STEERING', h: '本能がハンドルを\n乗っ取りました', s: '「無視して帰る」→「声をかける」に自動修正中……', op: '操縦者：同情心', style: 'hop', face: 'love' } },
    meet: { say: '何故に泣きたもうか。', k: '原作の台詞', h: '「何故に泣きたもうか。」', s: '門の扉に寄りかかって泣く少女に、豊太郎は思わず声をかけた。（森鷗外『舞姫』）', hearts: true },
    result: { goodT: '豊太郎、珍しく正しい進路！', goodL: '原作ルートを自分で選んだ', goodX: 'あなたはエリスを助ける道を選んだ。原作でも、泣いている少女を見た豊太郎は声をかける。',
      wrongT: '運命の出会い、回避失敗！', wrongL: '原作ルートに強制合流', wrongX: '無視して帰るつもりが、「同情心」がハンドルを奪った。結局、豊太郎はエリスに声をかけた。' },
@@ -604,7 +605,7 @@ var STAGES = [
    captions: [[25, 'エリスの父が亡くなった。明日は葬式なのに、家にはお金が一銭もない。'], [60, 'エリス「われを救いたまえ、君。」（原作の言葉）'], [9999, '左：時計を差し出す ／ 右：お金がないと断る']],
    good: { stamp: '原作どおり！', bubble: '（時計なら、ある……！）', caption: '迷わず左へ！ 懐中時計を握りしめて走る！' },
    wrong: { bubble: 'すまぬ、手持ちが無いのだ……', caption: '財布を押さえて、下宿へ急ぐ！', gag: 'watch',
-     hijack: { k: 'AUTO PAYMENT', h: '財布のひもが\n勝手にほどけました', s: '「断る」→「時計を渡す」に自動修正中……', op: '操縦者：同情心', face: 'love' } },
+     hijack: { k: 'AUTO PAYMENT', h: '財布のひもが\n勝手にほどけました', s: '「断る」→「時計を渡す」に自動修正中……', op: '操縦者：同情心', style: 'chain', face: 'love' } },
    meet: { say: 'これにて一時の急を凌ぎたまえ。', k: '原作では', h: '余は時計をはずして\n机の上に置きぬ。', s: '手持ちの銀貨では足りないので、豊太郎は自分の時計を渡した。（森鷗外『舞姫』）', hearts: true },
    result: { goodT: '懐中時計、正しく手放しました', goodL: '原作ルートを自分で選んだ', goodX: 'あなたは時計を差し出す道を選んだ。原作でも、豊太郎は時計をはずして、質に入れるよう渡した。',
      wrongT: '断るつもりが、強制決済！', wrongL: '原作ルートに強制合流', wrongX: '断って帰るつもりが、時計が勝手に飛んでいった。結局、豊太郎は時計を差し出した。' },
@@ -615,7 +616,7 @@ var STAGES = [
    captions: [[25, '免官（クビ）になった。今すぐ帰国するなら旅費が出る。'], [60, '残るなら、国からの助けは無い。そこへ母の死の知らせが……'], [9999, '左：日本に帰る ／ 右：ベルリンに残る']],
    good: { stamp: '原作どおり！', bubble: '（ここに残ろう……）', caption: '右へ！ 豊太郎、ベルリンに残る！' },
    wrong: { bubble: 'よし、旅費をもらって帰国だ', caption: '公使館へ、旅費を受け取りに！', gag: 'loading',
-     hijack: { k: 'TIMEOUT', h: '優柔不断が\nハンドルを握りました', s: '「日本に帰る」→「ベルリンに残る」に自動修正中……', op: '操縦者：優柔不断', face: 'dizzy' } },
+     hijack: { k: 'TIMEOUT', h: '優柔不断が\nハンドルを握りました', s: '「日本に帰る」→「ベルリンに残る」に自動修正中……', op: '操縦者：優柔不断', style: 'warp', face: 'dizzy' } },
    meet: { say: 'ベルリンに、残ろう。', k: '原作では', h: '伯林に留まりて\n政治学芸のことなどを\n報道せしむることとなしつ。', s: '友の相沢が新聞社にかけあい、豊太郎は通信員としてベルリンに残った。（森鷗外『舞姫』）', hearts: false },
    result: { goodT: '残留、原作どおり！', goodL: '原作ルートを自分で選んだ', goodX: 'あなたはベルリンに残る道を選んだ。原作でも、豊太郎は帰国せず、新聞社の通信員として残る。',
      wrongT: '帰国、処理しきれず！', wrongL: '原作ルートに強制合流', wrongX: '帰国を決めたはずが、決断が処理しきれずに時間切れ。結局、豊太郎はベルリンに残った。' },
@@ -626,7 +627,7 @@ var STAGES = [
    captions: [[25, '冬のベルリン。旧友の相沢が、大臣のお供で来ている。'], [60, '相沢「学識あり、才能あるものが、いつまでか一少女の情にかかずらいて……」'], [9999, '左：エリスとは別れない ／ 右：関係を断つと約束する']],
    good: { stamp: '原作どおり！', bubble: '（友には逆らえない……）', caption: '右へ！ 友の言葉にうなずく豊太郎！' },
    wrong: { bubble: '相沢、僕はエリスと別れない！', caption: '今日こそ、友にはっきり言うぞ！', gag: 'aizawa',
-     hijack: { k: 'ERROR 404', h: '友への遠慮が\nハンドルを握りました', s: '「別れない」→「約束します」に自動修正中……', op: '操縦者：友への遠慮', face: 'dizzy' } },
+     hijack: { k: 'ERROR 404', h: '友への遠慮が\nハンドルを握りました', s: '「別れない」→「約束します」に自動修正中……', op: '操縦者：友への遠慮', style: 'hand', face: 'dizzy' } },
    meet: { say: '……わかった。約束しよう。', k: '原作では', h: 'しばらく友の言に従いて、\nこの情縁を断たんと約しき。', s: '豊太郎は、エリスとの関係を断つと相沢に約束してしまった。（森鷗外『舞姫』）', hearts: false },
    result: { goodT: '「否」と言えない、原作どおり', goodL: '原作ルートを自分で選んだ', goodX: 'あなたは約束する道を選んだ。原作でも、豊太郎は相沢の忠告に従い、エリスとの関係を断つと約束する。',
      wrongT: '反論、受け付けられず！', wrongL: '原作ルートに強制合流', wrongX: '「別れない」と言うつもりが、断る勇気が見つからなかった。結局、豊太郎は約束してしまった。' },
@@ -637,7 +638,7 @@ var STAGES = [
    captions: [[25, '天方伯（大臣）の通訳として働く日々。'], [60, '大臣「余はあす、魯西亜に向かいて出発すべし。随いて来べきか」'], [9999, '左：断る ／ 右：同行する']],
    good: { stamp: '原作どおり！', bubble: '（はい、と言ってしまった……）', caption: '右へ！ 考えるより先に返事が出た！' },
    wrong: { bubble: 'エリスのそばにいたいので……', caption: '今回は、ていねいにお断りしよう。', gag: 'autoyes',
-     hijack: { k: 'AUTO REPLY', h: '口が先に\n「はい」と言いました', s: '「断る」→「同行する」に自動修正中……', op: '操縦者：即答グセ', face: 'shock' } },
+     hijack: { k: 'AUTO REPLY', h: '口が先に\n「はい」と言いました', s: '「断る」→「同行する」に自動修正中……', op: '操縦者：即答グセ', style: 'march', face: 'shock' } },
    meet: { say: 'いかで命に従わざらむ。', k: '原作の台詞', h: '「いかで命に\n従わざらむ」', s: '突然の問いに、豊太郎はよく考えないまま、すぐに承知してしまう。（森鷗外『舞姫』）', hearts: false },
    result: { goodT: '即答、原作どおり！', goodL: '原作ルートを自分で選んだ', goodX: 'あなたは同行する道を選んだ。原作でも、豊太郎は大臣の問いにすぐ「いかで命に従わざらむ」と答える。',
      wrongT: 'お断り、書き換えられました！', wrongL: '原作ルートに強制合流', wrongX: '断るつもりが、口が先に「はい」と言ってしまった。結局、豊太郎はロシアへ同行した。' },
@@ -648,7 +649,7 @@ var STAGES = [
    captions: [[25, 'ロシアから戻った。エリスのお腹には、子どもがいる。'], [60, '大臣「われとともに東にかえる心なきか」'], [9999, '左：エリスとベルリンに残る ／ 右：日本へ帰る']],
    good: { stamp: '原作どおり', bubble: '（本国も名誉も、失いたくない……）', caption: '右へ。金色の道へ吸い寄せられる……' },
    wrong: { bubble: '僕は、エリスとここで生きる！', caption: '出世より、エリスを選ぶ！', gag: 'gold',
-     hijack: { k: 'PERMISSION GRANTED', h: '出世欲が\nハンドルを握りました', s: '「残る」→「帰る」に自動修正中……', op: '操縦者：出世欲', face: 'smug' } },
+     hijack: { k: 'PERMISSION GRANTED', h: '出世欲が\nハンドルを握りました', s: '「残る」→「帰る」に自動修正中……', op: '操縦者：出世欲', style: 'conveyor', face: 'smug' } },
    meet: { say: '承り侍り。', k: '原作の台詞', h: '「承り侍り」', s: '「ああ、何らの特操なき心ぞ」――豊太郎は自分を責めながら、帰国を承知した。（森鷗外『舞姫』）', hearts: false },
    result: { goodT: '承知、原作どおり', goodL: '原作ルートを自分で選んだ', goodX: 'あなたは日本へ帰る道を選んだ。原作でも、豊太郎は本国と名誉を失うことを恐れて、「承り侍り」と答える。',
      wrongT: '拒否ボタン、使えず！', wrongL: '原作ルートに強制合流', wrongX: '残るつもりが、出世欲が操作の権限を取った。結局、豊太郎は帰国を承知した。' },
@@ -659,7 +660,7 @@ var STAGES = [
    captions: [[25, '帰国を承知してしまった。エリスに、何と言えばいいのか。'], [60, '雪の夜。四階の屋根裏に、エリスの灯が見える。'], [9999, '左：正直に話す ／ 右：言い出せない']],
    good: { stamp: '原作どおり……', bubble: '（言えない……）', caption: '雪の中を、あてもなくさまよう……', quiet: true },
    wrong: { bubble: '今日こそ、本当のことを話そう', caption: 'まっすぐ屋根裏へ帰る！', gag: 'message',
-     hijack: { k: 'SEND FAILED', h: '足が勝手に\n遠回りを始めました', s: '「正直に話す」→「言い出せない」に自動修正中……', op: '操縦者：臆病な心', face: 'dizzy' } },
+     hijack: { k: 'SEND FAILED', h: '足が勝手に\n遠回りを始めました', s: '「正直に話す」→「言い出せない」に自動修正中……', op: '操縦者：臆病な心', style: 'wander', face: 'dizzy' } },
    meet: { say: '', k: '原作では', h: '答えんとすれど声出でず……\nそのままに地に倒れぬ。', s: '豊太郎は何も告げられないまま倒れた。このあとエリスは、相沢から本当のことを知る。（森鷗外『舞姫』）', hearts: false, collapse: true },
    result: { goodT: '言えないまま、原作どおり', goodL: '原作ルートを自分で選んだ', goodX: 'あなたは言い出せない道を選んだ。原作でも、豊太郎はエリスに告げられないまま雪の夜をさまよい、倒れる。',
      wrongT: '本当のこと、送信できず', wrongL: '原作ルートに強制合流', wrongX: '正直に話すつもりが、言葉が出てこなかった。結局、豊太郎は何も言えないまま倒れた。' },
@@ -831,21 +832,60 @@ var BGM = [
   [72, 48, 64, 67], [0, 0, 64, 67], [0, 0, 64, 67]
 ];
 function midi(n){ return 440 * Math.pow(2, (n - 69) / 12); }
+// 幕ごとの曲：[メロディ, 低音, 和音1, 和音2]（0 は鳴らさない）
+var TRACKS = {
+  waltz: { beat: 0.4, tr: 0, wave: 'triangle', bass: 'sine', notes: BGM },
+  night: { beat: 0.48, tr: -2, wave: 'sine', bass: 'sine', notes: BGM },
+  minor: { beat: 0.44, tr: 0, wave: 'triangle', bass: 'sine', notes: [
+    [76, 45, 60, 64], [72, 0, 60, 64], [69, 0, 60, 64], [74, 40, 59, 64], [72, 0, 59, 64], [71, 0, 59, 64],
+    [72, 41, 60, 65], [69, 0, 60, 65], [65, 0, 60, 65], [64, 40, 59, 64], [0, 0, 59, 64], [0, 0, 59, 64],
+    [69, 45, 60, 64], [72, 0, 60, 64], [76, 0, 60, 64], [77, 38, 62, 65], [76, 0, 62, 65], [74, 0, 62, 65],
+    [72, 40, 59, 64], [71, 0, 59, 64], [68, 0, 59, 64], [69, 45, 60, 64], [0, 0, 60, 64], [0, 0, 60, 64]] },
+  box: { beat: 0.27, tr: 0, wave: 'sine', bass: 'sine', notes: [
+    [84, 48, 0, 0], [88, 0, 0, 0], [91, 0, 0, 0], [88, 0, 0, 0], [86, 43, 0, 0], [91, 0, 0, 0], [93, 0, 0, 0], [91, 0, 0, 0],
+    [84, 45, 0, 0], [88, 0, 0, 0], [91, 0, 0, 0], [96, 0, 0, 0], [93, 41, 0, 0], [91, 0, 0, 0], [88, 0, 0, 0], [86, 0, 0, 0]] },
+  pomp: { beat: 0.3, tr: 0, wave: 'square', bass: 'triangle', notes: [
+    [72, 36, 0, 0], [0, 0, 48, 52], [72, 43, 0, 0], [74, 0, 47, 50], [76, 36, 0, 0], [0, 0, 48, 52], [79, 43, 0, 0], [76, 0, 48, 52],
+    [77, 41, 0, 0], [0, 0, 48, 53], [81, 36, 0, 0], [79, 0, 48, 52], [76, 43, 0, 0], [74, 0, 47, 50], [72, 36, 0, 0], [0, 0, 48, 52]] },
+  sad: { beat: 0.62, tr: -3, wave: 'sine', bass: 'sine', notes: [
+    [69, 45, 0, 0], [72, 0, 57, 60], [76, 0, 57, 60], [74, 41, 0, 0], [72, 0, 57, 60], [69, 0, 57, 60],
+    [71, 40, 0, 0], [68, 0, 56, 59], [64, 0, 56, 59], [69, 45, 0, 0], [0, 0, 57, 60], [0, 0, 57, 60]] }
+};
+var STAGE_TRACK = { 1: 'waltz', 2: 'night', 3: 'minor', 4: 'box', 5: 'box', 6: 'pomp', 7: 'sad' };
 function bgmTick(){
   if (!A.ctx || !A.bgmOn) return;
-  // 第7幕は短調に寄せてゆっくり
-  var sad = ST.no === 7 && !A.comic;
-  var beat = A.comic ? 0.2 : (sad ? 0.55 : 0.4), tr = A.comic ? 7 : (sad ? -3 : 0);
+  var T = TRACKS[STAGE_TRACK[ST.no]] || TRACKS.waltz;
+  var beat = A.comic ? 0.2 : T.beat, tr = A.comic ? 7 : T.tr, list = A.comic ? BGM : T.notes, wave = A.comic ? 'triangle' : T.wave;
+  var mv = wave === 'square' ? 0.18 : 0.5;
   while (A.next < A.ctx.currentTime + 0.25){
-    var st = BGM[A.idx % BGM.length], dl = A.next - A.ctx.currentTime;
-    if (dl > -0.05){
-      if (st[0]) tone(midi(st[0] + tr), beat * 0.95, 'triangle', 0.5, Math.max(0, dl), 0, A.bgmGain);
-      if (st[1]) tone(midi(st[1] + tr), beat * 1.6, 'sine', 0.55, Math.max(0, dl), 0, A.bgmGain);
-      else { tone(midi(st[2] + tr), beat * 0.5, 'sine', 0.18, Math.max(0, dl), 0, A.bgmGain); tone(midi(st[3] + tr), beat * 0.5, 'sine', 0.18, Math.max(0, dl), 0, A.bgmGain); }
+    var st = list[A.idx % list.length], dl = Math.max(0, A.next - A.ctx.currentTime);
+    if (A.next - A.ctx.currentTime > -0.05){
+      if (st[0]) tone(midi(st[0] + tr), beat * (T.wave === 'sine' && !A.comic ? 1.6 : 0.95), wave, mv, dl, 0, A.bgmGain);
+      if (st[1]) tone(midi(st[1] + tr), beat * 1.6, A.comic ? 'sine' : T.bass, 0.5, dl, 0, A.bgmGain);
+      else if (st[2]){ tone(midi(st[2] + tr), beat * 0.5, 'sine', 0.18, dl, 0, A.bgmGain); tone(midi(st[3] + tr), beat * 0.5, 'sine', 0.18, dl, 0, A.bgmGain); }
     }
     A.idx++; A.next += beat;
   }
 }
+// 環境の音：街のざわめき・風（雪の幕）。ループする雑音を絞って流す
+var AMB = { src: null, gain: null, level: 0 };
+function ambient(kind){
+  if (!A.ctx || !A.noise) return;
+  try {
+    if (AMB.src){ AMB.src.stop(); AMB.src.disconnect(); AMB.src = null; }
+    if (!kind) return;
+    var src = A.ctx.createBufferSource(); src.buffer = A.noise; src.loop = true;
+    var f = A.ctx.createBiquadFilter(), g = A.ctx.createGain();
+    if (kind === 'wind'){ f.type = 'lowpass'; f.frequency.value = 520; f.Q.value = 0.8; }
+    else { f.type = 'bandpass'; f.frequency.value = 340; f.Q.value = 0.6; }
+    g.gain.value = 0;
+    src.connect(f); f.connect(g); g.connect(A.master);
+    if (kind === 'wind'){ var lfo = A.ctx.createOscillator(), lg = A.ctx.createGain(); lfo.frequency.value = 0.17; lg.gain.value = 260; lfo.connect(lg); lg.connect(f.frequency); lfo.start(); src.onended = function(){ try { lfo.stop(); } catch (e) {} }; }
+    src.start(); AMB.src = src; AMB.gain = g;
+  } catch (e) {}
+}
+function ambLevel(v){ AMB.level = v; if (AMB.gain && A.ctx){ try { AMB.gain.gain.setTargetAtTime(v, A.ctx.currentTime, 0.3); } catch (e) {} } }
+var STAGE_AMB = { 1: ['city', 0.06], 2: ['city', 0.035], 3: ['city', 0.05], 4: ['wind', 0.14], 5: ['wind', 0.12], 6: ['wind', 0.14], 7: ['wind', 0.24] };
 function bgm(play, comic){
   if (!A.ctx) return;
   A.comic = !!comic;
@@ -1091,6 +1131,7 @@ function buildWorld(){
   buildSnow();
   W3.bigHead = null;
   if (ST.wrong.gag === 'aizawa') W3.bigHead = buildBigHead();
+  W3.prop = null;
 }
 function goalBoard(text, sub, cx, y, z, w){
   var b = textBoard(text, sub || '', '#2b2a3a', '#ffe9b8', w || 7, sub ? 2.2 : 1.6); b.position.set(cx, y, z); scene.add(b); return b;
@@ -1459,9 +1500,10 @@ function enterSet(){
 
 /* ---------------- [5] CHARACTERS ---------------- */
 function faceCanvas(draw){
-  var c = document.createElement('canvas'); c.width = c.height = 256;
-  var g = c.getContext('2d'); g.lineCap = 'round'; g.lineJoin = 'round'; draw(g);
-  return keep(new THREE.CanvasTexture(c));
+  // 512 四方に描く（座標は 256 基準のまま 2 倍）
+  var c = document.createElement('canvas'); c.width = c.height = 512;
+  var g = c.getContext('2d'); g.scale(2, 2); g.lineCap = 'round'; g.lineJoin = 'round'; draw(g);
+  var t = keep(new THREE.CanvasTexture(c)); if (R) t.anisotropy = Math.min(4, R.capabilities.getMaxAnisotropy()); return t;
 }
 function heartPath(g, x, y, s){
   g.beginPath(); g.moveTo(x, y + s * 0.35);
@@ -1471,84 +1513,172 @@ function heartPath(g, x, y, s){
 var FACES = {};
 function makeFaces(){
   var ink = '#2a2230';
-  function brows(g, a, b){ g.strokeStyle = ink; g.lineWidth = 8; g.beginPath(); g.moveTo(58, 86 + a); g.lineTo(104, 80 + b); g.moveTo(152, 80 + b); g.lineTo(198, 86 + a); g.stroke(); }
-  function blush(g, al){ g.fillStyle = 'rgba(255,120,140,' + al + ')'; g.beginPath(); g.ellipse(64, 160, 24, 12, 0, 0, 7); g.ellipse(192, 160, 24, 12, 0, 0, 7); g.fill(); }
-  function dots(g, r){ g.fillStyle = ink; g.beginPath(); g.ellipse(84, 124, r * 0.65, r, 0, 0, 7); g.ellipse(172, 124, r * 0.65, r, 0, 0, 7); g.fill(); }
-  FACES.normal = faceCanvas(function(g){ brows(g, 0, -6); dots(g, 17); g.strokeStyle = ink; g.lineWidth = 6; g.beginPath(); g.moveTo(110, 186); g.quadraticCurveTo(128, 180, 146, 186); g.stroke(); });
-  FACES.smug = faceCanvas(function(g){ brows(g, -8, 6); g.strokeStyle = ink; g.lineWidth = 8; g.beginPath(); g.moveTo(64, 126); g.lineTo(104, 122); g.moveTo(152, 122); g.lineTo(192, 126); g.stroke(); g.lineWidth = 6; g.beginPath(); g.moveTo(104, 182); g.quadraticCurveTo(138, 198, 160, 176); g.stroke(); g.fillStyle = '#ffd166'; g.font = '900 60px sans-serif'; g.fillText('¥', 190, 70); });
-  FACES.shock = faceCanvas(function(g){ brows(g, -14, -20); g.fillStyle = '#fff'; g.strokeStyle = ink; g.lineWidth = 6; g.beginPath(); g.arc(84, 124, 26, 0, 7); g.fill(); g.stroke(); g.beginPath(); g.arc(172, 124, 26, 0, 7); g.fill(); g.stroke(); g.fillStyle = ink; g.beginPath(); g.arc(84, 124, 6, 0, 7); g.arc(172, 124, 6, 0, 7); g.fill(); g.fillStyle = '#5a2030'; g.beginPath(); g.ellipse(128, 194, 18, 26, 0, 0, 7); g.fill(); g.fillStyle = '#7fc8ff'; g.beginPath(); g.moveTo(214, 60); g.quadraticCurveTo(232, 92, 214, 100); g.quadraticCurveTo(196, 92, 214, 60); g.fill(); g.strokeStyle = 'rgba(80,90,200,.6)'; g.lineWidth = 5; for (var i = 0; i < 4; i++){ g.beginPath(); g.moveTo(80 + i * 24, 20); g.lineTo(80 + i * 24, 56); g.stroke(); } });
-  FACES.love = faceCanvas(function(g){ blush(g, 0.65); g.fillStyle = '#ff3d6e'; heartPath(g, 84, 130, 34); g.fill(); heartPath(g, 172, 130, 34); g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.arc(74, 112, 6, 0, 7); g.arc(162, 112, 6, 0, 7); g.fill(); g.fillStyle = '#5a2030'; g.beginPath(); g.moveTo(102, 178); g.quadraticCurveTo(128, 222, 154, 178); g.closePath(); g.fill(); });
-  FACES.dizzy = faceCanvas(function(g){ g.strokeStyle = ink; g.lineWidth = 5; for (var e = 0; e < 2; e++){ var cx = e ? 172 : 84; g.beginPath(); for (var a = 0; a < 16; a += 0.3){ var r = a * 1.6, x = cx + Math.cos(a) * r, y = 124 + Math.sin(a) * r; if (a === 0) g.moveTo(x, y); else g.lineTo(x, y); } g.stroke(); } g.lineWidth = 6; g.beginPath(); g.moveTo(104, 190); for (var k = 0; k < 6; k++) g.lineTo(108 + k * 8, k % 2 ? 182 : 196); g.stroke(); });
-  FACES.sad = faceCanvas(function(g){ brows(g, -10, 8); dots(g, 14); g.strokeStyle = ink; g.lineWidth = 6; g.beginPath(); g.moveTo(108, 194); g.quadraticCurveTo(128, 180, 148, 194); g.stroke(); g.strokeStyle = '#8fd6ff'; g.lineWidth = 7; g.beginPath(); g.moveTo(84, 146); g.lineTo(80, 176); g.stroke(); });
-  FACES.eCry = faceCanvas(function(g){ g.strokeStyle = '#5a3a30'; g.lineWidth = 7; g.beginPath(); g.moveTo(60, 122); g.quadraticCurveTo(84, 140, 108, 122); g.moveTo(148, 122); g.quadraticCurveTo(172, 140, 196, 122); g.stroke(); g.strokeStyle = '#8fd6ff'; g.lineWidth = 9; g.beginPath(); g.moveTo(72, 140); g.lineTo(66, 200); g.moveTo(184, 140); g.lineTo(190, 200); g.stroke(); blush(g, 0.45); g.strokeStyle = '#b8616c'; g.lineWidth = 6; g.beginPath(); g.moveTo(112, 192); g.quadraticCurveTo(128, 182, 144, 192); g.stroke(); });
-  FACES.eLook = faceCanvas(function(g){ blush(g, 0.4); for (var e = 0; e < 2; e++){ var cx = e ? 172 : 84; g.fillStyle = '#fff'; g.beginPath(); g.ellipse(cx, 126, 24, 28, 0, 0, 7); g.fill(); g.fillStyle = '#3f86cf'; g.beginPath(); g.ellipse(cx, 130, 17, 22, 0, 0, 7); g.fill(); g.fillStyle = '#163059'; g.beginPath(); g.ellipse(cx, 132, 8, 11, 0, 0, 7); g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.arc(cx + 6, 120, 6, 0, 7); g.fill(); g.strokeStyle = '#3a2a26'; g.lineWidth = 6; g.beginPath(); g.moveTo(cx - 28, 110); g.quadraticCurveTo(cx, 92, cx + 28, 110); g.stroke(); } g.strokeStyle = '#8fd6ff'; g.lineWidth = 7; g.beginPath(); g.moveTo(62, 152); g.lineTo(58, 186); g.stroke(); g.fillStyle = '#e88a95'; g.beginPath(); g.ellipse(128, 194, 10, 7, 0, 0, 7); g.fill(); });
-  FACES.eWorry = faceCanvas(function(g){ for (var e = 0; e < 2; e++){ var cx = e ? 172 : 84; g.fillStyle = '#fff'; g.beginPath(); g.ellipse(cx, 126, 22, 26, 0, 0, 7); g.fill(); g.fillStyle = '#3f86cf'; g.beginPath(); g.ellipse(cx, 130, 15, 20, 0, 0, 7); g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.arc(cx + 5, 121, 5, 0, 7); g.fill(); g.strokeStyle = '#3a2a26'; g.lineWidth = 6; g.beginPath(); g.moveTo(cx - 24, e ? 92 : 104); g.lineTo(cx + 24, e ? 104 : 92); g.stroke(); } g.strokeStyle = '#b8616c'; g.lineWidth = 6; g.beginPath(); g.moveTo(114, 196); g.quadraticCurveTo(128, 188, 142, 196); g.stroke(); });
-  FACES.aizawa = faceCanvas(function(g){ g.strokeStyle = ink; g.lineWidth = 10; g.beginPath(); g.moveTo(54, 92); g.lineTo(106, 104); g.moveTo(150, 104); g.lineTo(202, 92); g.stroke(); g.fillStyle = ink; g.fillRect(70, 118, 30, 9); g.fillRect(156, 118, 30, 9); g.strokeStyle = '#555'; g.lineWidth = 4; g.strokeRect(62, 106, 46, 32); g.strokeRect(148, 106, 46, 32); g.beginPath(); g.moveTo(108, 120); g.lineTo(148, 120); g.stroke(); g.fillStyle = '#2a2230'; g.beginPath(); g.moveTo(84, 176); g.quadraticCurveTo(128, 150, 172, 176); g.quadraticCurveTo(128, 168, 84, 176); g.fill(); g.lineWidth = 6; g.beginPath(); g.moveTo(112, 200); g.lineTo(144, 200); g.stroke(); });
-  FACES.minister = faceCanvas(function(g){ g.strokeStyle = '#eee'; g.lineWidth = 9; g.beginPath(); g.moveTo(56, 92); g.lineTo(104, 96); g.moveTo(152, 96); g.lineTo(200, 92); g.stroke(); g.strokeStyle = ink; g.lineWidth = 6; g.beginPath(); g.arc(84, 124, 14, 3.4, 6.0); g.stroke(); g.beginPath(); g.arc(172, 124, 14, 3.4, 6.0); g.stroke(); g.fillStyle = '#f4f4f4'; g.strokeStyle = '#bbb'; g.lineWidth = 3; g.beginPath(); g.moveTo(60, 168); g.quadraticCurveTo(128, 140, 196, 168); g.quadraticCurveTo(170, 250, 128, 254); g.quadraticCurveTo(86, 250, 60, 168); g.fill(); g.stroke(); });
+  function brows(g, a, b){ g.strokeStyle = ink; g.lineWidth = 7; g.beginPath(); g.moveTo(60, 88 + a); g.quadraticCurveTo(82, 78 + b, 104, 84 + b); g.moveTo(152, 84 + b); g.quadraticCurveTo(174, 78 + b, 196, 88 + a); g.stroke(); }
+  function blush(g, al){ var r = g.createRadialGradient(64, 160, 2, 64, 160, 26); r.addColorStop(0, 'rgba(255,120,140,' + al + ')'); r.addColorStop(1, 'rgba(255,120,140,0)'); g.fillStyle = r; g.fillRect(30, 140, 70, 40); r = g.createRadialGradient(192, 160, 2, 192, 160, 26); r.addColorStop(0, 'rgba(255,120,140,' + al + ')'); r.addColorStop(1, 'rgba(255,120,140,0)'); g.fillStyle = r; g.fillRect(156, 140, 70, 40); }
+  function eye(g, cx, cy, rx, ry, iris){
+    g.fillStyle = '#fff'; g.beginPath(); g.ellipse(cx, cy, rx, ry, 0, 0, 7); g.fill();
+    var ir = g.createLinearGradient(0, cy - ry, 0, cy + ry); ir.addColorStop(0, iris[0]); ir.addColorStop(1, iris[1]);
+    g.fillStyle = ir; g.beginPath(); g.ellipse(cx, cy + ry * 0.12, rx * 0.78, ry * 0.86, 0, 0, 7); g.fill();
+    g.fillStyle = '#120c18'; g.beginPath(); g.ellipse(cx, cy + ry * 0.18, rx * 0.36, ry * 0.42, 0, 0, 7); g.fill();
+    g.fillStyle = '#fff'; g.beginPath(); g.arc(cx + rx * 0.3, cy - ry * 0.3, rx * 0.28, 0, 7); g.fill(); g.beginPath(); g.arc(cx - rx * 0.3, cy + ry * 0.45, rx * 0.12, 0, 7); g.fill();
+    g.strokeStyle = ink; g.lineWidth = 5; g.beginPath(); g.ellipse(cx, cy, rx, ry, 0, Math.PI * 1.05, Math.PI * 1.95); g.stroke();
+  }
+  function closed(g, cx, cy, w, up){ g.strokeStyle = ink; g.lineWidth = 6; g.beginPath(); g.moveTo(cx - w, cy); g.quadraticCurveTo(cx, cy + (up ? -10 : 10), cx + w, cy); g.stroke(); }
+  var TOYO_IRIS = ['#4a3a32', '#1f1612'];
+  FACES.normal = faceCanvas(function(g){ brows(g, 0, -4); eye(g, 84, 124, 18, 22, TOYO_IRIS); eye(g, 172, 124, 18, 22, TOYO_IRIS); g.strokeStyle = ink; g.lineWidth = 5; g.beginPath(); g.moveTo(112, 186); g.quadraticCurveTo(128, 192, 144, 186); g.stroke(); blush(g, 0.18); });
+  FACES.normalB = faceCanvas(function(g){ brows(g, 0, -4); closed(g, 84, 128, 18); closed(g, 172, 128, 18); g.strokeStyle = ink; g.lineWidth = 5; g.beginPath(); g.moveTo(112, 186); g.quadraticCurveTo(128, 192, 144, 186); g.stroke(); blush(g, 0.18); });
+  FACES.smug = faceCanvas(function(g){ brows(g, -8, 6); g.strokeStyle = ink; g.lineWidth = 7; g.beginPath(); g.moveTo(64, 128); g.quadraticCurveTo(84, 120, 104, 126); g.moveTo(152, 126); g.quadraticCurveTo(172, 120, 192, 128); g.stroke(); g.lineWidth = 6; g.beginPath(); g.moveTo(104, 182); g.quadraticCurveTo(138, 200, 162, 174); g.stroke(); g.fillStyle = '#ffd166'; g.strokeStyle = '#a87a2e'; g.lineWidth = 3; g.font = '900 54px sans-serif'; g.fillText('$', 196, 72); g.strokeText('$', 196, 72); });
+  FACES.shock = faceCanvas(function(g){ brows(g, -16, -22); g.fillStyle = '#fff'; g.strokeStyle = ink; g.lineWidth = 5; g.beginPath(); g.arc(84, 124, 26, 0, 7); g.fill(); g.stroke(); g.beginPath(); g.arc(172, 124, 26, 0, 7); g.fill(); g.stroke(); g.fillStyle = ink; g.beginPath(); g.arc(84, 126, 6, 0, 7); g.arc(172, 126, 6, 0, 7); g.fill(); g.fillStyle = '#5a2030'; g.beginPath(); g.ellipse(128, 196, 16, 24, 0, 0, 7); g.fill(); g.fillStyle = '#ff9aa8'; g.beginPath(); g.ellipse(128, 206, 9, 8, 0, 0, 7); g.fill(); g.fillStyle = '#7fc8ff'; g.beginPath(); g.moveTo(214, 56); g.quadraticCurveTo(234, 92, 214, 102); g.quadraticCurveTo(194, 92, 214, 56); g.fill(); g.strokeStyle = 'rgba(80,90,200,.55)'; g.lineWidth = 5; for (var i = 0; i < 4; i++){ g.beginPath(); g.moveTo(80 + i * 24, 18); g.lineTo(80 + i * 24, 54); g.stroke(); } });
+  FACES.love = faceCanvas(function(g){ blush(g, 0.7); g.fillStyle = '#ff3d6e'; g.strokeStyle = '#a3002a'; g.lineWidth = 3; heartPath(g, 84, 132, 34); g.fill(); g.stroke(); heartPath(g, 172, 132, 34); g.fill(); g.stroke(); g.fillStyle = '#fff'; g.beginPath(); g.arc(72, 112, 7, 0, 7); g.arc(160, 112, 7, 0, 7); g.fill(); g.fillStyle = '#5a2030'; g.beginPath(); g.moveTo(102, 178); g.quadraticCurveTo(128, 224, 154, 178); g.closePath(); g.fill(); g.fillStyle = '#ff9aa8'; g.beginPath(); g.ellipse(128, 200, 12, 8, 0, 0, 7); g.fill(); });
+  FACES.dizzy = faceCanvas(function(g){ g.strokeStyle = ink; g.lineWidth = 5; for (var e = 0; e < 2; e++){ var cx = e ? 172 : 84; g.beginPath(); for (var a = 0; a < 16; a += 0.25){ var r = a * 1.6, x = cx + Math.cos(a) * r, y = 124 + Math.sin(a) * r; if (a === 0) g.moveTo(x, y); else g.lineTo(x, y); } g.stroke(); } g.lineWidth = 6; g.beginPath(); g.moveTo(104, 192); for (var k = 0; k < 6; k++) g.lineTo(108 + k * 8, k % 2 ? 184 : 198); g.stroke(); blush(g, 0.2); });
+  FACES.sad = faceCanvas(function(g){ brows(g, -12, 10); eye(g, 84, 128, 16, 18, TOYO_IRIS); eye(g, 172, 128, 16, 18, TOYO_IRIS); g.strokeStyle = ink; g.lineWidth = 5; g.beginPath(); g.moveTo(110, 196); g.quadraticCurveTo(128, 184, 146, 196); g.stroke(); g.fillStyle = 'rgba(143,214,255,.9)'; g.beginPath(); g.moveTo(80, 150); g.quadraticCurveTo(74, 176, 82, 182); g.quadraticCurveTo(90, 176, 80, 150); g.fill(); });
+  var E_IRIS = ['#9fd8ff', '#2f6fb8'];
+  FACES.eCry = faceCanvas(function(g){ g.strokeStyle = '#5a3a30'; g.lineWidth = 6; g.beginPath(); g.moveTo(60, 122); g.quadraticCurveTo(84, 140, 108, 122); g.moveTo(148, 122); g.quadraticCurveTo(172, 140, 196, 122); g.stroke(); for (var l = 0; l < 3; l++){ g.beginPath(); g.moveTo(62 + l * 8, 126); g.lineTo(56 + l * 7, 136); g.moveTo(194 - l * 8, 126); g.lineTo(200 - l * 7, 136); g.stroke(); } g.strokeStyle = 'rgba(143,214,255,.95)'; g.lineWidth = 8; g.beginPath(); g.moveTo(74, 140); g.quadraticCurveTo(68, 170, 70, 204); g.moveTo(182, 140); g.quadraticCurveTo(188, 170, 186, 204); g.stroke(); blush(g, 0.5); g.strokeStyle = '#b8616c'; g.lineWidth = 5; g.beginPath(); g.moveTo(114, 194); g.quadraticCurveTo(128, 184, 142, 194); g.stroke(); });
+  function eliseOpen(g, worry){ blush(g, 0.45); eye(g, 84, 128, 23, 27, E_IRIS); eye(g, 172, 128, 23, 27, E_IRIS); g.strokeStyle = '#3a2a26'; g.lineWidth = 4; for (var s2 = -1; s2 <= 1; s2 += 2){ var cx = s2 < 0 ? 84 : 172; g.beginPath(); g.moveTo(cx - 24 * s2 * -1 + (s2 < 0 ? -2 : 2), 112); g.lineTo(cx - 30 * -s2, 104); g.stroke(); } g.strokeStyle = '#8a6a4a'; g.lineWidth = 4; g.beginPath(); if (worry){ g.moveTo(64, 92); g.lineTo(102, 84); g.moveTo(154, 84); g.lineTo(192, 92); } else { g.moveTo(64, 88); g.quadraticCurveTo(84, 80, 102, 86); g.moveTo(154, 86); g.quadraticCurveTo(172, 80, 192, 88); } g.stroke(); g.strokeStyle = 'rgba(143,214,255,.9)'; g.lineWidth = 6; g.beginPath(); g.moveTo(64, 154); g.lineTo(60, 184); g.stroke(); }
+  FACES.eLook = faceCanvas(function(g){ eliseOpen(g, false); g.fillStyle = '#e88a95'; g.beginPath(); g.ellipse(128, 196, 9, 6, 0, 0, 7); g.fill(); });
+  FACES.eLookB = faceCanvas(function(g){ blush(g, 0.45); closed(g, 84, 132, 22); closed(g, 172, 132, 22); g.fillStyle = '#e88a95'; g.beginPath(); g.ellipse(128, 196, 9, 6, 0, 0, 7); g.fill(); });
+  FACES.eWorry = faceCanvas(function(g){ eliseOpen(g, true); g.strokeStyle = '#b8616c'; g.lineWidth = 5; g.beginPath(); g.moveTo(116, 198); g.quadraticCurveTo(128, 190, 140, 198); g.stroke(); });
+  FACES.eWorryB = faceCanvas(function(g){ blush(g, 0.45); closed(g, 84, 132, 22); closed(g, 172, 132, 22); g.strokeStyle = '#b8616c'; g.lineWidth = 5; g.beginPath(); g.moveTo(116, 198); g.quadraticCurveTo(128, 190, 140, 198); g.stroke(); });
+  function aizawaBase(g, blink){ g.strokeStyle = ink; g.lineWidth = 9; g.beginPath(); g.moveTo(54, 92); g.lineTo(106, 104); g.moveTo(150, 104); g.lineTo(202, 92); g.stroke(); if (blink){ closed(g, 85, 124, 14); closed(g, 171, 124, 14); } else { g.fillStyle = ink; g.beginPath(); g.ellipse(85, 124, 8, 11, 0, 0, 7); g.ellipse(171, 124, 8, 11, 0, 0, 7); g.fill(); g.fillStyle = '#fff'; g.beginPath(); g.arc(88, 120, 3, 0, 7); g.arc(174, 120, 3, 0, 7); g.fill(); } g.strokeStyle = '#4a4a4a'; g.lineWidth = 4; g.beginPath(); g.arc(85, 124, 24, 0, 7); g.stroke(); g.beginPath(); g.arc(171, 124, 24, 0, 7); g.stroke(); g.beginPath(); g.moveTo(109, 120); g.lineTo(147, 120); g.stroke(); g.fillStyle = 'rgba(200,230,255,.25)'; g.beginPath(); g.arc(85, 124, 22, 0, 7); g.arc(171, 124, 22, 0, 7); g.fill(); g.fillStyle = '#2a2230'; g.beginPath(); g.moveTo(84, 176); g.quadraticCurveTo(128, 150, 172, 176); g.quadraticCurveTo(150, 172, 128, 170); g.quadraticCurveTo(106, 172, 84, 176); g.fill(); g.lineWidth = 5; g.strokeStyle = ink; g.beginPath(); g.moveTo(114, 200); g.lineTo(142, 200); g.stroke(); }
+  FACES.aizawa = faceCanvas(function(g){ aizawaBase(g, false); });
+  FACES.aizawaB = faceCanvas(function(g){ aizawaBase(g, true); });
+  FACES.minister = faceCanvas(function(g){ g.strokeStyle = '#f4f4f4'; g.lineWidth = 9; g.beginPath(); g.moveTo(56, 92); g.lineTo(104, 96); g.moveTo(152, 96); g.lineTo(200, 92); g.stroke(); closed(g, 84, 124, 16, true); closed(g, 172, 124, 16, true); blush(g, 0.3); g.fillStyle = '#f6f6f6'; g.strokeStyle = '#bbb'; g.lineWidth = 3; g.beginPath(); g.moveTo(70, 168); g.quadraticCurveTo(100, 150, 128, 162); g.quadraticCurveTo(156, 150, 186, 168); g.quadraticCurveTo(156, 178, 128, 172); g.quadraticCurveTo(100, 178, 70, 168); g.fill(); g.stroke(); });
 }
-// 人物を1体作る（豊太郎・相沢・大臣で共通）
+// 人物の材質：なめらかな陰影＋輪郭線（アニメ風の縁取り）
+var OUTLINE = null;
+function smat(color, opt){ var o = { color: color, shininess: 14, specular: 0x222222 }; if (opt) for (var k in opt) o[k] = opt[k]; return new THREE.MeshPhongMaterial(o); }
+function ol(mesh, s){
+  if (!OUTLINE) OUTLINE = new THREE.MeshBasicMaterial({ color: 0x1a1424, side: THREE.BackSide });
+  var o = new THREE.Mesh(mesh.geometry, OUTLINE); o.scale.setScalar(s || 1.07); mesh.add(o); return mesh;
+}
+function M(geo, m, x, y, z, parent, outline){ var me = new THREE.Mesh(geo, m); me.position.set(x || 0, y || 0, z || 0); if (parent) parent.add(me); if (outline) ol(me, outline === true ? 1.07 : outline); return me; }
+function lathe(points, seg){ var v = []; for (var i = 0; i < points.length; i++) v.push(new THREE.Vector2(points[i][0], points[i][1])); return new THREE.LatheGeometry(v, seg || 20); }
+// 豊太郎・相沢・大臣
 function buildPerson(o){
   var root = new THREE.Group(), body = new THREE.Group(); root.add(body);
-  var coat = mat(o.coat), coatD = mat(o.coatD || o.coat), skin = mat(0xf2cdb0), hair = mat(o.hair || 0x1d1a22), pants = mat(0x3a3a48), shoe = mat(0x221c1c), white = mat(0xf6f1e6), hatM = mat(0x16141c);
-  function limb(w, h, d, m, px, py){ var piv = new THREE.Group(); piv.position.set(px, py, 0); var mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); mesh.position.y = -h / 2; piv.add(mesh); body.add(piv); return piv; }
-  var legL = limb(0.2, 0.62, 0.22, pants, -0.15, 0.66), legR = limb(0.2, 0.62, 0.22, pants, 0.15, 0.66);
-  var fL = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.12, 0.34), shoe); fL.position.set(0, -0.64, -0.06); legL.add(fL); legR.add(fL.clone());
-  var torso = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.46, 0.85, 8), coat); torso.position.y = 0.98; body.add(torso);
-  var tail = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.42, 0.08), coatD); tail.position.set(0, 0.62, 0.32); tail.rotation.x = 0.25; body.add(tail);
-  var collar = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 0.12, 8), white); collar.position.y = 1.43; body.add(collar);
-  var tie = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.22, 0.04), mat(o.tie || 0xb23a48)); tie.position.set(0, 1.3, -0.3); body.add(tie);
-  if (o.sash){ var sash = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.95, 0.05), mat(0xc4374f)); sash.position.set(0.05, 1.05, -0.36); sash.rotation.z = 0.6; body.add(sash); var medal = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.04, 8), mat(0xf3cf7f)); medal.rotation.x = Math.PI / 2; medal.position.set(-0.15, 1.2, -0.38); body.add(medal); }
-  var armL = limb(0.16, 0.6, 0.16, coat, -0.4, 1.32), armR = limb(0.16, 0.6, 0.16, coat, 0.4, 1.32);
-  var hL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 6), skin); hL.position.y = -0.64; armL.add(hL); armR.add(hL.clone());
-  var head = new THREE.Group(); head.position.y = 1.86; body.add(head);
-  head.add(new THREE.Mesh(new THREE.SphereGeometry(0.42, 16, 12), skin));
-  var hairBack = new THREE.Mesh(new THREE.SphereGeometry(0.43, 16, 12), hair); hairBack.position.set(0, 0.05, 0.07); hairBack.scale.set(1, 0.98, 0.95); head.add(hairBack);
-  var bang = new THREE.Mesh(new THREE.SphereGeometry(0.44, 16, 8, 0, Math.PI * 2, 0, Math.PI * (o.bald ? 0.12 : 0.32)), hair); bang.position.y = 0.03; head.add(bang);
-  var hat = new THREE.Group(); hat.position.set(0, 0.36, 0.02); hat.rotation.z = 0.08; head.add(hat);
+  var coat = smat(o.coat), coatD = smat(o.coatD || o.coat), skin = smat(0xf6d2b8), hairM = smat(o.hair || 0x1d1a22, { shininess: 40 }), pants = smat(o.pants || 0x34343f), shoe = smat(0x1a1414, { shininess: 70 }), white = smat(0xfbf7ee), hatM = smat(o.hatColor || 0x16141c, { shininess: 50 });
+  function limb(r, len, m, px, py, cuff){
+    var piv = new THREE.Group(); piv.position.set(px, py, 0); body.add(piv);
+    M(new THREE.CapsuleGeometry(r, len, 4, 10), m, 0, -len / 2 - r * 0.4, 0, piv, 1.12);
+    if (cuff) M(new THREE.CylinderGeometry(r * 1.15, r * 1.15, 0.07, 12), white, 0, -len - r * 0.2, 0, piv);
+    return piv;
+  }
+  var legL = limb(0.105, 0.42, pants, -0.15, 0.66), legR = limb(0.105, 0.42, pants, 0.15, 0.66);
+  [legL, legR].forEach(function(l){ var sh = M(new THREE.SphereGeometry(0.13, 14, 10), shoe, 0, -0.68, -0.07, l, 1.1); sh.scale.set(1, 0.62, 1.55); });
+  // フロックコート（裾が広がる形）
+  var coatGeo = lathe([[0.0, 1.45], [0.27, 1.44], [0.33, 1.25], [0.36, 0.95], [0.4, 0.7], [0.47, 0.42], [0.48, 0.38], [0.0, 0.38]], 22);
+  M(coatGeo, coat, 0, 0, 0, body, 1.05);
+  M(new THREE.BoxGeometry(0.2, 0.4, 0.05), white, 0, 1.24, -0.31, body);
+  M(new THREE.BoxGeometry(0.08, 0.26, 0.04), coatD, -0.12, 1.22, -0.33, body).rotation.z = 0.35;
+  M(new THREE.BoxGeometry(0.08, 0.26, 0.04), coatD, 0.12, 1.22, -0.33, body).rotation.z = -0.35;
+  var tieM = smat(o.tie || 0xb23a48);
+  M(new THREE.ConeGeometry(0.06, 0.12, 4), tieM, -0.06, 1.39, -0.33, body).rotation.z = Math.PI / 2;
+  M(new THREE.ConeGeometry(0.06, 0.12, 4), tieM, 0.06, 1.39, -0.33, body).rotation.z = -Math.PI / 2;
+  for (var bt = 0; bt < 3; bt++) M(new THREE.SphereGeometry(0.025, 8, 6), smat(0xd9a441, { shininess: 80 }), 0.16, 1.08 - bt * 0.17, -0.37, body);
+  if (o.sash){ var sash = M(new THREE.BoxGeometry(0.13, 1.0, 0.04), smat(0xc4374f), 0.04, 1.02, -0.4, body); sash.rotation.z = 0.6; M(new THREE.CylinderGeometry(0.09, 0.09, 0.04, 12), smat(0xf3cf7f, { shininess: 90 }), -0.17, 1.2, -0.41, body).rotation.x = Math.PI / 2; M(new THREE.CylinderGeometry(0.06, 0.06, 0.04, 10), smat(0xf3cf7f, { shininess: 90 }), -0.2, 1.02, -0.41, body).rotation.x = Math.PI / 2; }
+  M(new THREE.CylinderGeometry(0.11, 0.12, 0.14, 12), skin, 0, 1.5, 0, body);
+  M(new THREE.CylinderGeometry(0.16, 0.16, 0.09, 14), white, 0, 1.46, 0, body);
+  var armL = limb(0.085, 0.42, coat, -0.38, 1.32, true), armR = limb(0.085, 0.42, coat, 0.38, 1.32, true);
+  [armL, armR].forEach(function(a){ M(new THREE.SphereGeometry(0.095, 12, 10), skin, 0, -0.66, 0, a, 1.12); });
+  var head = new THREE.Group(); head.position.y = 1.9; body.add(head);
+  M(new THREE.SphereGeometry(0.42, 28, 20), skin, 0, 0, 0, head, 1.05);
+  M(new THREE.SphereGeometry(0.07, 10, 8), skin, -0.41, -0.02, 0.02, head); M(new THREE.SphereGeometry(0.07, 10, 8), skin, 0.41, -0.02, 0.02, head);
+  if (!o.bald){
+    var hb = M(new THREE.SphereGeometry(0.44, 28, 20), hairM, 0, 0.06, 0.07, head, 1.04); hb.scale.set(1, 0.98, 0.95);
+    var bang = M(new THREE.SphereGeometry(0.45, 28, 12, 0, Math.PI * 2, 0, Math.PI * 0.33), hairM, 0, 0.03, -0.01, head);
+    for (var tf = -1; tf <= 1; tf++){ var tuft = M(new THREE.ConeGeometry(0.12, 0.26, 8), hairM, tf * 0.16, 0.24, -0.36, head); tuft.rotation.x = -2.3; tuft.rotation.z = tf * 0.3; }
+  } else {
+    var side = M(new THREE.SphereGeometry(0.43, 24, 16, 0, Math.PI * 2, Math.PI * 0.35, Math.PI * 0.35), hairM, 0, 0, 0.04, head);
+  }
+  if (o.beard){ var bd = M(new THREE.SphereGeometry(0.28, 18, 14), smat(0xf2f2f2), 0, -0.3, -0.24, head, 1.06); bd.scale.set(1, 1.15, 0.7); }
+  var hat = new THREE.Group(); hat.position.set(0, 0.36, 0.02); hat.rotation.z = 0.07; head.add(hat);
   if (o.hat === 'top'){
-    hat.add(new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.05, 16), hatM));
-    var crown = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.32, 0.5, 16), hatM); crown.position.y = 0.27; hat.add(crown);
-    var band = new THREE.Mesh(new THREE.CylinderGeometry(0.325, 0.325, 0.08, 16), mat(0x8a2a3a)); band.position.y = 0.08; hat.add(band);
+    M(new THREE.CylinderGeometry(0.52, 0.52, 0.05, 28), hatM, 0, 0, 0, hat, 1.06);
+    M(new THREE.CylinderGeometry(0.31, 0.33, 0.52, 28), hatM, 0, 0.28, 0, hat, 1.05);
+    M(new THREE.CylinderGeometry(0.335, 0.335, 0.09, 28), smat(0x8a2a3a), 0, 0.08, 0, hat);
   } else if (o.hat === 'bowler'){
-    hat.add(new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.05, 16), mat(0x3a2e24)));
-    var dome = new THREE.Mesh(new THREE.SphereGeometry(0.32, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), mat(0x3a2e24)); hat.add(dome);
+    M(new THREE.CylinderGeometry(0.5, 0.5, 0.05, 28), hatM, 0, 0, 0, hat, 1.06);
+    M(new THREE.SphereGeometry(0.34, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), hatM, 0, 0, 0, hat, 1.05);
+    M(new THREE.CylinderGeometry(0.345, 0.345, 0.07, 28), smat(0x1a1410), 0, 0.04, 0, hat);
   }
   var faceMat = new THREE.MeshBasicMaterial({ map: FACES[o.face || 'normal'], transparent: true, depthWrite: false });
-  var face = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.62), faceMat); face.position.set(0, -0.04, -0.425); face.rotation.y = Math.PI; head.add(face);
+  var face = new THREE.Mesh(new THREE.PlaneGeometry(0.64, 0.64), faceMat); face.position.set(0, -0.04, -0.43); face.rotation.y = Math.PI; head.add(face);
   scene.add(root);
-  return { root: root, body: body, head: head, legL: legL, legR: legR, armL: armL, armR: armR, faceMat: faceMat, hat: hat, faces: o.faces };
+  return { root: root, body: body, head: head, legL: legL, legR: legR, armL: armL, armR: armR, faceMat: faceMat, hat: hat, faceKey: o.face || 'normal' };
 }
 function buildElise(){
-  var root = new THREE.Group();
-  var dress = mat(0xe8eef3), dressD = mat(0xb9c6d2), skin = mat(0xf7d9c4), hair = mat(0xf0cf7c), scarf = mat(0x7d95bb);
-  var skirt = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.62, 1.05, 10), dress); skirt.position.y = 0.55; root.add(skirt);
-  var hem = new THREE.Mesh(new THREE.CylinderGeometry(0.63, 0.64, 0.1, 10), dressD); hem.position.y = 0.06; root.add(hem);
-  var chest = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 0.4, 10), dressD); chest.position.y = 1.2; root.add(chest);
-  var head = new THREE.Group(); head.position.y = 1.72; root.add(head);
-  head.add(new THREE.Mesh(new THREE.SphereGeometry(0.38, 16, 12), skin));
-  var hb = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 12), hair); hb.position.set(0, 0, -0.08); head.add(hb);
-  var braid = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.08, 0.8, 8), hair); braid.position.set(0, -0.45, -0.3); braid.rotation.x = -0.3; head.add(braid);
-  var kerchief = new THREE.Mesh(new THREE.SphereGeometry(0.43, 16, 8, 0, Math.PI * 2, 0, Math.PI * 0.42), scarf); kerchief.position.y = 0.04; kerchief.rotation.x = -0.25; head.add(kerchief);
-  var faceMat = new THREE.MeshBasicMaterial({ map: FACES.eCry, transparent: true, depthWrite: false });
-  var face = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.56), faceMat); face.position.set(0, -0.05, 0.385); head.add(face);
+  var root = new THREE.Group(), body = new THREE.Group(); root.add(body);
+  var dress = smat(0xdfe6ee), dressD = smat(0x9fb0c6), apron = smat(0xfbf8f0), skin = smat(0xfadfcc), hair = smat(0xf2d07c, { shininess: 50 }), scarf = smat(0x6f8ab3);
+  M(lathe([[0.0, 1.05], [0.22, 1.05], [0.3, 0.8], [0.45, 0.45], [0.62, 0.1], [0.64, 0.04], [0.0, 0.04]], 24), dress, 0, 0, 0, body, 1.04);
+  var ap = M(new THREE.CylinderGeometry(0.36, 0.55, 0.85, 20, 1, true, Math.PI * 0.7, Math.PI * 0.6), apron, 0, 0.5, 0, body); ap.scale.set(1.04, 1, 1.04); ap.material.side = THREE.DoubleSide;
+  M(lathe([[0.0, 1.5], [0.17, 1.5], [0.22, 1.35], [0.24, 1.15], [0.22, 1.02], [0.0, 1.02]], 20), dressD, 0, 0, 0, body, 1.06);
+  M(new THREE.CylinderGeometry(0.1, 0.11, 0.14, 12), skin, 0, 1.55, 0, body);
   var arms = [];
   for (var i = -1; i <= 1; i += 2){
-    var piv = new THREE.Group(); piv.position.set(i * 0.27, 1.34, 0); root.add(piv);
-    var a = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.5, 0.13), dress); a.position.y = -0.25; piv.add(a);
-    var hnd = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 6), skin); hnd.position.y = -0.52; piv.add(hnd);
+    var piv = new THREE.Group(); piv.position.set(i * 0.26, 1.38, 0); body.add(piv);
+    var puff = M(new THREE.SphereGeometry(0.11, 12, 10), dress, 0, -0.04, 0, piv, 1.1);
+    M(new THREE.CapsuleGeometry(0.065, 0.36, 4, 10), dress, 0, -0.28, 0, piv, 1.12);
+    M(new THREE.SphereGeometry(0.075, 10, 8), skin, 0, -0.52, 0, piv, 1.12);
     piv.rotation.x = -2.5; piv.rotation.z = i * -0.35; arms.push(piv);
   }
+  var head = new THREE.Group(); head.position.y = 1.86; body.add(head);
+  M(new THREE.SphereGeometry(0.38, 28, 20), skin, 0, 0, 0, head, 1.05);
+  var hb = M(new THREE.SphereGeometry(0.41, 28, 20), hair, 0, 0.02, -0.08, head, 1.04); hb.scale.set(1.02, 1.05, 1);
+  var longHair = M(new THREE.CapsuleGeometry(0.3, 0.45, 4, 14), hair, 0, -0.42, -0.16, head, 1.05); longHair.scale.set(1.15, 1, 0.55);
+  var braid = M(new THREE.CapsuleGeometry(0.08, 0.5, 4, 8), hair, 0.22, -0.55, 0.06, head, 1.1); braid.rotation.z = 0.15;
+  for (var bg = -1; bg <= 1; bg += 2){ var bang = M(new THREE.SphereGeometry(0.16, 12, 10), hair, bg * 0.17, 0.22, 0.27, head); bang.scale.set(1.1, 0.7, 0.6); }
+  var kerchief = M(new THREE.SphereGeometry(0.43, 28, 12, 0, Math.PI * 2, 0, Math.PI * 0.4), scarf, 0, 0.05, -0.02, head, 1.04); kerchief.rotation.x = -0.28;
+  var knot = M(new THREE.ConeGeometry(0.12, 0.32, 8), scarf, 0, -0.08, -0.42, head, 1.1); knot.rotation.x = -2.6;
+  var faceMat = new THREE.MeshBasicMaterial({ map: FACES.eCry, transparent: true, depthWrite: false });
+  var face = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.56), faceMat); face.position.set(0, -0.05, 0.39); head.add(face);
   scene.add(root);
-  return { root: root, head: head, faceMat: faceMat, arms: arms, isElise: true };
+  return { root: root, body: body, head: head, faceMat: faceMat, arms: arms, isElise: true, faceKey: 'eCry' };
 }
 function buildNPC(){
   var n;
   if (ST.npc === 'elise'){ n = buildElise(); n.cry = ST.no <= 2; }
   else if (ST.npc === 'aizawa') n = buildPerson({ coat: 0x4a5a48, coatD: 0x3a4838, hat: 'bowler', face: 'aizawa', tie: 0x2b2a3a });
-  else n = buildPerson({ coat: 0x1d1d26, hat: 'top', face: 'minister', hair: 0xdddddd, sash: true, bald: true });
+  else n = buildPerson({ coat: 0x1d1d26, hat: 'top', face: 'minister', hair: 0xe8e8e8, sash: true, bald: true, beard: true });
   n.root.position.set(laneC(C, ROAD.GOAL) + C * 1.5, 0, -(ROAD.GOAL + 1.2));
   if (!n.isElise) n.root.rotation.y = Math.PI;
   return n;
+}
+// 乗っ取りの小道具：第2幕は時計の鎖、第4幕は巨大な手、第6幕は動く歩道の矢印
+function buildProp(){
+  var stl = ST.wrong.hijack.style, g = new THREE.Group();
+  if (stl === 'chain'){
+    var link = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1, 6), smat(0xd9a441, { shininess: 90 })); link.name = 'chain'; g.add(link);
+    var w = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.12, 20), smat(0xf3cf7f, { shininess: 90 })); w.rotation.x = Math.PI / 2; w.name = 'watch'; g.add(w);
+    var dial = new THREE.Mesh(new THREE.CircleGeometry(0.36, 20), new THREE.MeshBasicMaterial({ color: 0xfffaf0 })); dial.position.y = 0.07; dial.rotation.x = -Math.PI / 2; w.add(dial);
+  } else if (stl === 'hand'){
+    var sk = smat(0xf2cdb0), hand = new THREE.Group(); hand.name = 'hand'; g.add(hand);
+    M(new THREE.BoxGeometry(0.7, 2.4, 2.0), sk, 0, 0, 0, hand, 1.04);
+    for (var f = 0; f < 4; f++) M(new THREE.CapsuleGeometry(0.22, 1.0, 4, 8), sk, 0, 1.6, -0.75 + f * 0.5, hand, 1.06);
+    var th = M(new THREE.CapsuleGeometry(0.24, 0.8, 4, 8), sk, 0, 0.2, 1.25, hand, 1.06); th.rotation.x = -0.9;
+    M(new THREE.CylinderGeometry(0.9, 0.9, 1.6, 12), smat(0x4a5a48), 0, -1.9, 0, hand);
+  } else if (stl === 'conveyor'){
+    for (var a = 0; a < 6; a++){ var ar = new THREE.Mesh(new THREE.ConeGeometry(0.45, 0.9, 3), new THREE.MeshBasicMaterial({ color: 0xffd166, transparent: true, opacity: 0.85, fog: false })); ar.rotation.x = -Math.PI / 2; g.add(ar); }
+  } else return null;
+  g.visible = false; scene.add(g); return g;
+}
+var tmpA = null, tmpB = null;
+function updateProp(dt){
+  var g = W3.prop; if (!g || !g.visible) return;
+  var stl = ST.wrong.hijack.style, px = G.x, pz = -G.s;
+  if (!tmpA){ tmpA = new THREE.Vector3(); tmpB = new THREE.Vector3(); }
+  if (stl === 'chain'){
+    var ax = laneTarget(C, G.s + 7), az = -(G.s + 7), ay = 1.3 + Math.sin(G.clock * 6) * 0.2;
+    var w = g.getObjectByName('watch'), l = g.getObjectByName('chain');
+    w.position.set(ax, ay, az); w.rotation.y = G.clock * 4;
+    tmpA.set(px, 1.25, pz); tmpB.set(ax, ay, az);
+    l.position.copy(tmpA).add(tmpB).multiplyScalar(0.5); l.scale.set(1, tmpA.distanceTo(tmpB), 1);
+    l.lookAt(tmpB); l.rotateX(Math.PI / 2);
+  } else if (stl === 'hand'){
+    var hd = g.getObjectByName('hand');
+    hd.position.set(px - C * 1.6, 1.3, pz); hd.rotation.z = C * 0.15;
+  } else if (stl === 'conveyor'){
+    for (var i = 0; i < g.children.length; i++){ var k = ((G.clock * 1.5 + i / 6) % 1); g.children[i].position.set(mix(px, laneTarget(C, G.s), k), 0.12, pz - 1 - k * 8); }
+  }
 }
 function buildBigHead(){
   // 第4幕：道をふさぐ巨大な相沢の顔
@@ -1642,7 +1772,16 @@ var G = {
 };
 var sobTimer = 0;
 function setFace(f){ if (G.face !== f){ G.face = f; W3.toyo.faceMat.map = FACES[f]; W3.toyo.faceMat.needsUpdate = true; } }
-function setNpcFace(f){ W3.npc.faceMat.map = FACES[f]; W3.npc.faceMat.needsUpdate = true; }
+function setNpcFace(f){ W3.npc.faceKey = f; W3.npc.faceMat.map = FACES[f]; W3.npc.faceMat.needsUpdate = true; }
+// まばたき：目を開けた顔に「B」付きの閉じた顔があれば、ときどき差し替える
+function updateBlink(dt){
+  G.blinkT = (G.blinkT || 2) - dt;
+  if (G.blinkT <= 0){ G.blinkT = 2.2 + Math.random() * 2.4; G.blinkOn = 0.13; }
+  var onb = (G.blinkOn || 0) > 0; if (onb) G.blinkOn -= dt;
+  var t = W3.toyo, n = W3.npc, k1 = onb && FACES[G.face + 'B'] ? G.face + 'B' : G.face, k2 = onb && FACES[n.faceKey + 'B'] ? n.faceKey + 'B' : n.faceKey;
+  if (t.faceMat.map !== FACES[k1]) t.faceMat.map = FACES[k1];
+  if (FACES[k2] && n.faceMat.map !== FACES[k2]) n.faceMat.map = FACES[k2];
+}
 function schedule(list){ G.seq = list.slice().sort(function(a, b){ return a[0] - b[0]; }); G.seqT = 0; }
 function runSeq(dt){
   if (!G.seq.length) return;
@@ -1668,7 +1807,7 @@ function loadStage(i){
   W3.npc = buildNPC();
   W3.shadow = new THREE.Mesh(new THREE.CircleGeometry(0.75, 16), new THREE.MeshBasicMaterial({ color: 0x1b1028, transparent: true, opacity: 0.35, depthWrite: false }));
   W3.shadow.rotation.x = -Math.PI / 2; scene.add(W3.shadow);
-  W3.set = buildSet(); G.inSet = false;
+  W3.set = buildSet(); G.inSet = false; W3.prop = buildProp();
   el.stageNo.textContent = 'STAGE ' + ST.no + ' / 7'; el.stageTtl.textContent = ST.title;
   hintL.textContent = '◀ ' + ST.left.label; hintR.textContent = ST.right.label + ' ▶';
   hintL.className = 'hint good ' + (C === -1 ? 'ok' : 'ng'); hintR.className = 'hint bad ' + (C === 1 ? 'ok' : 'ng');
@@ -1685,9 +1824,11 @@ function startStage(i, cont){
   captionText = null; caption(ST.captions[0][1]);
   showCard('center', 'STAGE ' + ST.no, ST.title, '');
   bgm(false); bgm(true, false);
+  var am = STAGE_AMB[ST.no]; ambient(am[0]); ambLevel(am[1]);
   schedule([[1.6, function(){ showCard(null); }], [3.5, function(){ el.ctlTip.style.display = 'none'; }]]);
 }
 function toTitle(){
+  ambient(null);
   exitSlow(false); G.mode = 'title'; G.seq = []; resetFx(); hudOn(false); caption(''); on(el.result, false); on(el.end, false); on(el.title, true);
   if (G.stage !== 0) loadStage(0);
   G.s = 0; G.x = 0; G.collapse = 0; bgm(false);
@@ -1699,14 +1840,29 @@ function decide(side){
   G.heldL = G.heldR = false; on(el.btnL, false, 'down'); on(el.btnR, false, 'down');
   if (side === C) playGood(); else playWrong();
 }
+// 原作どおりの道で出す、原作の一文（青空文庫『舞姫』で確かめた文）
+var GOOD_Q = {
+  1: ['原作の地の文', 'わが臆病なる心は憐憫の情に打ち勝たれて'],
+  2: ['原作：エリス', 'われを救いたまえ、君。わが恥なき人とならんを。'],
+  3: ['原作：豊太郎', 'このままにて郷にかえらば、学成らずして汚名を負いたる身の浮かぶ瀬あらじ。'],
+  4: ['原作：豊太郎', '大洋に舵を失いしふな人が、遥かなる山を望むごときは、相沢が余に示したる前途の方鍼なり。'],
+  5: ['原作：豊太郎', '卒然ものを問われたるときは、咄嗟の間、その答の範囲をよくも量らず、直ちにうべなうことあり。'],
+  6: ['原作：豊太郎', '黒がねの額はありとも、帰りてエリスになにとかいわん。'],
+  7: ['原作：豊太郎', '余は道の東西をも分かず、思いに沈みて行くほどに']
+};
 function playGood(){
-  var g = ST.good;
+  var g = ST.good, q = GOOD_Q[ST.no];
+  // 決めた瞬間：一瞬だけ時間がゆっくりになり、カメラが横から回り込む
+  G.worldScale = 0.25; G.camMode = 'goodcam'; flash();
   SFX.chime(); if (!g.quiet){ SFX.fanfare(); burst('star', 40, FX.w * 0.5, FX.h * 0.75, 600); }
   showStamp(g.stamp, 'green'); say('T', g.bubble, 2.2); setFace(g.quiet ? 'sad' : 'normal');
   schedule([
-    [0.2, function(){ caption(g.caption); }],
+    [0.2, function(){ caption(q[0] + '「' + q[1] + '」'); }],
+    [0.7, function(){ G.worldScale = 1; if (!g.quiet) SFX.whoosh(); }],
     [1.4, function(){ showStamp(null); }],
-    [1.8, function(){ if (!g.quiet){ burst('star', 24, FX.w * 0.5, FX.h * 0.6, 500); SFX.sparkle(); } }]
+    [1.8, function(){ if (!g.quiet){ burst('star', 24, FX.w * 0.5, FX.h * 0.6, 500); SFX.sparkle(); } }],
+    [2.6, function(){ if (G.camMode === 'goodcam') G.camMode = 'follow'; }],
+    [3.4, function(){ caption(g.caption); }]
   ]);
 }
 // 原作と違う道：逃げ切れたと思わせる → 止まる → 幕ごとのギャグ → 乗っ取り
@@ -1722,7 +1878,7 @@ function startFreeze(){
   var w = ST.wrong;
   var beats = [
     [0, function(){
-      bgm(false); SFX.scratch(); G.worldScale = 0; G.mode = 'freeze'; G.camMode = 'face'; caption(''); showStamp(null);
+      bgm(false); ambLevel(0); SFX.scratch(); G.worldScale = 0; G.mode = 'freeze'; G.camMode = 'face'; caption(''); showStamp(null);
       el.gl.className = 'gray'; darken(''); setFace('shock'); say('T', '……ん？', 1.2); W3.toyo.head.rotation.y = -0.5 * C;
     }]
   ];
@@ -1732,13 +1888,23 @@ function startFreeze(){
   beats.push([t, function(){
     clearErrWins(); gagHTML(''); el.stage.className = ''; on(el.scan, false); darken(''); flash(); el.gl.className = ''; el.portrait.className = '';
     FX.lines = 0;
-    showCard('err', hj.k, hj.h, hj.s);
-    el.bigWheel.querySelector('.tag').textContent = hj.op; on(el.bigWheel, true);
-    SFX.squeal(); bgm(true, true); restartAnim(el.stage, 'swerve');
-    G.worldScale = 1; G.mode = 'hijack'; G.camMode = 'follow'; W3.toyo.head.rotation.y = 0; setFace(hj.face);
-    G.hop = { t: 0, dur: 1.7, x0: G.x }; G.glow = 1;
-    if (G.bigHeadT >= 0) G.bigHeadT = -2;
+    showCard('err hj', hj.k, hj.h, hj.s);
+    var stl = hj.style || 'hop';
+    el.bigWheel.querySelector('.tag').textContent = hj.op; on(el.bigWheel, stl === 'hop' || stl === 'march');
+    if (stl === 'wander'){ bgm(true, false); noise(1.5, 0.12, 400, 200, 0.6); }
+    else { if (stl !== 'warp') SFX.squeal(); bgm(true, true); }
+    if (stl !== 'wander' && stl !== 'warp') restartAnim(el.stage, 'swerve');
+    if (stl === 'warp'){ restartAnim(el.stage, 'glitch'); SFX.err(3); tone(200, 0.4, 'sawtooth', 0.15, 0, 1600); }
+    if (stl === 'chain'){ SFX.coin(); noise(0.6, 0.25, 3000, 1500, 4); }
+    if (stl === 'hand'){ SFX.boom(); shake(); }
+    if (stl === 'conveyor'){ SFX.fanfare(); rain('coin', 40); }
+    ambLevel(STAGE_AMB[ST.no][1]);
+    G.worldScale = 1; G.mode = 'hijack'; G.hstyle = stl; G.camMode = 'follow'; W3.toyo.head.rotation.y = 0; setFace(hj.face);
+    G.hop = { t: 0, dur: ({ hop: 1.7, chain: 2.0, warp: 0.5, hand: 1.9, march: 1.8, conveyor: 2.0, wander: 3.2 })[stl], x0: G.x }; G.glow = stl !== 'wander';
+    if (G.bigHeadT >= 0) G.bigHeadT = stl === 'hand' ? -3 : -2;
+    if (W3.prop) W3.prop.visible = true;
   }]);
+  if ((hj.style || 'hop') === 'warp') beats.push([t + 0.45, function(){ el.stage.className = ''; flash(); }]);
   beats.push([t + 1.8, function(){ showCard(null); on(el.bigWheel, false); caption('原作ルートに強制合流しました'); }]);
   schedule(beats);
 }
@@ -1772,6 +1938,7 @@ function finish(){
   schedule([[2.8, function(){ darken('on'); }], [3.2, function(){ if (last) ending(); else startStage(G.stage + 1, true); }]]);
 }
 function ending(){
+  ambient(null);
   G.mode = 'ending'; resetFx(); hudOn(false); on(el.result, false); on(el.title, false);
   var html = '', notes = '';
   for (var i = 0; i < STAGES.length; i++){
@@ -2049,23 +2216,33 @@ function update(dt, rawDt){
     el.wheel.style.transform = el.wheel.style.webkitTransform = 'rotate(' + (G.vx * 9) + 'deg)';
   } else if (G.mode === 'good'){
     var tgt = ST.good.quiet ? ROAD.SPEED * 0.8 : ROAD.BOOST;
-    G.speed = damp(G.speed, tgt, 2, dt); G.s += G.speed * dt;
+    G.speed = damp(G.speed, tgt, 2, dt); G.s += G.speed * wdt;
     G.x = damp(G.x, laneTarget(C, G.s), 5, dt); G.vx = 0;
     FX.speed = ST.good.quiet ? 0 : damp(FX.speed, 1, 4, dt); G.glow = ST.good.quiet ? 0 : 1;
+    if (!ST.good.quiet && Math.random() < dt * 18){ var pf = toScreen(t.root, 0.2); FX.parts.push({ k: 'star', x: pf.x + (Math.random() - 0.5) * 40, y: pf.y, vx: (Math.random() - 0.5) * 60, vy: 40 + Math.random() * 60, g: 20, s: 4 + Math.random() * 6, r: 0, vr: 2, life: 0.9, t: 0, c: Math.random() < 0.5 ? '#ffd166' : '#fff3b0' }); }
     if (G.s > ROAD.GOAL - 40){ G.mode = 'arriving'; FX.speed = 0; }
   } else if (G.mode === 'wrong'){
     G.speed = damp(G.speed, ROAD.SPEED, 2, dt); G.s += G.speed * dt;
     G.x = damp(G.x, laneTarget(-C, G.s), 4, dt);
     if (G.s >= G.freezeAt) startFreeze();
   } else if (G.mode === 'hijack'){
-    G.speed = damp(G.speed, 30, 3, dt); G.s += G.speed * wdt;
-    FX.speed = 1;
+    var hs = G.hstyle || 'hop';
+    G.speed = damp(G.speed, ({ wander: 14, march: 26, conveyor: 24 })[hs] || 30, 3, dt); G.s += G.speed * wdt;
+    FX.speed = hs === 'wander' ? 0 : 1;
     var h = G.hop;
     if (h){
-      h.t += dt; var u = clamp(h.t / h.dur, 0, 1), ue = smooth(u);
-      G.x = mix(h.x0, laneTarget(C, G.s), ue); G.y = Math.sin(Math.PI * u) * 2.2; G.spin = ue * Math.PI * 4;
-      if (u >= 1){ G.hop = null; G.y = 0; G.spin = 0; }
+      h.t += dt; var u = clamp(h.t / h.dur, 0, 1), ue = smooth(u), tx = laneTarget(C, G.s);
+      if (hs === 'hop'){ G.x = mix(h.x0, tx, ue); G.y = Math.sin(Math.PI * u) * 2.2; G.spin = ue * Math.PI * 4; }
+      else if (hs === 'wander'){ G.x = mix(h.x0, tx, ue) + Math.sin(u * Math.PI * 3) * 1.6 * (1 - u); G.y = 0; G.spin = Math.sin(u * Math.PI * 3) * 0.7; }
+      else if (hs === 'warp'){ G.x = u < 0.5 ? h.x0 + (Math.random() - 0.5) * 2 : tx; G.y = 0; G.spin = 0; }
+      else if (hs === 'chain'){ G.x = mix(h.x0, tx, ue); G.y = 0; G.spin = -C * 0.6; }
+      else if (hs === 'hand'){ var ue2 = smooth(clamp((u - 0.25) / 0.75, 0, 1)); G.x = mix(h.x0, tx, ue2); G.y = Math.sin(Math.PI * ue2) * 0.6; G.spin = C * ue2 * 0.8; }
+      else { G.x = mix(h.x0, tx, ue); G.y = 0; G.spin = 0; }
+      if (u >= 1){ G.hop = null; G.y = 0; G.spin = 0; if (W3.prop) W3.prop.visible = false; if (G.bigHeadT === -3) G.bigHeadT = -2; }
     } else G.x = damp(G.x, laneTarget(C, G.s), 6, dt);
+    if (hs === 'march' && Math.random() < dt * 2.5) say('T', Math.random() < 0.5 ? 'はい！' : 'お供します！', 0.6);
+    if (hs === 'conveyor' && Math.random() < dt * 8){ var pc = toScreen(t.body, 0.5); burst('star', 2, pc.x, pc.y, 200); }
+    updateProp(dt);
     if (ST.wrong.hijack.face === 'love' && Math.random() < dt * 14){ var p = toScreen(t.head, 0); burst('heart', 1, p.x, p.y, 200); }
     if (!h && G.s > ROAD.GOAL - 48){ G.mode = 'arriving'; FX.speed = 0; }
   } else if (G.mode === 'arriving'){
@@ -2080,19 +2257,37 @@ function update(dt, rawDt){
   if (W3.bigHead){
     var bh = W3.bigHead;
     if (G.bigHeadT >= 0){ G.bigHeadT += dt; bh.position.y = damp(bh.position.y, 4.2, 5, dt); bh.rotation.z = Math.sin(G.clock * 3) * 0.05; bh.rotation.y = Math.atan2(camera.position.x - bh.position.x, camera.position.z - bh.position.z); }
+    else if (G.bigHeadT === -3){ bh.position.x = damp(bh.position.x, G.x - C * 4.2, 6, dt); bh.position.z = damp(bh.position.z, -(G.s + 4), 6, dt); bh.rotation.y = Math.atan2(camera.position.x - bh.position.x, camera.position.z - bh.position.z); }
     else if (G.bigHeadT === -2){ bh.position.y = damp(bh.position.y, -9, 3, dt); if (bh.position.y < -8) { bh.visible = false; G.bigHeadT = -1; } }
   }
   W3.glowMat.opacity = G.glow ? 0.28 + Math.sin(G.clock * 8) * 0.12 : 0;
   // 豊太郎の動き
-  var moving = (G.mode === 'run' || G.mode === 'good' || G.mode === 'wrong' || G.mode === 'hijack' || G.mode === 'arriving') && G.speed > 0.5;
+  var moving = (G.mode === 'run' || G.mode === 'good' || G.mode === 'wrong' || G.mode === 'hijack' || G.mode === 'arriving') && G.speed > 0.5 && !(G.mode === 'hijack' && G.hstyle === 'conveyor');
+  var prevW = G.walk;
   G.walk += (moving ? G.speed * 0.55 : 0) * wdt;
+  if (moving && Math.floor(prevW / Math.PI) !== Math.floor(G.walk / Math.PI)){
+    if (SKYP.snow) noise(0.08, 0.1, 2600, 1800, 2); else { tone(95, 0.05, 'sine', 0.14); noise(0.03, 0.06, 1800, 0, 2); }
+  }
   var sw = moving ? Math.sin(G.walk) : 0;
   t.legL.rotation.x = sw * 0.9; t.legR.rotation.x = -sw * 0.9;
   t.armL.rotation.x = -sw * 0.8; t.armR.rotation.x = sw * 0.8;
+  if (G.mode === 'hijack'){
+    var hs2 = G.hstyle;
+    if (hs2 === 'march'){ t.armL.rotation.x = -sw * 1.7; t.armR.rotation.x = sw * 1.7; t.legL.rotation.x = sw * 1.3; t.legR.rotation.x = -sw * 1.3; }
+    else if (hs2 === 'conveyor'){ t.armL.rotation.x = -2.8; t.armR.rotation.x = -2.8; t.legL.rotation.x = 0; t.legR.rotation.x = 0; }
+    else if (hs2 === 'chain'){ t.armL.rotation.x = -1.5; t.armR.rotation.x = -1.5; }
+    else if (hs2 === 'wander'){ t.armL.rotation.x = 0.1; t.armR.rotation.x = -0.1; t.head.rotation.x = 0.35; }
+  } else if (G.mode !== 'meet') t.head.rotation.x = 0;
   if (G.mode === 'locked'){ t.armL.rotation.x = -2.6 + Math.sin(G.clock * 30) * 0.3; t.armR.rotation.x = -2.6 - Math.sin(G.clock * 30) * 0.3; }
   if (G.mode === 'meet' && !G.collapse){ t.armL.rotation.x = -1.2; t.armL.rotation.z = -0.25 * -C; } else t.armL.rotation.z = 0;
   t.body.position.y = moving ? Math.abs(Math.sin(G.walk)) * 0.12 : (G.mode === 'title' ? Math.sin(G.clock * 2) * 0.03 : 0);
-  t.body.rotation.z = -G.vx * 0.035; t.body.rotation.x = moving ? -0.12 - G.speed * 0.004 : 0;
+  t.body.scale.y = moving ? 1 : 1 + Math.sin(G.clock * 2.2) * 0.012;
+  if (e.body) e.body.scale.y = 1 + Math.sin(G.clock * 2.0 + 1) * 0.012;
+  // 会話の場面：話す時に小さくうなずく
+  if (G.mode === 'meet' && !G.collapse){ var talk = bubbles.T.text && G.clock < bubbles.T.until; t.head.rotation.x = talk ? Math.sin(G.clock * 9) * 0.07 : damp(t.head.rotation.x, 0, 6, dt); if (!e.isElise) e.head.rotation.x = Math.sin(G.clock * 1.6) * 0.05 + (talk ? 0 : 0.04); }
+  else if (G.mode !== 'meet') t.head.rotation.x = 0;
+  updateBlink(dt);
+  t.body.rotation.z = -G.vx * 0.035; t.body.rotation.x = (G.mode === 'hijack' && G.hstyle === 'chain') ? 0.35 : (moving ? -0.12 - G.speed * 0.004 : 0);
   if (G.inSet){
     t.root.position.copy(G.setPos);
     if (G.collapse){ t.root.rotation.z = damp(t.root.rotation.z, 1.45, 3, dt); t.root.position.y = 0.25; }
@@ -2128,6 +2323,8 @@ function updateCamera(dt){
     tp = [px + Math.sin(a) * 2.5, 6 + Math.sin(a * 1.3) * 0.5, pz + 10]; tl = [px, 1.5, pz - 24]; k = 2;
   } else if (G.camMode === 'face'){
     tp = [px - C * 1.8, 2.15, pz - 3.8]; tl = [px, 1.85, pz]; k = 7;
+  } else if (G.camMode === 'goodcam'){
+    tp = [px - C * 5.2, 2.1, pz - 4.6]; tl = [px, 1.3, pz + 1.5]; k = 4;
   } else if (G.camMode === 'set'){
     var Sc = W3.set.auto; G.setT = (G.setT || 0) + dt; var pu = Math.min(1, G.setT / 6) * 0.12;
     var zoomOut = 1 - pu;
