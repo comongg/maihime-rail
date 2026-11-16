@@ -309,6 +309,25 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 #endNotes{margin-top:12px;text-align:left}
 #endNotes summary{cursor:pointer;font-size:13px;font-weight:900;color:#8a5a2b;padding:8px 4px}
 #endNotes .note{margin-top:8px}
+/* 隠しエンド：優柔不断 */
+#lapse{pointer-events:none;z-index:8;opacity:0;-webkit-transition:opacity .5s;transition:opacity .5s}
+#lapse.on{opacity:1;-webkit-animation:lapse .7s linear infinite;animation:lapse .7s linear infinite}
+@-webkit-keyframes lapse{0%{background:rgba(8,10,40,.7)}45%{background:rgba(8,10,40,.7)}55%{background:rgba(255,220,150,.12)}100%{background:rgba(255,220,150,.12)}}
+@keyframes lapse{0%{background:rgba(8,10,40,.7)}45%{background:rgba(8,10,40,.7)}55%{background:rgba(255,220,150,.12)}100%{background:rgba(255,220,150,.12)}}
+#lapseText{position:absolute;z-index:30;left:50%;top:40%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;font-size:clamp(30px,6vw,64px);font-weight:900;color:#fff;text-shadow:0 0 18px rgba(0,0,0,.8),3px 3px 0 #2b2a3a;white-space:nowrap;pointer-events:none;display:none}
+#lapseText.on{display:block;-webkit-animation:lapseT .9s ease-out both;animation:lapseT .9s ease-out both}
+@-webkit-keyframes lapseT{from{opacity:0;-webkit-transform:translate(-50%,-30%)}to{opacity:1}}
+@keyframes lapseT{from{opacity:0;transform:translate(-50%,-30%)}to{opacity:1}}
+#overScreen .panel{background:#1d1a26;color:#f3ead6;width:min(600px,94vw)}
+#overScreen .eyebrow{color:#ff8fa0}
+.overBig{font-size:clamp(34px,7vw,62px);white-space:nowrap;font-weight:900;letter-spacing:.08em;color:#ff4d6d;text-shadow:4px 4px 0 #000;margin:6px 0 2px}
+.overName{display:inline-block;padding:6px 16px;border-radius:999px;background:#f3cf7f;color:#2b2a3a;font-weight:900;font-size:15px;margin:6px 0 10px}
+.overMain{font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;font-size:clamp(18px,2.8vw,26px);font-weight:900;line-height:1.7;margin:8px 0}
+.overSub{font-size:14px;color:#d8cfe0;line-height:1.8;font-weight:700}
+.overBadge{display:inline-block;margin:12px 0 4px;padding:8px 18px;border-radius:12px;border:3px dashed #ffd166;color:#ffd166;font-weight:900;font-size:15px;-webkit-transform:rotate(-3deg);transform:rotate(-3deg)}
+#overScreen .note{background:#2b2738;color:#e8e0f0}
+#overScreen .note b{color:#ffd166}
+#overScreen .secondary{background:#2b2738;color:#e8e0f0;border-color:#5a5470}
 #bootDiag{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:#fbe9ec;color:#7a1d2b;font-size:12px;line-height:1.6;text-align:left;word-break:break-all;-webkit-user-select:text;user-select:text}
 #errBox{position:absolute;z-index:99;left:10px;right:10px;bottom:10px;padding:10px 12px;border-radius:10px;background:#5b0d1c;color:#fff;font-size:12px;line-height:1.5;display:none;word-break:break-all}
 @media (max-height:600px){.panel{padding:16px 22px 16px}.logo{font-size:52px}.tag2{margin-top:6px;font-size:12.5px}.primary{margin-top:8px;min-height:48px;padding:10px 28px}.howto{margin-top:8px}.steer{height:62px}#wheel{width:92px;height:92px;margin-left:-46px}}
@@ -508,6 +527,22 @@ window.onerror=function(msg,src,line){
    </div>
   </div></div>
  </section>
+ <div id="lapse" class="full"></div>
+ <div id="lapseText"></div>
+ <section id="overScreen" class="screen" aria-label="隠しエンド">
+  <div class="screenInner"><div class="screenCell">
+   <div class="panel">
+    <div class="eyebrow" id="overEyebrow">STAGE 1</div>
+    <div class="overBig">GAME OVER</div>
+    <div class="overName">隠しエンド：優柔不断エンド</div>
+    <p class="overMain">豊太郎は、分かれ道の前で<br>一生を終えた。</p>
+    <p class="overSub" id="overSub"></p>
+    <div class="overBadge">★ 隠しエンドを見つけた！</div>
+    <div class="note"><b>原作の豊太郎も……</b>　迷う心は原作にも書かれている。免官を言い渡された時は<span class="q">「一週日の猶予を請いて、とやこうと思い煩ううち」</span>、相沢に忠告された時は<span class="q">「わが弱き心には思い定めんよしなかりしが」</span>。<br><b>ゲームの創作</b>　分かれ道の前で一生を終えるのはギャグです。原作の豊太郎は、迷いながらも、周りに流される形で道を進んでいく。</div>
+    <button id="overRetry" class="primary" type="button">↻ この幕をやり直す</button><button id="overBack" class="secondary" type="button">タイトルへ</button>
+   </div>
+  </div></div>
+ </section>
  <div id="gag"></div>
  <div id="errBox"></div>
  <noscript><div style="position:absolute;z-index:100;left:0;right:0;top:0;padding:16px;background:#5b0d1c;color:#fff;font-weight:bold">JavaScript が止まっているため遊べません。Safari などのブラウザで開いてください。</div></noscript>
@@ -694,7 +729,8 @@ var el = {
   result: $('result'), resEyebrow: $('resEyebrow'), resTitle: $('resTitle'), resLabel: $('resLabel'), resText: $('resText'), resRebel: $('resRebel'), resNote: $('resNote'),
   next: $('nextBtn'), retry: $('retryBtn'), back: $('backBtn'),
   end: $('endScreen'), endRebel: $('endRebel'), endJoke: $('endJoke'), endBack: $('endBack'),
-  endList: $('endList'), endNotesBody: $('endNotesBody')
+  endList: $('endList'), endNotesBody: $('endNotesBody'),
+  lapse: $('lapse'), lapseText: $('lapseText'), over: $('overScreen'), overEyebrow: $('overEyebrow'), overSub: $('overSub'), overRetry: $('overRetry'), overBack: $('overBack')
 };
 var cardK = el.card.querySelector('.k'), cardH = el.card.querySelector('.h'), cardS = el.card.querySelector('.s');
 var hintL = el.hints.querySelector('.good'), hintR = el.hints.querySelector('.bad');
@@ -1605,7 +1641,8 @@ function buildPerson(o){
   var faceMat = new THREE.MeshBasicMaterial({ map: FACES[o.face || 'normal'], transparent: true, depthWrite: false });
   var face = new THREE.Mesh(new THREE.PlaneGeometry(0.64, 0.64), faceMat); face.position.set(0, -0.04, -0.43); face.rotation.y = Math.PI; head.add(face);
   scene.add(root);
-  return { root: root, body: body, head: head, legL: legL, legR: legR, armL: armL, armR: armR, faceMat: faceMat, hat: hat, faceKey: o.face || 'normal' };
+  var oldBeard = M(new THREE.SphereGeometry(0.27, 18, 14), smat(0xf2f2f2), 0, -0.3, -0.24, head, 1.06); oldBeard.scale.set(1, 1.2, 0.7); oldBeard.visible = !!o.beard && false;
+  return { oldBeard: oldBeard, hairM: hairM, root: root, body: body, head: head, legL: legL, legR: legR, armL: armL, armR: armR, faceMat: faceMat, hat: hat, faceKey: o.face || 'normal' };
 }
 function buildElise(){
   var root = new THREE.Group(), body = new THREE.Group(); root.add(body);
@@ -1881,6 +1918,7 @@ function startStage(i, cont){
   if (i !== G.stage || !scene) loadStage(i); else loadStage(i);
   G.round++; G.mode = 'run'; G.s = 0; G.x = 0; G.vx = 0; G.y = 0; G.speed = 0; G.chosen = null; G.worldScale = 1; G.spin = 0; G.hop = null;
   G.camMode = 'follow'; G.glow = 0; G.eLook = 0; G.collapse = 0; G.bigHeadT = -1; G.dither = 0; G.heldL = G.heldR = false; on(el.btnL, false, 'down'); on(el.btnR, false, 'down');
+  G.sit = 0; G.lapse = 0; on(el.lapse, false); el.lapseText.className = ''; on(el.over, false);
   exitSlow(false); resetFx(); on(el.title, false); on(el.result, false); on(el.end, false); hudOn(true);
   el.ctlTip.style.display = ST.no === 1 ? 'block' : 'none';
   captionText = null; caption(ST.captions[0][1]);
@@ -1890,7 +1928,7 @@ function startStage(i, cont){
   schedule([[1.6, function(){ showCard(null); }], [3.5, function(){ el.ctlTip.style.display = 'none'; }]]);
 }
 function toTitle(){
-  ambient(null);
+  ambient(null); on(el.over, false); on(el.lapse, false); el.lapseText.className = ''; G.sit = 0; G.lapse = 0;
   exitSlow(false); G.mode = 'title'; G.seq = []; resetFx(); hudOn(false); caption(''); on(el.result, false); on(el.end, false); on(el.title, true);
   if (G.stage !== 0) loadStage(0);
   G.s = 0; G.x = 0; G.collapse = 0; bgm(false);
@@ -1989,6 +2027,36 @@ function arrive(){
   if (m.collapse){ list.push([d + 0.9, function(){ setFace('sad'); }]); list.push([d + 2.2, function(){ G.collapse = 1; SFX.thud(); setFace('dizzy'); }]); }
   schedule(list);
 }
+// 隠しエンド：分かれ道で3秒止まると「優柔不断エンド」
+var OVER_LINES = {
+  1: 'そのころエリスは、別の親切な人に助けられていた。',
+  2: '葬式は、近所の人たちが手伝ってすませたらしい。',
+  3: '一週間の猶予は、とっくに過ぎていた。',
+  4: '相沢は、しびれを切らして日本へ帰った。',
+  5: '大臣は、別の通訳を連れてロシアへ旅立った。',
+  6: '大臣は、別の通訳を連れて日本へ帰った。',
+  7: '春になっても、豊太郎は雪だるまのまま立っていた。'
+};
+function indecisionEnd(){
+  G.mode = 'indecisive'; G.hiddenFound = true;
+  on(el.warn, false); hudOn(false); caption(''); bgm(false); ambLevel(0.02);
+  var t = W3.toyo;
+  schedule([
+    [0.0, function(){ say('T', 'う、うーん……', 1.2); setFace('dizzy'); SFX.err(0); }],
+    [0.9, function(){ say('T', 'もう少しだけ、考えさせて……', 1.4); G.sit = 1; SFX.thud(); }],
+    [1.9, function(){ on(el.lapse, true); G.camMode = 'lapse'; G.lapse = 1; say('T', ''); }],
+    [2.1, function(){ lapseText('1週間後……'); }],
+    [3.1, function(){ lapseText('1年後……'); }],
+    [4.1, function(){ lapseText('30年後……'); t.hairM.color.set(0xeeeeee); t.oldBeard.visible = true; setFace('sad'); }],
+    [5.3, function(){ on(el.lapse, false); G.lapse = 0; el.lapseText.className = ''; tone(392, 0.6, 'sine', 0.2); tone(349, 0.6, 'sine', 0.2, 0.5); tone(262, 1.4, 'sine', 0.22, 1.0); }],
+    [6.6, function(){
+      hudOn(false); el.overEyebrow.textContent = 'STAGE ' + ST.no + '　' + ST.title;
+      el.overSub.textContent = OVER_LINES[ST.no] || '';
+      on(el.over, true); SFX.bell(); G.mode = 'over';
+    }]
+  ]);
+}
+function lapseText(txt){ el.lapseText.textContent = txt; el.lapseText.className = ''; void el.lapseText.offsetWidth; el.lapseText.className = 'on'; for (var i = 0; i < 6; i++) tone(1400, 0.03, 'square', 0.08, i * 0.08); }
 // 幕の終わり：結果の画面は出さず、短い見出しのあと次の幕へそのまま進む
 function finish(){
   G.mode = 'between'; resetFx(); hudOn(false); caption('');
@@ -2008,6 +2076,7 @@ function ending(){
     html += '<li>第' + s.no + '幕　' + esc(s.title) + (v === undefined ? '<b>―</b>' : (v ? '<b class="g">原作ルートを自分で選んだ</b>' : '<b class="w">強制合流</b>')) + '</li>';
     notes += '<div class="note"><b>第' + s.no + '幕　' + esc(s.title) + '</b><br>' + s.note + '</div>';
   }
+  html += '<li>隠しエンド　' + (G.hiddenFound ? '優柔不断エンド<b class="g">発見済み</b>' : '？？？<b>未発見</b>') + '</li>';
   el.endList.innerHTML = html; el.endNotesBody.innerHTML = notes;
   el.endRebel.textContent = G.rebels + '回';
   el.endJoke.textContent = G.rebels > 0
@@ -2268,10 +2337,12 @@ function update(dt, rawDt){
       on(el.hints, false);
       if (G.s >= DECIDE){
         if (Math.abs(G.x) > 0.9) decide(G.x < 0 ? -1 : 1);
-        else { exitSlow(false); G.mode = 'dither'; G.s = DECIDE; G.speed = 0; on(el.warn, true); on(el.hints, false); say('E', ''); say('T', 'ど、どっちに行けば……', 2.5); SFX.err(0); caption('立て札の前で立ち止まってしまった！'); }
+        else { exitSlow(false); G.ditherT = 0; G.mode = 'dither'; G.s = DECIDE; G.speed = 0; on(el.warn, true); on(el.hints, false); say('E', ''); say('T', 'ど、どっちに行けば……', 2.5); SFX.err(0); caption('立て札の前で立ち止まってしまった！'); }
       }
     } else {
       G.speed = 0; t.head.rotation.y = Math.sin(G.clock * 6) * 0.6;
+      G.ditherT = (G.ditherT || 0) + dt;
+      if (G.ditherT >= 3 && Math.abs(G.x) <= 0.9){ indecisionEnd(); return; }
       if (Math.abs(G.x) > 0.9){ t.head.rotation.y = 0; decide(G.x < 0 ? -1 : 1); }
     }
     el.prog.style.width = Math.min(100, 100 * G.s / DECIDE).toFixed(1) + '%';
@@ -2314,6 +2385,11 @@ function update(dt, rawDt){
     G.speed = Math.min(G.speed, Math.max(1.2, rem * 1.6)); G.s += G.speed * dt;
     G.x = damp(G.x, laneC(C, G.s) - C * 1.6, 4, dt);
     if (rem <= 0.05){ G.s = STOP; arrive(); }
+  }
+  if (G.mode === 'indecisive' || G.mode === 'over'){
+    if (G.sit){ t.body.position.y = damp(t.body.position.y, -0.42, 6, dt); t.legL.rotation.x = damp(t.legL.rotation.x, -1.45, 6, dt); t.legR.rotation.x = damp(t.legR.rotation.x, -1.45, 6, dt); t.armL.rotation.x = -0.6; t.armR.rotation.x = -0.6; t.body.rotation.x = 0.15; }
+    if (G.lapse && Math.random() < dt * 40) FX.parts.push({ k: 'star', x: Math.random() * FX.w, y: -10, vx: (Math.random() - 0.5) * 40, vy: 160 + Math.random() * 120, g: 0, s: 3 + Math.random() * 3, r: 0, vr: 1, life: 3, t: 0, c: '#ffffff' });
+    updateCamera(dt); updateSnow(dt); return;
   }
   // 第3幕：迷って首を振る
   if (G.dither) t.head.rotation.y = Math.sin(G.clock * 14) * 0.8;
@@ -2387,6 +2463,8 @@ function updateCamera(dt){
     tp = [px + Math.sin(a) * 2.5, 6 + Math.sin(a * 1.3) * 0.5, pz + 10]; tl = [px, 1.5, pz - 24]; k = 2;
   } else if (G.camMode === 'face'){
     tp = [px - C * 1.8, 2.15, pz - 3.8]; tl = [px, 1.85, pz]; k = 7;
+  } else if (G.camMode === 'lapse'){
+    var la = G.clock * 0.9; tp = [px + Math.sin(la) * 5.5, 2.6, pz + Math.cos(la) * 5.5]; tl = [px, 1.0, pz]; k = 3;
   } else if (G.camMode === 'goodcam'){
     tp = [px - C * 5.2, 2.1, pz - 4.6]; tl = [px, 1.3, pz + 1.5]; k = 4;
   } else if (G.camMode === 'set'){
@@ -2510,6 +2588,8 @@ function init(){
   el.retry.addEventListener('click', function(){ startStage(G.stage); });
   el.back.addEventListener('click', toTitle);
   el.endBack.addEventListener('click', toTitle);
+  el.overRetry.addEventListener('click', function(){ startStage(G.stage, true); });
+  el.overBack.addEventListener('click', toTitle);
   el.sound.addEventListener('click', function(){ audioInit(); setMuted(!A.muted); if (!A.muted) SFX.click(); });
   setMuted(A.muted);
   document.addEventListener('visibilitychange', function(){
