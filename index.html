@@ -94,7 +94,57 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 #darken.pink{background:radial-gradient(circle at 62% 50%,rgba(255,150,190,.55),rgba(80,20,60,.85) 75%)}
 #darken.red{background:rgba(90,0,20,.55)}
 #portrait{position:absolute;z-index:22;right:0;bottom:0;height:92%;width:auto;display:none;pointer-events:none}
-#portrait svg{height:100%;width:auto;display:block}
+#portrait svg{height:100%;width:auto;display:none}
+#portrait svg.on{display:block}
+#portrait.left{right:auto;left:0}
+#portrait.left.in{-webkit-animation-name:pinL;animation-name:pinL}
+@-webkit-keyframes pinL{from{-webkit-transform:translateX(-80%) scale(.5) rotate(-18deg);opacity:0}to{-webkit-transform:none;opacity:1}}
+@keyframes pinL{from{transform:translateX(-80%) scale(.5) rotate(-18deg);opacity:0}to{transform:none;opacity:1}}
+/* 第2〜7幕の追加演出 */
+.speech{position:absolute;z-index:29;max-width:min(460px,80vw);padding:14px 20px;border-radius:22px;background:#fff;color:#2b2a3a;border:4px solid #2b2a3a;font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;font-size:clamp(18px,3vw,30px);font-weight:900;line-height:1.5;box-shadow:8px 8px 0 rgba(0,0,0,.35);-webkit-animation:gpop .35s cubic-bezier(.2,1.7,.4,1) both;animation:gpop .35s cubic-bezier(.2,1.7,.4,1) both}
+.speech small{display:block;font-family:-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;font-size:12px;color:#8a5a2b;margin-bottom:4px;letter-spacing:.1em}
+.bigwatch{position:absolute;left:50%;top:46%;width:min(46vw,320px);height:min(46vw,320px);margin:calc(min(46vw,320px) / -2) 0 0 calc(min(46vw,320px) / -2);-webkit-animation:bigwatch 1.3s cubic-bezier(.2,1.4,.4,1) both;animation:bigwatch 1.3s cubic-bezier(.2,1.4,.4,1) both;-webkit-filter:drop-shadow(0 0 30px #ffd166);filter:drop-shadow(0 0 30px #ffd166)}
+.bigwatch .hand{-webkit-transform-origin:60px 80px;transform-origin:60px 80px;-webkit-animation:spin .25s linear infinite;animation:spin .25s linear infinite}
+@-webkit-keyframes bigwatch{0%{-webkit-transform:scale(.1) rotate(-200deg);opacity:0}60%{-webkit-transform:scale(1.15) rotate(10deg);opacity:1}100%{-webkit-transform:scale(1) rotate(0)}}
+@keyframes bigwatch{0%{transform:scale(.1) rotate(-200deg);opacity:0}60%{transform:scale(1.15) rotate(10deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+.tick{position:absolute;font-size:clamp(24px,4vw,44px);font-weight:900;color:#fff;text-shadow:3px 3px 0 #a87a2e;-webkit-animation:dmg .9s ease-out both;animation:dmg .9s ease-out both}
+.receipt .ln{opacity:0}.receipt .ln.show{opacity:1;-webkit-animation:println .2s both;animation:println .2s both}
+@-webkit-keyframes println{from{-webkit-transform:translateY(-6px);opacity:0}}@keyframes println{from{transform:translateY(-6px);opacity:0}}
+.flipL{-webkit-animation:flipx .5s steps(1) infinite;animation:flipx .5s steps(1) infinite}
+@-webkit-keyframes flipx{0%{-webkit-transform:scaleX(1)}50%{-webkit-transform:scaleX(-1)}}
+@keyframes flipx{0%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
+.duel{position:absolute;top:36%;font-size:clamp(34px,7vw,80px);font-weight:900;padding:6px 22px;border-radius:16px;border:5px solid #2b2a3a;background:#fff;box-shadow:8px 8px 0 #2b2a3a;-webkit-transition:-webkit-transform .12s;transition:transform .12s}
+.duel.a{left:6%;color:#c0504d}.duel.b{right:6%;color:#2e8b57}
+.duel.big{-webkit-transform:scale(1.35) rotate(-4deg);transform:scale(1.35) rotate(-4deg)}
+.meter{position:absolute;left:50%;bottom:14%;width:min(520px,84vw);margin-left:calc(min(520px,84vw) / -2);background:#fff;border:4px solid #2b2a3a;border-radius:14px;padding:10px 14px;font-weight:900;font-size:15px;color:#2b2a3a}
+.meter .bar{height:20px;border-radius:10px;background:#eee;margin-top:6px;overflow:hidden;border:2px solid #2b2a3a}
+.meter .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd166,#ff4d6d);-webkit-transition:width .25s;transition:width .25s}
+.bsod{position:absolute;top:0;left:0;right:0;bottom:0;background:#1f4fbf;color:#fff;padding:12% 10%;font-weight:800;text-align:left;-webkit-animation:none;animation:none}
+.bsod .face{font-size:clamp(60px,12vw,120px);line-height:1}
+.bsod p{font-size:clamp(15px,2.4vw,22px);line-height:1.6;margin:14px 0}
+.bsod small{font-size:13px;opacity:.85}
+.tiny{position:absolute;left:50%;bottom:18%;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:rgba(10,10,20,.82);color:#fff;font-weight:900;padding:12px 22px;border-radius:12px;white-space:nowrap;-webkit-transition:font-size .25s;transition:font-size .25s}
+.echo{position:absolute;font-size:clamp(22px,4.6vw,48px);font-weight:900;color:#fff;background:#ff4d6d;border:4px solid #fff;border-radius:16px;padding:4px 16px;box-shadow:0 6px 18px rgba(0,0,0,.35);white-space:nowrap;-webkit-animation:echo .9s cubic-bezier(.2,1.8,.4,1) both;animation:echo .9s cubic-bezier(.2,1.8,.4,1) both}
+@-webkit-keyframes echo{from{-webkit-transform:scale(.2) rotate(-20deg);opacity:0}to{-webkit-transform:scale(1) rotate(-6deg);opacity:1}}
+@keyframes echo{from{transform:scale(.2) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(-6deg);opacity:1}}
+.hanko{position:absolute;left:50%;top:44%;width:min(300px,60vw);height:min(300px,60vw);margin:calc(min(300px,60vw) / -2) 0 0 calc(min(300px,60vw) / -2);border-radius:50%;border:12px solid #d23a3a;color:#d23a3a;background:rgba(255,255,255,.75);font-size:clamp(40px,8vw,84px);font-weight:900;line-height:1.05;display:-webkit-box;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;text-align:center;-webkit-animation:stamp3 .4s cubic-bezier(.2,1.6,.4,1) both;animation:stamp3 .4s cubic-bezier(.2,1.6,.4,1) both}
+@-webkit-keyframes stamp3{from{-webkit-transform:scale(3) rotate(-30deg);opacity:0}to{-webkit-transform:rotate(-12deg);opacity:1}}
+@keyframes stamp3{from{transform:scale(3) rotate(-30deg);opacity:0}to{transform:rotate(-12deg);opacity:1}}
+#gag.goldtint{background:radial-gradient(circle at 50% 50%,rgba(255,215,100,.15),rgba(255,180,40,.45))}
+.slot{position:absolute;left:50%;top:44%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:linear-gradient(180deg,#ffdf8f,#f0b95c);border:6px solid #8a5a10;border-radius:22px;padding:16px 18px 18px;box-shadow:10px 10px 0 rgba(0,0,0,.35);text-align:center;-webkit-animation:gpop .35s cubic-bezier(.2,1.7,.4,1) both;animation:gpop .35s cubic-bezier(.2,1.7,.4,1) both}
+.slot h3{margin:0 0 10px;color:#8a2a10;font-size:16px;letter-spacing:.2em}
+.reel{display:inline-block;width:min(120px,24vw);height:min(90px,18vw);margin:0 5px;background:#fff;border:4px solid #8a5a10;border-radius:12px;overflow:hidden;position:relative}
+.reel span{position:absolute;left:0;right:0;text-align:center;font-size:clamp(22px,4.4vw,40px);font-weight:900;color:#c4374f;line-height:min(90px,18vw)}
+.reel.spin span{-webkit-animation:reel .12s linear infinite;animation:reel .12s linear infinite}
+@-webkit-keyframes reel{from{-webkit-transform:translateY(-100%)}to{-webkit-transform:translateY(100%)}}
+@keyframes reel{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+.jackpot{position:absolute;left:50%;top:20%;-webkit-transform:translateX(-50%) rotate(-5deg);transform:translateX(-50%) rotate(-5deg);font-size:clamp(34px,7vw,72px);font-weight:900;color:#ffdf3f;text-shadow:4px 4px 0 #c4374f,-2px -2px 0 #fff;white-space:nowrap;-webkit-animation:echo .5s cubic-bezier(.2,1.8,.4,1) both;animation:echo .5s cubic-bezier(.2,1.8,.4,1) both}
+.phone .send{-webkit-transition:right .18s,top .18s;transition:right .18s,top .18s}
+.phone .battery{position:absolute;right:12px;top:12px;width:44px;height:18px;border:2px solid #fff;border-radius:4px}
+.phone .battery i{display:block;height:100%;width:100%;background:#7fdc8f;-webkit-transition:width .3s,background .3s;transition:width .3s,background .3s}
+.phone .courage{position:absolute;left:0;right:0;top:46px;background:#fff3f3;color:#b3261e;font-size:12px;font-weight:900;text-align:center;padding:4px}
+.phone.off{background:#000}.phone.off *{visibility:hidden}
+.phone .offmsg{visibility:visible!important;position:absolute;left:0;right:0;top:45%;text-align:center;color:#777;font-weight:900}
 #portrait.in{display:block;-webkit-animation:pin .55s cubic-bezier(.15,1.5,.35,1) both;animation:pin .55s cubic-bezier(.15,1.5,.35,1) both}
 #portrait.out{display:block;-webkit-animation:pout .3s ease-in both;animation:pout .3s ease-in both}
 @-webkit-keyframes pin{from{-webkit-transform:translateX(80%) scale(.5) rotate(18deg);opacity:0}to{-webkit-transform:none;opacity:1}}
@@ -287,7 +337,7 @@ window.onerror=function(msg,src,line){
  <div id="darken" class="full"></div>
  <div id="portrait" aria-hidden="true">
   <!-- エリスの顔（自作の図。原作の「被りし巾」「薄きこがね色」の髪、「青く清らにて」の目、露を宿す長い睫毛に合わせた） -->
-  <svg viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+  <svg data-who="elise" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
    <defs>
     <radialGradient id="eGlow" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fff6e0"/><stop offset=".6" stop-color="#ffd3e2" stop-opacity=".7"/><stop offset="1" stop-color="#ffb3cf" stop-opacity="0"/></radialGradient>
     <linearGradient id="eHair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset=".5" stop-color="#f0cf7c"/><stop offset="1" stop-color="#c8924c"/></linearGradient>
@@ -321,6 +371,53 @@ window.onerror=function(msg,src,line){
    <path d="M192 346 Q210 336 228 346 Q210 358 192 346Z" fill="#e88a95" stroke="#b8616c" stroke-width="3"/>
    <ellipse cx="128" cy="420" rx="34" ry="26" fill="url(#eSkin)" stroke="#d6a48e" stroke-width="4"/>
    <ellipse cx="292" cy="420" rx="34" ry="26" fill="url(#eSkin)" stroke="#d6a48e" stroke-width="4"/>
+  </svg>
+  <!-- 相沢謙吉（自作の図：山高帽・丸眼鏡・口ひげ・きびしい顔） -->
+  <svg data-who="aizawa" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+    <radialGradient id="aBg" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#c9d6ff"/><stop offset=".6" stop-color="#6d7fb8" stop-opacity=".6"/><stop offset="1" stop-color="#2b2a3a" stop-opacity="0"/></radialGradient>
+    <linearGradient id="aSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6d8bf"/><stop offset="1" stop-color="#e3b598"/></linearGradient>
+   </defs>
+   <circle cx="210" cy="270" r="240" fill="url(#aBg)"/>
+   <g stroke="#ffffff" stroke-width="6" opacity=".7"><path d="M20 120 L90 160"/><path d="M400 110 L330 160"/><path d="M15 360 L80 340"/><path d="M405 370 L340 345"/></g>
+   <path d="M70 560 Q70 440 140 410 L280 410 Q350 440 350 560Z" fill="#4a5a48" stroke="#2b3328" stroke-width="6"/>
+   <path d="M170 410 L210 480 L250 410Z" fill="#f6f1e6"/><path d="M200 420 L220 420 L214 470 L206 470Z" fill="#2b2a3a"/>
+   <rect x="180" y="350" width="60" height="70" rx="16" fill="url(#aSkin)"/>
+   <ellipse cx="210" cy="265" rx="122" ry="134" fill="url(#aSkin)" stroke="#b98b70" stroke-width="5"/>
+   <path d="M92 230 Q100 140 210 132 Q320 140 328 230 Q300 190 210 186 Q120 190 92 230Z" fill="#1d1a22"/>
+   <path d="M60 150 L360 150 L352 172 L68 172Z" fill="#3a2e24" stroke="#1c1612" stroke-width="5"/>
+   <path d="M110 152 Q115 50 210 46 Q305 50 310 152Z" fill="#3a2e24" stroke="#1c1612" stroke-width="5"/>
+   <path d="M118 138 L302 138" stroke="#8a2a3a" stroke-width="12"/>
+   <path d="M118 222 L190 244 M302 222 L230 244" stroke="#1d1a22" stroke-width="13" stroke-linecap="round"/>
+   <circle cx="160" cy="272" r="34" fill="#fff" fill-opacity=".35" stroke="#333" stroke-width="6"/><circle cx="260" cy="272" r="34" fill="#fff" fill-opacity=".35" stroke="#333" stroke-width="6"/>
+   <path d="M194 272 L226 272" stroke="#333" stroke-width="6"/>
+   <ellipse cx="164" cy="276" rx="9" ry="12" fill="#1d1a22"/><ellipse cx="256" cy="276" rx="9" ry="12" fill="#1d1a22"/>
+   <path d="M206 296 Q200 318 214 320" fill="none" stroke="#b98b70" stroke-width="5" stroke-linecap="round"/>
+   <path d="M140 352 Q210 318 280 352 Q240 340 210 344 Q180 340 140 352Z" fill="#1d1a22"/>
+   <path d="M184 376 L236 376" stroke="#7a4a40" stroke-width="7" stroke-linecap="round"/>
+   <path d="M330 300 q14 10 4 26 q-12 -6 -4 -26z" fill="#7fc8ff"/>
+  </svg>
+  <!-- 天方伯（大臣。自作の図：白いひげ・勲章・たすき・後光） -->
+  <svg data-who="minister" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+    <radialGradient id="mBg" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#fff7c8"/><stop offset=".55" stop-color="#ffd76a" stop-opacity=".8"/><stop offset="1" stop-color="#ffb43c" stop-opacity="0"/></radialGradient>
+    <linearGradient id="mSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7dcc6"/><stop offset="1" stop-color="#e8bea2"/></linearGradient>
+   </defs>
+   <circle cx="210" cy="250" r="250" fill="url(#mBg)"/>
+   <g stroke="#fff3b0" stroke-width="10" opacity=".8"><path d="M210 0 V60"/><path d="M60 60 L105 105"/><path d="M360 60 L315 105"/><path d="M0 230 H55"/><path d="M420 230 H365"/></g>
+   <path d="M60 560 Q60 440 140 405 L280 405 Q360 440 360 560Z" fill="#1d1d26" stroke="#000" stroke-width="6"/>
+   <path d="M120 430 L320 540" stroke="#c4374f" stroke-width="30"/>
+   <circle cx="150" cy="470" r="20" fill="#f3cf7f" stroke="#a87a2e" stroke-width="5"/><circle cx="150" cy="470" r="8" fill="#c4374f"/>
+   <circle cx="110" cy="500" r="14" fill="#f3cf7f" stroke="#a87a2e" stroke-width="4"/>
+   <ellipse cx="210" cy="250" rx="120" ry="130" fill="url(#mSkin)" stroke="#b98b70" stroke-width="5"/>
+   <path d="M96 200 Q120 140 210 136 Q300 140 324 200 Q300 170 210 168 Q120 170 96 200Z" fill="#e8e8ee"/>
+   <path d="M120 214 L186 222 M300 214 L234 222" stroke="#f2f2f2" stroke-width="14" stroke-linecap="round"/>
+   <path d="M138 252 Q160 236 184 252 M236 252 Q260 236 282 252" fill="none" stroke="#2a2230" stroke-width="7" stroke-linecap="round"/>
+   <ellipse cx="148" cy="290" rx="20" ry="10" fill="#ff8fab" opacity=".35"/><ellipse cx="272" cy="290" rx="20" ry="10" fill="#ff8fab" opacity=".35"/>
+   <path d="M120 300 Q210 270 300 300 Q300 420 210 430 Q120 420 120 300Z" fill="#f6f6f6" stroke="#c8c8c8" stroke-width="4"/>
+   <path d="M150 300 Q210 286 270 300 Q240 312 210 308 Q180 312 150 300Z" fill="#ffffff" stroke="#c8c8c8" stroke-width="3"/>
+   <path d="M190 326 Q210 340 230 326" fill="none" stroke="#b8616c" stroke-width="5" stroke-linecap="round"/>
+   <g fill="#fff"><path d="M62 330 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6z"/><path d="M356 330 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6z"/></g>
   </svg>
  </div>
  <div id="card"><div class="k"></div><div class="h"></div><div class="s"></div></div>
@@ -621,7 +718,7 @@ function errWin(msg, i){
   el.app.appendChild(w); errWins.push(w);
 }
 function clearErrWins(){ for (var i = 0; i < errWins.length; i++){ if (errWins[i].parentNode) errWins[i].parentNode.removeChild(errWins[i]); } errWins = []; }
-function gagHTML(html){ el.gag.innerHTML = html || ''; }
+function gagHTML(html){ el.gag.innerHTML = html || ''; el.gag.className = ''; }
 function gagAdd(html){ var d = document.createElement('div'); d.innerHTML = html; while (d.firstChild) el.gag.appendChild(d.firstChild); return el.gag.lastChild; }
 function esc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
@@ -691,7 +788,8 @@ var SFX = {
   key: function(){ noise(0.03, 0.25, 3000, 0, 4); },
   boom: function(){ tone(90, 0.6, 'sine', 0.6, 0, 40); noise(0.4, 0.4, 300, 80, 1); },
   bell: function(){ tone(784, 1.6, 'sine', 0.15); tone(1568, 1.0, 'sine', 0.05); },
-  thud: function(){ tone(80, 0.4, 'sine', 0.5, 0, 40); noise(0.2, 0.25, 400, 100, 1); }
+  thud: function(){ tone(80, 0.4, 'sine', 0.5, 0, 40); noise(0.2, 0.25, 400, 100, 1); },
+  pop: function(){ tone(500, 0.08, 'sine', 0.25, 0, 1200); }
 };
 var BGM = [
   [76, 48, 64, 67], [79, 0, 64, 67], [84, 0, 64, 67],
@@ -1196,6 +1294,7 @@ function fxDraw(dt){
     var al = 1 - Math.max(0, (p.t - p.life * 0.6) / (p.life * 0.4));
     g.save(); g.globalAlpha = al; g.translate(p.x, p.y); g.rotate(p.r * 0.3); g.fillStyle = p.c;
     if (p.k === 'heart'){ heartPath(g, 0, 0, p.s); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2; g.stroke(); }
+    else if (p.k === 'coin'){ g.scale(Math.abs(Math.cos(p.r)) * 0.8 + 0.2, 1); g.fillStyle = '#f3cf7f'; g.strokeStyle = '#a87a2e'; g.lineWidth = 3; g.beginPath(); g.arc(0, 0, p.s, 0, 7); g.fill(); g.stroke(); g.fillStyle = '#a87a2e'; g.font = '900 ' + Math.round(p.s * 1.1) + 'px sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('M', 0, 1); }
     else { g.beginPath(); for (var k = 0; k < 8; k++){ var rr = k % 2 ? p.s * 0.35 : p.s; g.lineTo(Math.cos(k * Math.PI / 4) * rr, Math.sin(k * Math.PI / 4) * rr); } g.closePath(); g.fill(); }
     g.restore();
   }
@@ -1368,6 +1467,23 @@ function ending(){
 
 /* ---------------- [8] GAGS（幕ごと） ---------------- */
 // 各関数は開始時刻 t0 を受け取り、{ beats: [[時刻, 処理]...], end: 乗っ取りを始める時刻 } を返す
+function showPortrait(who, side){
+  var svgs = el.portrait.querySelectorAll('svg');
+  for (var i = 0; i < svgs.length; i++) svgs[i].setAttribute('class', svgs[i].getAttribute('data-who') === who ? 'on' : '');
+  el.portrait.className = ''; void el.portrait.offsetWidth;
+  el.portrait.className = (side === 'left' ? 'left ' : '') + 'in';
+}
+function hidePortrait(){ if (/\bin\b/.test(el.portrait.className)) el.portrait.className = el.portrait.className.replace(/\bin\b/, 'out'); }
+function q(sel){ return el.gag.querySelector(sel); }
+function rmq(sel){ var n = q(sel); if (n && n.parentNode) n.parentNode.removeChild(n); }
+function rain(kind, n){
+  for (var i = 0; i < n; i++){
+    FX.parts.push({ k: kind, x: Math.random() * FX.w, y: -20 - Math.random() * FX.h * 0.6, vx: (Math.random() - 0.5) * 80, vy: 120 + Math.random() * 200, g: 380,
+      s: kind === 'coin' ? 11 + Math.random() * 7 : 6 + Math.random() * 9, r: Math.random() * 6, vr: (Math.random() - 0.5) * 8, life: 2.6 + Math.random(), t: 0,
+      c: Math.random() < 0.5 ? '#ffd166' : '#fff3b0' });
+  }
+}
+var WATCH_SVG = '<svg viewBox="0 0 120 140"><rect x="52" y="0" width="16" height="14" rx="4" fill="#d9a441"/><circle cx="60" cy="22" r="9" fill="none" stroke="#d9a441" stroke-width="5"/><circle cx="60" cy="80" r="52" fill="#f3cf7f" stroke="#a87a2e" stroke-width="7"/><circle cx="60" cy="80" r="40" fill="#fffaf0"/><g fill="#2b2a3a"><rect x="58" y="44" width="4" height="8"/><rect x="58" y="108" width="4" height="8"/><rect x="24" y="78" width="8" height="4"/><rect x="88" y="78" width="8" height="4"/></g><g class="hand"><path d="M60 80 V50" stroke="#2b2a3a" stroke-width="5" stroke-linecap="round"/></g><path d="M60 80 L78 92" stroke="#2b2a3a" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="80" r="4" fill="#c4374f"/></svg>';
 var GAGS = {
   // 第1幕：エリスの顔の大写し → システムエラー
   portrait: function(t0){
@@ -1375,14 +1491,14 @@ var GAGS = {
     var b = [
       [t0, function(){
         flash(); shake(); punch(); SFX.gasp(); SFX.heart();
-        el.gl.className = ''; darken('pink'); el.portrait.className = 'in'; FX.lines = 1; burst('heart', 70, FX.w * 0.8, FX.h * 0.45, 650);
+        el.gl.className = ''; darken('pink'); showPortrait('elise'); FX.lines = 1; burst('heart', 70, FX.w * 0.8, FX.h * 0.45, 650);
         setFace('love'); say('T', '');
         showCard('chroma', 'CRITICAL HIT!!', '可愛すぎて\n無視できない！！', '原作も認める美しさ：「青く清らにて物問いたげに愁いを含める目」');
       }],
       [t0 + 0.6, function(){ dmg('理性 −9999', 58, 22); SFX.heart(); burst('heart', 30, FX.w * 0.7, FX.h * 0.35, 500); }],
       [t0 + 1.1, function(){ dmg('決断力 −∞', 64, 64); burst('heart', 30, FX.w * 0.4, FX.h * 0.6, 500); }],
       [t0 + 2.2, function(){
-        el.portrait.className = 'out'; FX.lines = 0; darken('red'); restartAnim(el.stage, 'glitch'); on(el.scan, true); setFace('dizzy');
+        hidePortrait(); FX.lines = 0; darken('red'); restartAnim(el.stage, 'glitch'); on(el.scan, true); setFace('dizzy');
         showCard('center err chroma', 'SYSTEM ERROR', '「無視する」は\n原作に存在しません', '豊太郎の操作を一時停止しています……');
         G.mode = 'locked';
       }]
@@ -1390,109 +1506,166 @@ var GAGS = {
     lines.forEach(function(m, i){ b.push([t0 + 2.45 + i * 0.2, function(){ errWin(m, i); SFX.err(i); }]); });
     return { beats: b, end: t0 + 4.0 };
   },
-  // 第2幕：懐中時計が勝手に飛んで、強制決済
+  // 第2幕：エリスの頼み → 巨大な懐中時計 → 領収書が印字されて強制決済 → 硬貨の雨
   watch: function(t0){
-    var watchSvg = '<svg viewBox="0 0 120 140"><rect x="52" y="0" width="16" height="14" rx="4" fill="#d9a441"/><circle cx="60" cy="22" r="9" fill="none" stroke="#d9a441" stroke-width="5"/><circle cx="60" cy="80" r="52" fill="#f3cf7f" stroke="#a87a2e" stroke-width="7"/><circle cx="60" cy="80" r="40" fill="#fffaf0"/><path d="M60 80 V52 M60 80 L80 90" stroke="#2b2a3a" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="80" r="4" fill="#c4374f"/></svg>';
-    return { beats: [
+    var rows = [['葬儀の費用', '？？？'], ['所持金（銀貨）', '2〜3マルク'], ['不足分', '大幅に不足'], ['お支払い', '懐中時計 ×1']];
+    var b = [
       [t0, function(){
-        el.gl.className = ''; flash(); SFX.boom(); setFace('shock');
-        var p = toScreen(W3.toyo.body, 1.0);
-        var w = gagAdd('<div class="watch" style="left:' + Math.round(p.x - 60) + 'px;top:' + Math.round(p.y - 70) + 'px">' + watchSvg + '</div>');
-        say('T', 'あっ、時計が勝手に！？', 1.4);
-        burst('star', 20, p.x, p.y, 400);
+        el.gl.className = ''; flash(); punch(); SFX.gasp(); SFX.heart();
+        darken('pink'); showPortrait('elise'); FX.lines = 1; burst('heart', 40, FX.w * 0.8, FX.h * 0.45, 500);
+        gagHTML('<div class="speech" style="left:5%;top:14%"><small>エリス（原作の言葉）</small>「われを救いたまえ、君。」</div>');
+        setFace('love'); G.mode = 'locked';
       }],
-      [t0 + 1.0, function(){
-        darken('on'); SFX.register();
-        gagAdd('<div class="gpanel receipt right"><h3>― 領 収 書 ―</h3>' +
-          '<span class="ln">葬儀の費用 <b>？？？</b></span>' +
-          '<span class="ln">所持金（銀貨） <b>2〜3マルク</b></span>' +
-          '<span class="ln">不足分のお支払い <b>懐中時計 ×1</b></span>' +
-          '<div class="tot">お支払い方法：時計（強制）</div></div>');
-        G.mode = 'locked';
-      }],
-      [t0 + 1.8, function(){ gagAdd('<div class="paid">決済完了</div>'); var p = el.gag.querySelector('.receipt'); if (p) p.appendChild(el.gag.querySelector('.paid')); SFX.stamp(); SFX.coin(); shake(); }],
-      [t0 + 2.2, function(){ showCard('chroma', 'PAYMENT COMPLETE', '所持金不足！\n時計で強制決済しました', '原作：「わが隠しには二、三「マルク」の銀貨あれど、それにて足るべくもあらねば」'); setFace('dizzy'); }],
-      [t0 + 2.4, function(){ dmg('時計 −1', 70, 26); SFX.coin(); }]
-    ], end: t0 + 3.8 };
-  },
-  // 第3幕：決断が処理しきれず、タイムアウト
-  loading: function(t0){
-    var msgs = ['決断を処理中…', '母の手紙を読み込み中…', '旅費を計算中…', 'エリスの顔を読み込み中…', '決断を処理中……………'];
-    var b = [[t0, function(){
-      el.gl.className = ''; darken('on'); SFX.err(0);
-      gagHTML('<div class="gpanel loader"><div class="spin"></div><div class="ltext">決断を処理中…</div><div class="lbar"><i></i></div><div class="lsmall">しばらくお待ちください（豊太郎の決断には時間がかかります）</div></div>');
-      G.mode = 'locked'; G.dither = 1;
-    }]];
-    var pcts = [12, 37, 64, 91, 99];
-    msgs.forEach(function(m, i){ b.push([t0 + 0.3 + i * 0.55, function(){ var t = el.gag.querySelector('.ltext'), bar = el.gag.querySelector('.lbar i'); if (t) t.textContent = m; if (bar) bar.style.width = pcts[i] + '%'; SFX.key(); }]); });
-    b.push([t0 + 3.0, function(){ var t = el.gag.querySelector('.ltext'); if (t) t.textContent = '99%……99%……99%……'; }]);
-    b.push([t0 + 3.6, function(){
-      G.dither = 0; gagHTML(''); darken('red'); restartAnim(el.stage, 'glitch'); on(el.scan, true); SFX.err(3); setFace('dizzy');
-      showCard('center err chroma', 'TIMEOUT', '決断が\n時間切れになりました', '初期設定「ベルリンに残る」に戻します……');
+      [t0 + 0.7, function(){ dmg('理性 −500', 56, 20); SFX.heart(); }],
+      [t0 + 1.6, function(){
+        hidePortrait(); FX.lines = 0; gagHTML(''); darken('on'); SFX.boom(); shake(); setFace('shock');
+        gagAdd('<div class="bigwatch">' + WATCH_SVG + '</div>');
+        say('T', 'あっ、時計が勝手に！？', 1.4); burst('star', 30, FX.w * 0.5, FX.h * 0.46, 500);
+      }]
+    ];
+    [0, 1, 2, 3].forEach(function(i){ b.push([t0 + 1.9 + i * 0.28, function(){ tone(i % 2 ? 1500 : 2000, 0.05, 'square', 0.15); gagAdd('<div class="tick" style="left:' + (i % 2 ? 66 : 22) + '%;top:' + (28 + i * 8) + '%">' + (i % 2 ? 'タク' : 'チク') + '</div>'); }]); });
+    b.push([t0 + 3.1, function(){
+      rmq('.bigwatch'); SFX.register();
+      gagAdd('<div class="gpanel receipt right"><h3>― 領 収 書 ―</h3>' + rows.map(function(r){ return '<span class="ln">' + esc(r[0]) + ' <b>' + esc(r[1]) + '</b></span>'; }).join('') + '<div class="tot ln">お支払い方法：時計（強制）</div></div>');
     }]);
-    return { beats: b, end: t0 + 5.0 };
+    [0, 1, 2, 3, 4].forEach(function(i){ b.push([t0 + 3.35 + i * 0.22, function(){ var ls = el.gag.querySelectorAll('.receipt .ln'); if (ls[i]) ls[i].className += ' show'; SFX.key(); }]); });
+    b.push([t0 + 4.6, function(){
+      var p = q('.receipt'); if (p){ var d = document.createElement('div'); d.className = 'paid'; d.textContent = '決済完了'; p.appendChild(d); }
+      SFX.stamp(); SFX.coin(); shake(); flash(); rain('coin', 50); setFace('dizzy');
+      showCard('chroma', 'PAYMENT COMPLETE', '所持金不足！\n時計で強制決済しました', '原作：「わが隠しには二、三「マルク」の銀貨あれど、それにて足るべくもあらねば」');
+    }]);
+    b.push([t0 + 5.0, function(){ dmg('時計 −1', 70, 18); SFX.coin(); }]);
+    b.push([t0 + 5.4, function(){ dmg('所持金 0マルク', 60, 70); SFX.coin(); rain('coin', 25); }]);
+    return { beats: b, end: t0 + 6.4 };
   },
-  // 第4幕：巨大な相沢が道をふさぐ
+  // 第3幕：「帰る」「残る」で画面が反転し続ける → 迷い度 MAX → 青い画面で再起動
+  loading: function(t0){
+    var b = [[t0, function(){
+      el.gl.className = 'flipL'; darken(''); G.mode = 'locked'; G.dither = 1; setFace('shock');
+      gagHTML('<div class="duel a">帰る</div><div class="duel b">残る</div><div class="meter">迷い度 <span class="pct">0</span>%<div class="bar"><i></i></div></div>');
+      SFX.err(0);
+    }]];
+    for (var i = 0; i < 9; i++) (function(k){
+      b.push([t0 + 0.25 + k * 0.22, function(){
+        var a = q('.duel.a'), bb = q('.duel.b'), pct = Math.min(100, Math.round((k + 1) * 12)), bar = q('.meter i'), tx = q('.meter .pct');
+        if (a && bb){ a.className = 'duel a' + (k % 2 ? '' : ' big'); bb.className = 'duel b' + (k % 2 ? ' big' : ''); }
+        if (bar) bar.style.width = pct + '%'; if (tx) tx.textContent = pct >= 100 ? 'MAX ' + pct : pct;
+        tone(k % 2 ? 520 : 780, 0.08, 'square', 0.12); setFace(k % 2 ? 'shock' : 'dizzy');
+      }]);
+    })(i);
+    b.push([t0 + 2.3, function(){
+      el.gl.className = ''; gagHTML(''); darken('on'); shake();
+      gagHTML('<div class="gpanel loader"><h3>豊太郎の決断（応答なし）</h3><div class="spin"></div><div class="ltext">決断を処理中…</div><div class="lbar"><i></i></div><div class="lsmall">しばらくお待ちください（豊太郎の決断には時間がかかります）</div></div>');
+    }]);
+    [[2.5, 37, '旅費を計算中…'], [2.8, 81, 'エリスの顔を読み込み中…'], [3.1, 99, '99%……99%……99%……']].forEach(function(s){
+      b.push([t0 + s[0], function(){ var t = q('.ltext'), bar = q('.lbar i'); if (t) t.textContent = s[2]; if (bar) bar.style.width = s[1] + '%'; SFX.key(); }]);
+    });
+    b.push([t0 + 3.8, function(){
+      G.dither = 0; darken(''); SFX.err(3); tone(110, 0.8, 'sawtooth', 0.15, 0, 50);
+      gagHTML('<div class="bsod"><div class="face">:(</div><p>豊太郎OS で問題が発生したため、再起動する必要があります。</p><p>エラーの内容：KETSUDAN_TIMEOUT（決断が時間切れ）</p><small>再起動中… <b class="pct">0</b>% 完了</small></div>');
+    }]);
+    [20, 45, 70, 100].forEach(function(p, i){ b.push([t0 + 4.1 + i * 0.25, function(){ var x = q('.bsod .pct'); if (x) x.textContent = p; SFX.key(); }]); });
+    b.push([t0 + 5.3, function(){
+      gagHTML(''); flash(); SFX.chime(); setFace('dizzy');
+      showCard('center err chroma', 'REBOOT', '初期設定で\n再起動しました', '初期設定：「ベルリンに残る」');
+    }]);
+    return { beats: b, end: t0 + 6.5 };
+  },
+  // 第4幕：巨大な相沢 → 相沢の顔の大写しと原作の忠告 → 「いや」の声がしぼんで「……はい」
   aizawa: function(t0){
-    return { beats: [
+    var shrink = [[3.3, 34, 'い、いや、僕は……'], [3.65, 24, 'い、いや……その……'], [4.0, 16, 'ぼ、僕は……'], [4.3, 11, '……'], [4.65, 9, '……はい']];
+    var b = [
       [t0, function(){
         el.gl.className = ''; G.camMode = 'follow'; W3.toyo.head.rotation.y = 0; SFX.boom(); shake();
         var bh = W3.bigHead; bh.visible = true; bh.position.set(G.x, -7, -(G.s + 12)); G.bigHeadT = 0;
-        caption('');
+        caption(''); G.mode = 'locked';
       }],
-      [t0 + 1.0, function(){ say('T', 'あ、相沢……！？', 1.2); setFace('shock'); flash(); punch(); }],
-      [t0 + 1.4, function(){ G.mode = 'locked'; darken('on'); showCard('center low err chroma', 'ERROR 404', '断る勇気が\n見つかりません', '原作：「友に対して否とはえ対えぬが常なり」'); SFX.err(1); }],
-      [t0 + 2.1, function(){ dmg('NOと言う力 0', 60, 24); SFX.err(2); }],
-      [t0 + 2.6, function(){ dmg('友への遠慮 MAX', 30, 70); SFX.err(3); setFace('dizzy'); }]
-    ], end: t0 + 3.8 };
+      [t0 + 0.6, function(){ SFX.boom(); shake(); }],
+      [t0 + 1.1, function(){ say('T', 'あ、相沢……！？', 1.2); setFace('shock'); flash(); punch(); }],
+      [t0 + 1.6, function(){
+        showPortrait('aizawa', 'left'); darken('on'); FX.lines = 1; SFX.stamp(); punch();
+        gagHTML('<div class="speech" style="right:5%;top:12%"><small>相沢（原作の忠告）</small>「学識あり、才能あるものが、いつまでか一少女の情にかかずらいて……」</div>');
+      }],
+      [t0 + 3.0, function(){ hidePortrait(); FX.lines = 0; gagHTML('<div class="tiny" style="font-size:44px">い、いや、僕は……！</div>'); SFX.key(); setFace('normal'); }]
+    ];
+    shrink.forEach(function(s, i){ b.push([t0 + s[0], function(){ var x = q('.tiny'); if (x){ x.style.fontSize = s[1] + 'px'; x.textContent = s[2]; } tone(600 - i * 80, 0.12, 'sine', 0.15); if (i === shrink.length - 1){ SFX.err(2); setFace('dizzy'); } }]); });
+    b.push([t0 + 5.1, function(){ gagHTML(''); showCard('center low err chroma', 'ERROR 404', '断る勇気が\n見つかりません', '原作：「友に対して否とはえ対えぬが常なり」'); SFX.err(1); shake(); }]);
+    b.push([t0 + 5.5, function(){ dmg('NOと言う力 0', 60, 20); SFX.err(2); }]);
+    b.push([t0 + 5.9, function(){ dmg('友への遠慮 MAX', 22, 26); SFX.err(3); }]);
+    return { beats: b, end: t0 + 6.8 };
   },
-  // 第5幕：返事が勝手に書き換わる
+  // 第5幕：後光の大臣 → 「お断りし」に「自動承諾」の判子 → 「はい！」が画面じゅうに
   autoyes: function(t0){
     var typed = 'お断りし', after = 'いかで命に従わざらむ！！';
-    var b = [[t0, function(){
-      el.gl.className = ''; darken('on'); G.mode = 'locked';
-      gagHTML('<div class="subline"><span class="who">豊太郎の返事</span><span class="txt"></span><span class="caret"></span></div>');
-    }]];
-    function setTxt(html){ var t = el.gag.querySelector('.txt'); if (t) t.innerHTML = html; }
-    for (var i = 1; i <= typed.length; i++) (function(k){ b.push([t0 + 0.2 + k * 0.22, function(){ setTxt(esc(typed.slice(0, k))); SFX.key(); }]); })(i);
-    b.push([t0 + 1.4, function(){ gagAdd('<div class="autotag">⚡ 自動承諾機能が ON になっています</div>'); SFX.err(1); setFace('shock'); }]);
-    b.push([t0 + 1.7, function(){ setTxt('<span class="del">' + esc(typed) + '</span>'); SFX.err(2); }]);
-    for (var j = 1; j <= after.length; j++) (function(k){ b.push([t0 + 2.0 + k * 0.09, function(){ setTxt(esc(after.slice(0, k))); SFX.key(); }]); })(j);
-    b.push([t0 + 3.3, function(){ flash(); shake(); SFX.stamp(); showCard('chroma', 'AUTO REPLY', '返事が勝手に\n書き換わりました', '原作：「この答はいち早く決断して言いしにあらず」'); setFace('dizzy'); }]);
-    return { beats: b, end: t0 + 4.6 };
+    var echoes = [['はい！', 8, 18], ['喜んで！', 62, 14], ['承知！', 70, 58], ['もちろん！', 6, 60], ['お供します！', 34, 8], ['はい！！', 40, 66]];
+    var b = [
+      [t0, function(){
+        el.gl.className = ''; darken('on'); G.mode = 'locked'; SFX.chime(); SFX.sparkle(); flash();
+        showPortrait('minister'); FX.lines = 1; burst('star', 40, FX.w * 0.78, FX.h * 0.4, 500);
+        gagHTML('<div class="speech" style="left:5%;top:14%"><small>天方伯（原作の言葉）</small>「余はあす、魯西亜に向かいて出発すべし。随いて来べきか」</div>');
+        setFace('shock');
+      }],
+      [t0 + 2.0, function(){ hidePortrait(); FX.lines = 0; gagHTML('<div class="subline"><span class="who">豊太郎の返事</span><span class="txt"></span><span class="caret"></span></div>'); }]
+    ];
+    function setTxt(html){ var t = q('.txt'); if (t) t.innerHTML = html; }
+    for (var i = 1; i <= typed.length; i++) (function(k){ b.push([t0 + 2.1 + k * 0.22, function(){ setTxt(esc(typed.slice(0, k))); SFX.key(); }]); })(i);
+    b.push([t0 + 3.2, function(){ gagAdd('<div class="hanko">自動<br>承諾</div>'); SFX.stamp(); SFX.boom(); shake(); flash(); setTxt('<span class="del">' + esc(typed) + '</span>'); }]);
+    b.push([t0 + 3.6, function(){ gagAdd('<div class="autotag">⚡ 自動承諾機能が ON になっています</div>'); SFX.err(1); }]);
+    for (var j = 1; j <= after.length; j++) (function(k){ b.push([t0 + 3.8 + k * 0.06, function(){ setTxt(esc(after.slice(0, k))); SFX.key(); }]); })(j);
+    echoes.forEach(function(e, i){ b.push([t0 + 4.6 + i * 0.14, function(){ gagAdd('<div class="echo" style="left:' + e[1] + '%;top:' + e[2] + '%">' + esc(e[0]) + '</div>'); SFX.pop(); }]); });
+    b.push([t0 + 5.6, function(){ rmq('.hanko'); var ec = el.gag.querySelectorAll('.echo'); for (var z = 0; z < ec.length; z++) ec[z].parentNode.removeChild(ec[z]); showCard('chroma', 'AUTO REPLY', '返事が勝手に\n書き換わりました', '原作：「この答はいち早く決断して言いしにあらず」'); setFace('dizzy'); }]);
+    b.push([t0 + 5.9, function(){ dmg('考えた時間 0.0秒', 58, 74); SFX.err(2); }]);
+    return { beats: b, end: t0 + 6.8 };
   },
-  // 第6幕：出世欲が操作の権限を求め、拒否ボタンが効かない
+  // 第6幕：画面が金色に → スロットで「出世」がそろう → 硬貨の雨 → 拒否ボタンが効かない
   gold: function(t0){
     var words = [['出世', 18, 22], ['名誉', 58, 16], ['本国', 70, 52], ['大臣の信頼', 12, 60]];
-    var b = [[t0, function(){ el.gl.className = ''; G.glow = 1; SFX.sparkle(); G.camMode = 'follow'; W3.toyo.head.rotation.y = 0; setFace('smug'); }]];
-    words.forEach(function(w, i){ b.push([t0 + 0.2 + i * 0.3, function(){ gagAdd('<div class="flyword" style="left:' + w[1] + '%;top:' + w[2] + '%">' + esc(w[0]) + '</div>'); SFX.coin(); burst('star', 10, FX.w * w[1] / 100, FX.h * w[2] / 100, 300); }]); });
-    b.push([t0 + 1.6, function(){
-      darken('on'); G.mode = 'locked';
+    var items = ['出世', '名誉', '本国', 'エリス'];
+    var b = [[t0, function(){
+      el.gl.className = ''; G.glow = 1; SFX.sparkle(); G.camMode = 'follow'; W3.toyo.head.rotation.y = 0; setFace('smug'); G.mode = 'locked';
+      gagHTML(''); el.gag.className = 'goldtint'; rain('star', 50);
+    }]];
+    words.forEach(function(w, i){ b.push([t0 + 0.2 + i * 0.25, function(){ gagAdd('<div class="flyword" style="left:' + w[1] + '%;top:' + w[2] + '%">' + esc(w[0]) + '</div>'); SFX.coin(); burst('star', 10, FX.w * w[1] / 100, FX.h * w[2] / 100, 300); }]); });
+    b.push([t0 + 1.5, function(){
+      gagHTML(''); el.gag.className = 'goldtint'; darken('on');
+      gagAdd('<div class="slot"><h3>★ 人生スロット ★</h3><div class="reel spin"><span>' + items[0] + '</span></div><div class="reel spin"><span>' + items[1] + '</span></div><div class="reel spin"><span>' + items[3] + '</span></div></div>');
+    }]);
+    for (var i = 0; i < 10; i++) (function(k){ b.push([t0 + 1.6 + k * 0.1, function(){ var rs = el.gag.querySelectorAll('.reel.spin span'); for (var r = 0; r < rs.length; r++) rs[r].textContent = items[(k + r) % items.length]; tone(1200 + (k % 3) * 200, 0.03, 'square', 0.08); }]); })(i);
+    [0, 1, 2].forEach(function(r){ b.push([t0 + 2.6 + r * 0.4, function(){ var rs = el.gag.querySelectorAll('.reel'); if (rs[r]){ rs[r].className = 'reel'; rs[r].firstChild.textContent = '出世'; } SFX.stamp(); }]); });
+    b.push([t0 + 3.9, function(){ gagAdd('<div class="jackpot">JACKPOT！　本国行き</div>'); SFX.fanfare(); SFX.coin(); rain('coin', 70); flash(); shake(); }]);
+    b.push([t0 + 4.9, function(){
+      gagHTML(''); el.gag.className = 'goldtint';
       gagAdd('<div class="gpanel perm"><h3>⚠ 権限の要求</h3>「出世欲」がハンドル操作の権限を求めています。<div class="btns"><span class="b no">拒否</span><span class="b yes">許可</span></div><div class="note2"></div><svg class="cursor" viewBox="0 0 24 24" style="left:20%;top:120%"><path d="M2 2 L2 20 L7 15 L11 23 L14 22 L10 14 L17 14 Z" fill="#fff" stroke="#000" stroke-width="1.5"/></svg></div>');
       SFX.err(0);
     }]);
-    b.push([t0 + 2.0, function(){ var c = el.gag.querySelector('.cursor'); if (c){ c.style.left = '62%'; c.style.top = '62%'; } }]);
-    b.push([t0 + 2.55, function(){ var n = el.gag.querySelector('.b.no'), m = el.gag.querySelector('.note2'); if (n) n.className = 'b no press'; if (m) m.textContent = '「拒否」ボタンは、現在ご利用いただけません。'; SFX.err(2); }]);
-    b.push([t0 + 3.0, function(){ var c = el.gag.querySelector('.cursor'), n = el.gag.querySelector('.b.no'), y = el.gag.querySelector('.b.yes'); if (n) n.className = 'b no'; if (c){ c.style.left = '86%'; } if (y) y.className = 'b yes press'; }]);
-    b.push([t0 + 3.3, function(){ flash(); SFX.stamp(); showCard('chroma', 'PERMISSION GRANTED', '出世欲に\n操作権限を渡しました', '原作：「もしこの手にしも縋らずば、本国をも失い……」'); }]);
-    return { beats: b, end: t0 + 4.6 };
+    b.push([t0 + 5.2, function(){ var c = q('.cursor'); if (c){ c.style.left = '62%'; c.style.top = '62%'; } }]);
+    b.push([t0 + 5.7, function(){ var n = q('.b.no'), m = q('.note2'); if (n) n.className = 'b no press'; if (m) m.textContent = '「拒否」ボタンは、現在ご利用いただけません。'; SFX.err(2); }]);
+    b.push([t0 + 6.1, function(){ var c = q('.cursor'), n = q('.b.no'), y = q('.b.yes'); if (n) n.className = 'b no'; if (c) c.style.left = '86%'; if (y) y.className = 'b yes press'; }]);
+    b.push([t0 + 6.4, function(){ flash(); SFX.stamp(); showCard('chroma', 'PERMISSION GRANTED', '出世欲に\n操作権限を渡しました', '原作：「もしこの手にしも縋らずば、本国をも失い……」'); }]);
+    return { beats: b, end: t0 + 7.4 };
   },
-  // 第7幕：本当のことが送信できない
+  // 第7幕：送れない → 送信ボタンが逃げる → 勇気の残量 0% → 電源が切れる
   message: function(t0){
     var draft = '実は、日本に帰ることになっ';
     var b = [[t0, function(){
-      el.gl.className = ''; darken('on'); G.mode = 'locked';
-      gagHTML('<div class="phone"><div class="top">◀　エリス</div><div class="msgs"><div class="m them">おかえりなさい。遅かったのね。</div></div><div class="input"><span class="txt"></span><span class="send">送信</span></div></div>');
+      el.gl.className = ''; darken('on'); G.mode = 'locked'; setFace('sad');
+      gagHTML('<div class="phone"><div class="top">◀　エリス<span class="battery"><i></i></span></div><div class="courage">勇気の残量：100%</div><div class="msgs"><div class="m them" style="margin-top:22px">おかえりなさい。遅かったのね。</div></div><div class="input"><span class="txt"></span><span class="send">送信</span></div></div>');
     }]];
-    function setIn(t){ var x = el.gag.querySelector('.input .txt'); if (x) x.textContent = t; }
-    function addMsg(cls, t){ var m = el.gag.querySelector('.msgs'); if (m){ var d = document.createElement('div'); d.className = 'm ' + cls; d.textContent = t; m.appendChild(d); } }
-    for (var i = 1; i <= draft.length; i++) (function(k){ b.push([t0 + 0.3 + k * 0.08, function(){ setIn(draft.slice(0, k)); SFX.key(); }]); })(i);
-    b.push([t0 + 1.6, function(){ setIn(''); addMsg('fail', '⚠ 送信に失敗しました（原因：本人の勇気不足）'); SFX.err(1); setFace('sad'); }]);
-    b.push([t0 + 2.1, function(){ setIn('実は……'); SFX.key(); }]);
-    b.push([t0 + 2.5, function(){ setIn(''); addMsg('fail', '⚠ 送信に失敗しました（原因：本人の勇気不足）'); SFX.err(2); }]);
-    b.push([t0 + 2.9, function(){ addMsg('fail', '下書きに保存しました'); SFX.err(0); }]);
-    b.push([t0 + 3.3, function(){ showCard('err', 'SEND FAILED', '本当のことが\n送信できません', '原作：豊太郎は告げられないまま、雪の中をさまよった'); }]);
-    return { beats: b, end: t0 + 4.6 };
+    function setIn(t){ var x = q('.input .txt'); if (x) x.textContent = t; }
+    function addMsg(cls, t){ var m = q('.msgs'); if (m){ var d = document.createElement('div'); d.className = 'm ' + cls; d.textContent = t; m.appendChild(d); } }
+    function courage(p){ var c = q('.courage'), bt = q('.battery i'); if (c) c.textContent = '勇気の残量：' + p + '%'; if (bt){ bt.style.width = Math.max(4, p) + '%'; if (p < 30) bt.style.background = '#ff5a5a'; } }
+    for (var i = 1; i <= draft.length; i++) (function(k){ b.push([t0 + 0.3 + k * 0.07, function(){ setIn(draft.slice(0, k)); SFX.key(); }]); })(i);
+    b.push([t0 + 1.4, function(){ setIn(''); addMsg('fail', '⚠ 送信に失敗しました（原因：本人の勇気不足）'); SFX.err(1); courage(60); }]);
+    b.push([t0 + 1.9, function(){ setIn('実は……'); SFX.key(); }]);
+    [[2.2, '40px', '6px'], [2.45, '6px', '-30px'], [2.7, '120px', '-26px']].forEach(function(p){ b.push([t0 + p[0], function(){ var s = q('.send'); if (s){ s.style.right = p[1]; s.style.top = p[2]; } SFX.pop(); }]); });
+    b.push([t0 + 2.95, function(){ addMsg('fail', '送信ボタンが逃げました'); SFX.err(2); courage(20); setFace('shock'); }]);
+    b.push([t0 + 3.4, function(){ setIn(''); addMsg('fail', '下書きに保存しました'); courage(0); SFX.err(0); }]);
+    b.push([t0 + 3.9, function(){
+      var ph = q('.phone'); if (ph){ ph.className = 'phone off'; var o = document.createElement('div'); o.className = 'offmsg'; o.textContent = '電源が切れました（勇気の残量 0%）'; ph.appendChild(o); }
+      tone(600, 0.8, 'sine', 0.2, 0, 60); setFace('sad');
+    }]);
+    b.push([t0 + 4.7, function(){ showCard('err', 'SEND FAILED', '本当のことが\n送信できません', '原作：豊太郎は告げられないまま、雪の中をさまよった'); }]);
+    return { beats: b, end: t0 + 5.9 };
   }
 };
 
