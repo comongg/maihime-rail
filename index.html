@@ -359,6 +359,32 @@ button:focus-visible{outline:3px solid #fff3b0;outline-offset:3px}
 #liveNext{display:block;margin-top:8px;font-size:clamp(13px,2vw,18px);font-weight:800;color:rgba(255,255,255,.65);text-shadow:0 2px 6px #000}
 #liveSkip{position:absolute;right:16px;bottom:16px;bottom:max(16px,env(safe-area-inset-bottom));pointer-events:auto;padding:10px 16px;border-radius:12px;border:2px solid rgba(255,255,255,.6);background:rgba(0,0,0,.5);color:#fff;font-weight:900;font-size:14px}
 #liveTime{margin-left:10px;font-weight:800;color:#ffd0e4}
+/* 隠し：封筒・エリスからのメッセージ・見つけた数 */
+#mailIcon{position:absolute;z-index:55;right:18px;bottom:18px;bottom:max(18px,env(safe-area-inset-bottom));width:46px;height:34px;border:0;border-radius:6px;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35);display:none;padding:0;-webkit-animation:mailwiggle 2.4s ease-in-out infinite;animation:mailwiggle 2.4s ease-in-out infinite}
+#mailIcon.on{display:block}
+#mailIcon:before{content:"";position:absolute;left:0;top:0;width:0;height:0;border-left:23px solid transparent;border-right:23px solid transparent;border-top:18px solid #ff8fc0}
+#mailIcon b{position:absolute;right:-7px;top:-8px;min-width:18px;height:18px;border-radius:9px;background:#ff2a2a;color:#fff;font-size:11px;line-height:18px;font-weight:900;text-align:center}
+@-webkit-keyframes mailwiggle{0%,80%,100%{-webkit-transform:none}84%{-webkit-transform:rotate(-12deg)}88%{-webkit-transform:rotate(10deg)}92%{-webkit-transform:rotate(-6deg)}}
+@keyframes mailwiggle{0%,80%,100%{transform:none}84%{transform:rotate(-12deg)}88%{transform:rotate(10deg)}92%{transform:rotate(-6deg)}}
+#mailBox{position:absolute;z-index:70;top:0;left:0;right:0;bottom:0;display:none;background:rgba(6,4,12,.82)}
+#mailBox.on{display:block}
+#mailBox.recv{-webkit-animation:glitchbox .2s steps(2) 6;animation:glitchbox .2s steps(2) 6}
+@-webkit-keyframes glitchbox{0%{-webkit-transform:translate(0,0);background:rgba(40,0,30,.85)}50%{-webkit-transform:translate(-6px,3px);background:rgba(0,20,40,.85)}}
+@keyframes glitchbox{0%{transform:translate(0,0);background:rgba(40,0,30,.85)}50%{transform:translate(-6px,3px);background:rgba(0,20,40,.85)}}
+#mailBox .phone{height:min(500px,78vh)}
+#mailBox .phone .top{background:#ff4d9e}
+#mailBox .phone .msgs{bottom:76px}
+#mailBox .m.them{max-width:86%}
+#mailBox .acts{position:absolute;left:10px;right:10px;bottom:12px;text-align:center}
+#mailBox .acts button{display:inline-block;margin:0 4px;padding:10px 16px;border-radius:20px;font-weight:900;font-size:14px;border:0}
+#mailPlay{background:#ff4d9e;color:#fff}
+#mailSkip{background:#e8e2ea;color:#555}
+#mailBox .typing{float:left;clear:both;margin:8px 0;padding:8px 14px;border-radius:14px;background:#fff;border:1px solid #ddd;color:#999;font-weight:900;letter-spacing:.2em}
+#mailToast{position:absolute;z-index:75;left:50%;bottom:22%;-webkit-transform:translateX(-50%);transform:translateX(-50%);padding:10px 18px;border-radius:12px;background:rgba(0,0,0,.8);color:#fff;font-weight:900;font-size:14px;white-space:nowrap;display:none}
+#mailToast.on{display:block;-webkit-animation:lpop .3s both;animation:lpop .3s both}
+.hidCount{display:inline-block;margin-top:10px;padding:4px 12px;border-radius:999px;border:2px dashed #c9b48f;color:#8a6a3a;font-size:12px;font-weight:900;letter-spacing:.05em}
+#titleLive{display:none;margin:8px auto 0;padding:6px 14px;border-radius:999px;border:2px solid #ff8fc0;background:#fff0f6;color:#c4377a;font-weight:900;font-size:13px}
+#titleLive.on{display:inline-block}
 #bootDiag{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:#fbe9ec;color:#7a1d2b;font-size:12px;line-height:1.6;text-align:left;word-break:break-all;-webkit-user-select:text;user-select:text}
 #errBox{position:absolute;z-index:99;left:10px;right:10px;bottom:10px;padding:10px 12px;border-radius:10px;background:#5b0d1c;color:#fff;font-size:12px;line-height:1.5;display:none;word-break:break-all}
 @media (max-height:600px){.panel{padding:16px 22px 16px}.logo{font-size:52px}.tag2{margin-top:6px;font-size:12.5px}.primary{margin-top:8px;min-height:48px;padding:10px 28px}.howto{margin-top:8px}.steer{height:62px}#wheel{width:92px;height:92px;margin-left:-46px}}
@@ -509,6 +535,8 @@ window.onerror=function(msg,src,line){
     <p class="tag2">自由度100％！ あなたのハンドルで豊太郎の運命を変えよう。<small>※ゲーム側の誇大広告です</small></p>
     <button id="startBtn" class="primary" type="button" disabled>準備中…</button>
     <div id="stageSel"><span class="lbl">幕を選んで遊ぶ</span></div>
+    <div><span class="hidCount" id="hidTitle">隠し要素 0 / 2</span></div>
+    <button id="titleLive" type="button">♪ もう一度ライブを見る</button>
     <div id="boot">この文が変わらない時は、JavaScript が動いていません。プレビュー画面ではなく、Safari などのブラウザで開いてください。</div>
     <div id="bootDiag"></div>
     <div class="howto">iPad：画面下の ◀ ▶ を長押し／画面を左右になぞる<br>パソコン：← → キー（A・D でも可）／Enter で開始<br>音が出ない時は、iPad の消音と音量を確かめてください。</div>
@@ -554,6 +582,7 @@ window.onerror=function(msg,src,line){
     <p class="endQ">豊太郎は、選べなかったのか。<br>それとも、選ばなかったのか。</p>
     <p class="endSmall">このゲームでは、どの分かれ道でも原作と違う道を選べました。それでも毎回、豊太郎の性格や周りの力に連れ戻されました。<br>あなたの考えは、どちらですか。</p>
     <details id="endNotes"><summary>▶ 各幕の「原作では」と「ゲームの創作」（7幕分）</summary><div id="endNotesBody"></div></details>
+    <div><span class="hidCount" id="hidEnd">隠し要素 0 / 2</span></div>
     <button id="endBack" class="primary" type="button">タイトルへ</button>
    </div>
   </div></div>
@@ -593,6 +622,9 @@ window.onerror=function(msg,src,line){
   <div id="liveLyrics"><span id="liveLyric"></span><span id="liveNext"></span></div>
   <button id="liveSkip" type="button">スキップ ▶▶</button>
  </div>
+ <button id="mailIcon" type="button" aria-label="未読のメッセージ"><b>1</b></button>
+ <div id="mailBox"><div class="phone"><div class="top">◀　エリス</div><div class="msgs" id="mailMsgs"></div><div class="acts" id="mailActs" style="display:none"><button id="mailPlay" type="button">♪ 再生する</button><button id="mailSkip" type="button">既読スルー</button></div></div></div>
+ <div id="mailToast"></div>
  <div id="gag"></div>
  <div id="errBox"></div>
  <noscript><div style="position:absolute;z-index:100;left:0;right:0;top:0;padding:16px;background:#5b0d1c;color:#fff;font-weight:bold">JavaScript が止まっているため遊べません。Safari などのブラウザで開いてください。</div></noscript>
@@ -784,6 +816,7 @@ var el = {
   next: $('nextBtn'), retry: $('retryBtn'), back: $('backBtn'),
   end: $('endScreen'), endRebel: $('endRebel'), endJoke: $('endJoke'), endBack: $('endBack'),
   endList: $('endList'), endNotesBody: $('endNotesBody'),
+  mailIcon: $('mailIcon'), mailBox: $('mailBox'), mailMsgs: $('mailMsgs'), mailActs: $('mailActs'), mailPlay: $('mailPlay'), mailSkip: $('mailSkip'), mailToast: $('mailToast'), hidTitle: $('hidTitle'), hidEnd: $('hidEnd'), titleLive: $('titleLive'),
   liveAsk: $('liveAsk'), laYes: $('laYes'), laNo: $('laNo'), liveLoad: $('liveLoad'), liveHud: $('liveHud'), liveTime: $('liveTime'), liveSec: $('liveSec'), liveTitle: $('liveTitle'), liveLyric: $('liveLyric'), liveNext: $('liveNext'), liveSkip: $('liveSkip'),
   lapse: $('lapse'), lapseText: $('lapseText'), over: $('overScreen'), overEyebrow: $('overEyebrow'), overSub: $('overSub'), overRetry: $('overRetry'), overBack: $('overBack')
 };
@@ -1988,6 +2021,7 @@ function startStage(i, cont){
   schedule([[1.6, function(){ showCard(null); }], [3.5, function(){ el.ctlTip.style.display = 'none'; }]]);
 }
 function toTitle(){
+  on(el.mailIcon, false); closeMail(); showFound();
   ambient(null); on(el.over, false); on(el.lapse, false); el.lapseText.className = ''; G.sit = 0; G.lapse = 0;
   exitSlow(false); G.mode = 'title'; G.seq = []; resetFx(); hudOn(false); caption(''); on(el.result, false); on(el.end, false); on(el.title, true);
   if (G.stage !== 0) loadStage(0);
@@ -2087,6 +2121,11 @@ function arrive(){
   if (m.collapse){ list.push([d + 0.9, function(){ setFace('sad'); }]); list.push([d + 2.2, function(){ G.collapse = 1; SFX.thud(); setFace('dizzy'); }]); }
   schedule(list);
 }
+// 見つけた隠し要素（この端末の中だけに残す）
+var FOUND = { over: false, live: false };
+try { var fj = JSON.parse(localStorage.getItem('maihime-found') || '{}'); FOUND.over = !!fj.over; FOUND.live = !!fj.live; } catch (e) {}
+function markFound(k){ FOUND[k] = true; try { localStorage.setItem('maihime-found', JSON.stringify(FOUND)); } catch (e) {} showFound(); }
+function showFound(){ var n = (FOUND.over ? 1 : 0) + (FOUND.live ? 1 : 0), txt = '隠し要素 ' + n + ' / 2' + (n === 2 ? '　コンプリート！' : ''); el.hidTitle.textContent = txt; el.hidEnd.textContent = txt; on(el.titleLive, FOUND.live); }
 // 隠しエンド：分かれ道で3秒止まると「優柔不断エンド」
 var OVER_LINES = {
   1: 'そのころエリスは、別の親切な人に助けられていた。',
@@ -2098,7 +2137,7 @@ var OVER_LINES = {
   7: '春になっても、豊太郎は雪だるまのまま立っていた。'
 };
 function indecisionEnd(){
-  G.mode = 'indecisive'; G.hiddenFound = true;
+  G.mode = 'indecisive'; G.hiddenFound = true; markFound('over');
   on(el.warn, false); hudOn(false); caption(''); bgm(false); ambLevel(0.02);
   var t = W3.toyo;
   schedule([
@@ -2125,8 +2164,26 @@ function finish(){
   var nextInfo = last ? 'そして、物語の結末へ……' : 'つぎは　第' + (ST.no + 1) + '幕「' + STAGES[G.stage + 1].title + '」';
   showCard(good ? 'center good' : 'center err', 'STAGE ' + ST.no + ' CLEAR', good ? r.goodT : r.wrongT, nextInfo);
   if (ST.no !== 7){ SFX.fanfare(); burst('star', 30, FX.w * 0.5, FX.h * 0.4, 500); } else SFX.bell();
-  schedule([[2.8, function(){ darken('on'); }], [3.2, function(){ if (last){ if (allOriginal()) showLiveAsk(); else ending(); } else startStage(G.stage + 1, true); }]]);
+  schedule([[2.8, function(){ darken('on'); }], [3.2, function(){ if (last){ ending(); if (allOriginal()) setTimeout(showMailIcon, 2500); } else startStage(G.stage + 1, true); }]]);
 }
+function showMailIcon(){ if (G.mode !== 'ending') return; on(el.mailIcon, true); tone(1568, 0.12, 'sine', 0.15); tone(2093, 0.2, 'sine', 0.12, 0.12); liveDecode(function(){}); }
+// 封筒を開く：受信の乱れ → エリスのメッセージが1つずつ届く
+function openMail(){
+  audioInit(); on(el.mailIcon, false);
+  el.mailMsgs.innerHTML = ''; el.mailActs.style.display = 'none';
+  el.mailBox.className = 'on recv'; SFX.err(1); noise(0.5, 0.2, 2000, 500, 2);
+  var lines = ['7幕ぜんぶ、原作どおり……', 'あなた、本当に豊太郎みたいね。', 'ねえ、聞いて。', '歌、作ったの。'];
+  var tt = 600;
+  function typing(){ var d = document.createElement('div'); d.className = 'typing'; d.textContent = '・・・'; el.mailMsgs.appendChild(d); return d; }
+  lines.forEach(function(line, i){
+    setTimeout(function(){ var ty = typing(); setTimeout(function(){ if (ty.parentNode) ty.parentNode.removeChild(ty); var m = document.createElement('div'); m.className = 'm them'; m.textContent = line; el.mailMsgs.appendChild(m); tone(1318, 0.08, 'sine', 0.15); }, 700); }, tt);
+    tt += 1300;
+  });
+  setTimeout(function(){ el.mailBox.className = 'on'; el.mailActs.style.display = 'block'; }, tt);
+  liveDecode(function(){});
+}
+function closeMail(){ el.mailBox.className = ''; }
+function toast(txt){ el.mailToast.textContent = txt; el.mailToast.className = ''; void el.mailToast.offsetWidth; el.mailToast.className = 'on'; setTimeout(function(){ el.mailToast.className = ''; }, 2600); }
 function allOriginal(){ if (G.rebels > 0) return false; for (var i = 0; i < STAGES.length; i++) if (G.log[i] !== true) return false; return true; }
 function ending(){
   on(el.liveAsk, false);
@@ -2144,7 +2201,7 @@ function ending(){
   el.endJoke.textContent = G.rebels > 0
     ? 'あなたは ' + G.rebels + ' 回、原作に逆らいました。豊太郎より決断力があります。※ただし、その決断はすべて無効化されました。'
     : 'あなたは一度も原作に逆らいませんでした。豊太郎よりも豊太郎らしい、模範的なプレイです。';
-  on(el.end, true); SFX.bell();
+  showFound(); on(el.end, true); SFX.bell();
 }
 
 /* ---------------- [8] GAGS（幕ごと） ---------------- */
@@ -2531,7 +2588,7 @@ function showLiveAsk(){
   liveDecode(function(){});
 }
 function startLive(){
-  on(el.liveAsk, false); el.liveLoad.style.display = 'block';
+  on(el.liveAsk, false); closeMail(); on(el.mailIcon, false); el.liveLoad.style.display = 'block';
   audioInit();
   liveDecode(function(ok){
     el.liveLoad.style.display = 'none';
@@ -2542,6 +2599,7 @@ function startLive(){
     src.onended = function(){ if (LIVE.on) endLive(); };
     var off = 0, mo = /[?&]livet=([0-9.]+)/.exec(location.search); if (mo) off = parseFloat(mo[1]) || 0;
     LIVE.src = src; LIVE.t0 = A.ctx.currentTime + 0.1 - off; src.start(A.ctx.currentTime + 0.1, off);
+    markFound('live'); on(el.title, false); on(el.end, false);
     LIVE.on = true; LIVE.lyricIdx = -1; LIVE.shot = 0; LIVE.shotT = 0; LIVE.spinT = 0; LIVE.lastSec = ''; G.mode = 'live';
     on(el.liveHud, true); el.liveTitle.className = 'on';
     setTimeout(function(){ el.liveTitle.className = ''; }, 5000);
@@ -2553,7 +2611,7 @@ function endLive(){
   try { LIVE.src.onended = null; LIVE.src.stop(); } catch (e) {}
   on(el.liveHud, false); el.liveLyric.textContent = ''; el.liveNext.textContent = '';
   camera.fov = 50; camera.updateProjectionMatrix();
-  flash(); ending();
+  flash(); if (LIVE.fromTitle){ LIVE.fromTitle = false; toTitle(); } else ending();
 }
 function updateLive(dt){
   var O = LIVE.objs, t = Math.max(0, A.ctx.currentTime - LIVE.t0);
@@ -2918,6 +2976,11 @@ function init(){
   el.back.addEventListener('click', toTitle);
   el.endBack.addEventListener('click', toTitle);
   el.laYes.addEventListener('click', startLive);
+  el.mailIcon.addEventListener('click', openMail);
+  el.mailPlay.addEventListener('click', function(){ LIVE.fromTitle = false; startLive(); });
+  el.mailSkip.addEventListener('click', function(){ closeMail(); on(el.mailIcon, true); toast('既読スルーしました。……豊太郎みたいですね。'); });
+  el.titleLive.addEventListener('click', function(){ audioInit(); LIVE.fromTitle = true; on(el.title, false); el.liveLoad.style.display = 'block'; startLive(); });
+  showFound();
   el.laNo.addEventListener('click', function(){ ending(); });
   el.liveSkip.addEventListener('click', endLive);
   el.overRetry.addEventListener('click', function(){ startStage(G.stage, true); });
@@ -2933,7 +2996,7 @@ function init(){
   window.__ready = true; window.__bootStep = '準備完了';
   window.__maihime = { frames: function(){ return FRAMES; }, G: G, start: startStage, ending: ending, TIP: TIP, DECIDE: DECIDE, C: function(){ return C; } };
   var m = /[?&]stage=(\d)/.exec(location.search);
-  if (/[?&]live=1/.test(location.search)){ G.log = [true, true, true, true, true, true, true]; G.rebels = 0; on(el.title, false); showLiveAsk(); }
+  if (/[?&]live=1/.test(location.search)){ G.log = [true, true, true, true, true, true, true]; G.rebels = 0; on(el.title, false); ending(); setTimeout(showMailIcon, 800); }
   else if (m) startStage(clamp(+m[1] - 1, 0, 6)); else if (/[?&]autostart/.test(location.search)) startStage(0);
 }
 try { init(); }
